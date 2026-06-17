@@ -1,13 +1,28 @@
 
 
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useData } from '../context/DataContext';
 import { Leaf, Sprout, Hourglass, FlaskConical, PackageCheck } from 'lucide-react';
 
 const Process: React.FC = () => {
   const { processSteps, siteContent } = useData();
   const { processPage } = siteContent;
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const progressLineRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const update = () => {
+      if (!timelineRef.current || !progressLineRef.current) return;
+      const rect = timelineRef.current.getBoundingClientRect();
+      const scrolled = window.innerHeight / 2 - rect.top;
+      const progress = Math.min(Math.max(scrolled / rect.height, 0), 1);
+      progressLineRef.current.style.transform = `scaleY(${progress})`;
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    return () => window.removeEventListener('scroll', update);
+  }, []);
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
@@ -30,9 +45,15 @@ const Process: React.FC = () => {
           <p className="max-w-xl mx-auto text-stone-600 font-light italic animate-fade-in-up" style={{ animationDelay: '0.2s' }}>{processPage.header.subtitle}</p>
         </div>
 
-        <div className="relative">
-          {/* Central Line - Only visible on desktop */}
+        <div className="relative" ref={timelineRef}>
+          {/* Central Line - dim base */}
           <div className="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-900/10 hidden md:block"></div>
+          {/* Progress line - lights up on scroll */}
+          <div
+            ref={progressLineRef}
+            className="absolute left-1/2 top-0 bottom-0 w-px bg-amber-500 hidden md:block origin-top"
+            style={{ transform: 'scaleY(0)', boxShadow: '0 0 8px 1px rgba(245,158,11,0.5)' }}
+          ></div>
 
           <div className="space-y-24 md:space-y-0">
             {processSteps.map((step, index) => (
@@ -82,12 +103,15 @@ const Process: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-center mt-40 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-           <div className="inline-block px-10 py-8 border-y border-emerald-900/10">
-             <p className="font-serif italic text-emerald-900 text-2xl">
-               {processPage.bottomQuote}
-             </p>
-           </div>
+        <div className="text-center mt-40 mb-8 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+          <div className="relative inline-block px-8">
+            <span className="absolute -top-10 left-0 font-serif text-[8rem] leading-none text-amber-500/15 select-none">"</span>
+            <p className="font-serif italic text-emerald-950 text-4xl md:text-5xl leading-snug relative z-10">
+              {processPage.bottomQuote}
+            </p>
+            <span className="absolute -bottom-14 right-0 font-serif text-[8rem] leading-none text-amber-500/15 select-none rotate-180">"</span>
+            <div className="w-16 h-1 bg-amber-500 mx-auto mt-10 rounded-full"></div>
+          </div>
         </div>
 
       </div>

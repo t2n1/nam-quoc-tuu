@@ -1,6 +1,12 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { PRODUCTS as INITIAL_PRODUCTS, MOCK_DISTRIBUTORS as INITIAL_DISTRIBUTORS, PROCESS_STEPS as INITIAL_PROCESS, INITIAL_CONTENT, MOCK_NEWS as INITIAL_NEWS, MOCK_TESTIMONIALS, MOCK_FAQS } from '../constants';
+import { PRODUCTS as INITIAL_PRODUCTS, MOCK_DISTRIBUTORS as INITIAL_DISTRIBUTORS, PROCESS_STEPS as INITIAL_PROCESS, INITIAL_CONTENT, MOCK_NEWS as INITIAL_NEWS, MOCK_TESTIMONIALS, MOCK_FAQS, CONTENT_VERSION } from '../constants';
+
+// Clear stale localStorage when source data version changes
+if (localStorage.getItem('contentVersion') !== CONTENT_VERSION) {
+  ['siteContent', 'products', 'distributors', 'processSteps', 'blogPosts', 'testimonials', 'faqs'].forEach(k => localStorage.removeItem(k));
+  localStorage.setItem('contentVersion', CONTENT_VERSION);
+}
 import { Product, Distributor, ProcessStep, SiteContent, BlogPost, Testimonial, FAQItem } from '../types';
 
 interface DataContextType {

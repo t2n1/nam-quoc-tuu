@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Phone, MapPin, Mail, Send, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { useData } from '../context/DataContext';
+import Reveal from '../components/Reveal';
 
 const Contact: React.FC = () => {
   const { siteContent, faqs } = useData();
@@ -18,7 +19,7 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
           
           {/* Info Side */}
-          <div className="space-y-8 animate-fade-in-up">
+          <Reveal variant="fade-left"><div className="space-y-8">
             <div>
               <span className="text-amber-600 font-bold tracking-[0.2em] text-xs uppercase block mb-2">Get in touch</span>
               <h1 className="font-serif text-4xl md:text-5xl font-bold text-emerald-950 mb-6">{contactPage.title}</h1>
@@ -64,16 +65,16 @@ const Contact: React.FC = () => {
                <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg')] bg-cover opacity-10"></div>
                <div className="w-full h-full flex flex-col items-center justify-center text-stone-500 bg-stone-100 group-hover:bg-stone-200 transition-colors relative z-10">
                   <MapPin size={32} className="text-emerald-800 mb-2 animate-bounce" />
-                  <p className="font-serif italic">Bản đồ khu vực xã Bằng Phúc, Bắc Kạn</p>
+                  <p className="font-serif italic">Bản đồ khu vực Phường Bắc Giang, Bắc Ninh</p>
                   <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(general.address)}`} target="_blank" rel="noreferrer" className="mt-4 px-4 py-2 bg-white text-xs font-bold uppercase tracking-wider rounded-full shadow-sm hover:shadow-md text-emerald-900">
                     Mở Google Maps
                   </a>
                </div>
             </div>
-          </div>
+          </div></Reveal>
 
           {/* Form Side */}
-          <div className="bg-stone-50 p-8 md:p-10 rounded-3xl shadow-xl border border-stone-100 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <Reveal variant="fade-right" delay={150}><div className="bg-stone-50 p-8 md:p-10 rounded-3xl shadow-xl border border-stone-100">
             <h3 className="font-serif text-3xl font-bold text-emerald-900 mb-8">{contactPage.formTitle}</h3>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -108,22 +109,23 @@ const Contact: React.FC = () => {
                 <Send size={18} /> {contactPage.submitButton}
               </button>
             </form>
-          </div>
+          </div></Reveal>
         </div>
 
         {/* FAQ Section */}
         <div className="max-w-4xl mx-auto border-t border-stone-200 pt-20">
-          <div className="text-center mb-16 animate-fade-in-up">
+          <Reveal variant="blur-in"><div className="text-center mb-16">
              <div className="inline-block p-4 bg-emerald-50 rounded-full mb-6 text-emerald-800">
                <HelpCircle size={32} />
              </div>
              <h2 className="font-display text-4xl md:text-5xl font-bold text-emerald-950 mb-4">Câu Hỏi Thường Gặp (FAQ)</h2>
              <p className="text-stone-500 text-lg font-light">Những thắc mắc thường gặp khi khách hàng tìm hiểu về sản phẩm.</p>
-          </div>
+          </div></Reveal>
 
           <div className="space-y-4">
              {faqs.map((faq, index) => (
-               <div key={index} className="border border-stone-200 rounded-xl bg-white overflow-hidden hover:border-amber-400 transition-colors duration-300">
+               <Reveal key={index} variant="fade-up" delay={index * 80}>
+               <div className="border border-stone-200 rounded-xl bg-white overflow-hidden hover:border-amber-400 transition-colors duration-300">
                  <button 
                    onClick={() => toggleFaq(index)}
                    className="w-full flex items-center justify-between p-6 text-left hover:bg-stone-50 transition-colors"
@@ -147,6 +149,7 @@ const Contact: React.FC = () => {
                    </div>
                  </div>
                </div>
+               </Reveal>
              ))}
           </div>
         </div>

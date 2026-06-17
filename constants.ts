@@ -1,13 +1,14 @@
 
 import { Benefit, ProcessStep, Product, Distributor, SiteContent, BlogPost, Testimonial, FAQItem } from './types';
 
-export const APP_NAME = "Rượu Nam Quốc Tửu";
+export const APP_NAME = "Nam Quốc Tửu";
+export const CONTENT_VERSION = "8";
 
 export const INITIAL_CONTENT: SiteContent = {
   general: {
-    hotline: "090 123 4567",
-    address: "Thôn Nà Pài, xã Bằng Phúc, huyện Chợ Đồn, tỉnh Bắc Kạn",
-    email: "htx.menlabangphuc@gmail.com",
+    hotline: "0966383188",
+    address: "Đường Bàng Bá Lân 2, Phường Bắc Giang, Tỉnh Bắc Ninh",
+    email: "ctyhoanhao188@gmail.com",
     facebook: "#"
   },
   ageGate: {
@@ -18,7 +19,7 @@ export const INITIAL_CONTENT: SiteContent = {
     warning: "Uống rượu bia có thể gây ảnh hưởng đến sức khỏe. Vui lòng thưởng thức có trách nhiệm."
   },
   navbar: {
-    logoImage: "", 
+    logoImage: "/logo-nqt.svg",
     logoText: "Nam Quốc Tửu",
     logoSubText: "est. 18xx",
     menuHome: "Trang Chủ",
@@ -86,33 +87,33 @@ export const INITIAL_CONTENT: SiteContent = {
   story: {
     header: {
       title: "Bằng Phúc",
-      subtitle: "The Legend of",
+      subtitle: "Di sản",
       image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
     },
     chapter1: {
       label: "Chương I",
-      title: "Khởi Nguồn Của Lửa",
-      quote: "\"Giữa cái lạnh thấu xương của núi rừng Đông Bắc, người Tày đã tìm ra ngọn lửa sưởi ấm tâm hồn.\"",
+      title: "Ngọn Lửa Không Tắt",
+      quote: "\"Giữa đại ngàn Đông Bắc, nơi sương mù quanh năm ôm ấp từng nếp nhà sàn, người Tày đã đúc kết một triết lý: rượu không chỉ là thức uống — đó là ngôn ngữ của tâm hồn.\"",
       dropCapText: "T",
-      content: "ừ hàng trăm năm nay, tại xã Bằng Phúc, huyện Chợ Đồn, ngọn lửa lò nấu rượu chưa bao giờ tắt. Đó không chỉ là sinh kế, mà là nét văn hóa ăn sâu vào máu thịt của người dân nơi đây. Mỗi mẻ rượu ra lò đều chứa đựng sự tỉ mỉ, kiên nhẫn và lòng tôn kính với thiên nhiên.",
+      content: "ừ thế kỷ XVIII, tại xã Bằng Phúc, huyện Chợ Đồn, tỉnh Bắc Kạn, những mẻ rượu men lá đầu tiên đã ra đời. Không phải ngẫu nhiên mà người Tày chọn nơi này để giữ lửa nghề — nơi có rừng già che chở, nơi có suối Nậm Cắt luân lưu qua từng tầng đá cổ. Trong đời sống của người Tày, rượu men lá không đơn giản là thức uống. Nó hiện diện trong lễ cúng thần rừng, trong đám cưới, trong buổi lễ Lồng Tồng xuống đồng đầu xuân. Chén rượu được rót không phải để say, mà để kết nối — giữa người với người, giữa người với đất trời, giữa hiện tại với tổ tiên.",
       image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000&auto=format&fit=crop",
-      imageCaption: "Hình 01. Những bánh men lá được phơi khô tự nhiên"
+      imageCaption: "Hình 01. Những bánh men lá được phơi tự nhiên giữa đại ngàn Bắc Kạn"
     },
     section2: {
-      title: "Hành Trình Đánh Thức Thương Hiệu",
-      content: "Câu chuyện về Rượu Men Lá Bằng Phúc hiện đại không thể không nhắc đến bà Tâm (thôn Nà Hồng). Bà là người tiên phong đưa rượu ra khỏi lũy tre làng, đóng vào can, chai để mang đi các xã lân cận bán. Từ những chuyến đi ấy, tiếng lành đồn xa, hương vị men lá Bằng Phúc dần chinh phục những thực khách khó tính nhất."
+      title: "Linh Hồn Ẩn Trong Lá Và Nước",
+      content: "Điều làm nên sự khác biệt của Men Lá Bằng Phúc không nằm ở công nghệ — mà nằm ở tri thức được truyền miệng qua bao thế hệ. Từ 19 đến 32 loại thảo mộc được thu hái theo mùa: có loại chỉ mọc trên đỉnh núi cao hơn 800m, có loại chỉ ra lá vào tháng giêng khi sương còn đọng. Người thợ giỏi nhận ra lá tốt bằng mùi hương, bằng màu sắc, bằng cảm giác của ngón tay — chứ không phải bằng máy móc hay phân tích hóa học. Nhưng ngay cả khi mang đúng những lá thuốc ấy đến vùng đất khác, rượu vẫn không đạt được vị ngọt hậu đặc trưng. Bởi một nửa linh hồn của rượu nằm ở suối Nậm Cắt — nguồn nước chảy qua các địa tầng đặc biệt, mang theo khoáng chất tự nhiên tạo nên vị êm dịu và hương thơm không thể sao chép."
     },
     highlight: {
-      title: "Bí mật Nặm Cắt",
-      content: "\"Nhiều người mang men lá đi nơi khác nấu, nhưng rượu không bao giờ ngon bằng. Bởi lẽ, cái hồn của rượu nằm ở nước suối Nặm Cắt. Nguồn nước chảy qua các tầng địa chất đặc biệt mang lại vị ngọt hậu và độ êm dịu mà nước máy hay nước giếng khơi không thể nào sánh được.\""
+      title: "Lời Người Giữ Lửa",
+      content: "\"Có những năm rượu công nghiệp tràn lan, người ta hỏi tôi sao không làm theo cho nhanh, cho rẻ. Tôi chỉ trả lời: cái gì nấu bằng lá rừng, bằng nước suối, bằng đôi tay người — thì không thể vội được. Tôi giữ nghề này không phải vì không có lựa chọn nào khác. Tôi giữ vì tôi biết: một ngày nào đó, người ta sẽ tìm lại những thứ thật.\""
     },
     section3: {
-      title: "Tầm Nhìn OCOP",
-      content: "Hôm nay, HTX Rượu Men Lá Bằng Phúc tự hào khoác lên mình tấm áo mới: OCOP 4 sao. Chúng tôi kết hợp quy trình thủ công truyền thống với công nghệ lọc Aldehyde hiện đại, đảm bảo từng giọt rượu đến tay khách hàng không chỉ ngon mà còn an toàn tuyệt đối cho sức khỏe."
+      title: "Từ Bản Làng Ra Thế Giới",
+      content: "Nam Quốc Tửu chính thức được công nhận OCOP 4 sao — không phải bằng cách thay đổi công thức, mà bằng cách nâng chuẩn quy trình: hệ thống lọc khử Aldehyde hiện đại, bao bì được thiết kế xứng tầm, và cam kết minh bạch về nguồn gốc từng mẻ rượu. Hôm nay, từ những buổi họp mặt gia đình ở Hà Nội đến những bàn tiệc tại Sài Gòn, Nam Quốc Tửu đang kể câu chuyện của bản làng Bằng Phúc — không phải như một di vật của quá khứ, mà như một tinh hoa đang sống, đang lớn, đang vươn ra."
     },
     signature: {
       name: "Bà Tâm",
-      role: "Nghệ nhân"
+      role: "Nghệ nhân sáng lập • Thôn Nà Hồng, Bằng Phúc"
     }
   },
   productsPage: {
@@ -164,16 +165,16 @@ export const INITIAL_CONTENT: SiteContent = {
   footer: {
     brand: {
       since: "Since 19xx",
-      titleLine1: "Rượu",
+      titleLine1: "",
       titleHighlight: "Nam Quốc Tửu",
       description: "Tinh hoa ẩm thực dân tộc Tày. Sản phẩm OCOP 4 sao, gìn giữ hương vị truyền thống hàng trăm năm bên dòng suối Nặm Cắt."
     },
     sections: {
       linksTitle: "Khám Phá",
-      contactTitle: "Liên Hệ HTX"
+      contactTitle: "Liên Hệ"
     },
     bottom: {
-      copyright: "HTX Rượu Nam Quốc Tửu. All rights reserved.",
+      copyright: "Nam Quốc Tửu. All rights reserved.",
       disclaimer: "Uống rượu có trách nhiệm. Không lái xe khi đã uống rượu."
     }
   }
@@ -275,7 +276,7 @@ export const MOCK_NEWS: BlogPost[] = [
     id: 'n2',
     title: "Bằng Phúc đạt chuẩn OCOP 4 sao: Hành trình khẳng định vị thế",
     slug: "bang-phuc-dat-chuan-ocop-4-sao",
-    excerpt: "Sau nhiều nỗ lực cải tiến quy trình lọc và bao bì, sản phẩm của HTX đã chính thức được công nhận OCOP 4 sao.",
+    excerpt: "Sau nhiều nỗ lực cải tiến quy trình lọc và bao bì, Nam Quốc Tửu đã chính thức được công nhận OCOP 4 sao.",
     content: "Đây là kết quả của sự nỗ lực không ngừng nghỉ...",
     date: "28/02/2024",
     image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=800&auto=format&fit=crop",
@@ -333,7 +334,7 @@ export const MOCK_FAQS: FAQItem[] = [
     answer: "Chúng tôi có chính sách chiết khấu hấp dẫn và hỗ trợ marketing cho các đại lý. Vui lòng liên hệ trực tiếp hotline hoặc điền form đăng ký để được bộ phận kinh doanh tư vấn chi tiết."
   },
   {
-    question: "HTX có hỗ trợ vận chuyển đi tỉnh không?",
+    question: "Nam Quốc Tửu có hỗ trợ vận chuyển đi tỉnh không?",
     answer: "Có. Chúng tôi liên kết với các đơn vị vận chuyển uy tín để giao hàng toàn quốc (Viettel Post, GHTK...). Sản phẩm được đóng gói chống sốc kỹ lưỡng, đảm bảo an toàn tuyệt đối khi đến tay khách hàng."
   }
 ];

@@ -1,9 +1,10 @@
 
 import React from 'react';
 import Hero from '../components/Hero';
-import { ArrowRight, Leaf, Droplets, Award, Hexagon, Quote, Wine, Sparkles, Newspaper, Star } from 'lucide-react';
+import { ArrowRight, Leaf, Droplets, Award, Hexagon, Quote, Wine, Sparkles, Newspaper, Star, Wind } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
+import Reveal from '../components/Reveal';
 
 const Home: React.FC = () => {
   const { siteContent, blogPosts, testimonials } = useData();
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
             
             {/* Left Column: Image Composition */}
             <div className="lg:col-span-5 relative order-2 lg:order-1">
-               <div className="sticky top-32">
+               <Reveal variant="fade-left"><div className="sticky top-32">
                  <div className="relative z-10 aspect-[3/4] overflow-hidden rounded-t-full border border-emerald-900/10 shadow-2xl">
                    <img 
                      src={home.intro.image} 
@@ -50,12 +51,12 @@ const Home: React.FC = () => {
                       {home.intro.floatingText}
                     </p>
                  </div>
-               </div>
+               </div></Reveal>
             </div>
 
             {/* Right Column: Editorial Text */}
             <div className="lg:col-span-7 relative z-10 order-1 lg:order-2 flex flex-col justify-center">
-              <div className="mb-12">
+              <Reveal variant="fade-right" delay={150}><div className="mb-12">
                 <span className="text-amber-700 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">{home.intro.tagline}</span>
                 <h2 className="font-display text-6xl md:text-8xl text-emerald-950 leading-[0.85] mb-8">
                   {home.intro.title} <br/> 
@@ -80,7 +81,7 @@ const Home: React.FC = () => {
                   <span className="text-xs font-bold uppercase tracking-widest">Đọc câu chuyện</span>
                   <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
                 </Link>
-              </div>
+              </div></Reveal>
             </div>
 
           </div>
@@ -94,15 +95,16 @@ const Home: React.FC = () => {
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-emerald-900/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
         
         <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-           <div className="text-center mb-20">
+           <Reveal variant="blur-in"><div className="text-center mb-20">
              <span className="font-script text-6xl text-amber-500/20 block mb-2">{home.values.subtitle}</span>
              <h2 className="font-display text-5xl md:text-6xl text-white mb-6">{home.values.title}</h2>
              <p className="text-emerald-100/50 max-w-2xl mx-auto font-light text-lg">{home.values.description}</p>
-           </div>
+           </div></Reveal>
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {home.values.items.map((item, idx) => (
-                <div key={idx} className="group relative p-10 bg-white/5 border border-white/5 backdrop-blur-sm rounded-2xl hover:bg-white/10 transition-all duration-500 hover:-translate-y-2">
+                <Reveal key={idx} variant="scale-up" delay={idx * 120}>
+                <div className="group relative p-10 bg-white/5 border border-white/5 backdrop-blur-sm rounded-2xl hover:bg-white/10 transition-all duration-500 hover:-translate-y-2">
                    <div className="mb-8 p-4 bg-emerald-900/50 rounded-full w-fit group-hover:bg-emerald-800 transition-colors">
                      {getIcon(item.icon)}
                    </div>
@@ -111,8 +113,99 @@ const Home: React.FC = () => {
                      {item.desc}
                    </p>
                 </div>
+                </Reveal>
               ))}
            </div>
+        </div>
+      </section>
+
+      {/* Section: 32 Vị Thảo Mộc Bí Truyền */}
+      <section className="bg-emerald-950 py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] opacity-10"></div>
+        <div className="absolute top-0 right-0 text-emerald-800/10 font-display text-[22rem] leading-none select-none pointer-events-none translate-x-1/3 -translate-y-1/4">32</div>
+
+        <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+          <Reveal variant="blur-in"><div className="text-center mb-20">
+            <span className="text-amber-500 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">Linh Hồn Của Rượu</span>
+            <h2 className="font-display text-6xl md:text-8xl text-white leading-[0.85]">
+              32 Vị Thảo Mộc <br/>
+              <span className="font-serif italic text-amber-500">Bí Truyền.</span>
+            </h2>
+          </div></Reveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { name: "Lá Men Rừng", desc: "Hương thơm nồng nàn đặc trưng của núi rừng Chợ Đồn." },
+              { name: "Sâm Cau", desc: "Tăng cường sức khỏe, tạo hậu vị ngọt sâu." },
+              { name: "Thảo Quả", desc: "Gia tăng sự ấm áp và chiều sâu của hương vị." },
+              { name: "Quế Nhục", desc: "Hương cay nhẹ, hỗ trợ tuần hoàn máu." },
+            ].map((herb, idx) => (
+              <Reveal key={idx} variant="scale-up" delay={idx * 100}>
+              <div className="group bg-emerald-900/30 border border-emerald-800/30 rounded-2xl p-8 hover:bg-emerald-900/50 hover:-translate-y-1 transition-all duration-500">
+                <div className="w-12 h-12 bg-amber-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-amber-600/30 transition-colors">
+                  <Wind size={24} className="text-amber-500" />
+                </div>
+                <h3 className="font-serif text-xl text-white mb-3">{herb.name}</h3>
+                <p className="text-emerald-300/60 font-light leading-relaxed text-sm">{herb.desc}</p>
+              </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section: Vươn Ra Biển Lớn */}
+      <section className="py-32 bg-[#f8f6f1] relative overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+            {/* Left: Content */}
+            <Reveal variant="fade-right"><div>
+              <span className="text-amber-700 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">Tầm Nhìn Toàn Cầu</span>
+              <h2 className="font-display text-6xl md:text-8xl text-emerald-950 leading-[0.85] mb-4">
+                Vươn Ra<br/>Biển Lớn
+              </h2>
+              <p className="font-serif italic text-amber-700 text-xl md:text-2xl mb-8">Chinh phục thị trường Nhật Bản</p>
+              <p className="text-stone-600 font-light leading-relaxed mb-10 text-lg">
+                Tự hào là sản phẩm rượu truyền thống đầu tiên của Bắc Kạn chính thức xuất khẩu sang thị trường Nhật Bản — vượt qua hơn 100 chỉ tiêu kiểm định khắt khe về an toàn thực phẩm để khẳng định chất lượng và vị thế quốc tế.
+              </p>
+
+              <div className="grid grid-cols-2 gap-4 mb-12">
+                <div className="bg-white p-6 rounded-2xl border border-stone-100 shadow-sm">
+                  <p className="font-display text-4xl text-emerald-950 font-bold mb-1">Tokyo</p>
+                  <p className="text-[10px] text-stone-400 uppercase tracking-wider font-bold">Thị Trường Xuất Khẩu</p>
+                </div>
+                <div className="bg-white p-6 rounded-2xl border border-stone-100 shadow-sm">
+                  <p className="font-display text-4xl text-emerald-950 font-bold mb-1">100+</p>
+                  <p className="text-[10px] text-stone-400 uppercase tracking-wider font-bold">Chỉ Tiêu Kiểm Định</p>
+                </div>
+              </div>
+
+              <div className="flex gap-2 items-center">
+                {[0, 1, 2].map(i => (
+                  <div key={i} className={`rounded-full transition-all ${i === 2 ? 'w-8 h-2 bg-emerald-950' : 'w-2 h-2 bg-stone-300'}`} />
+                ))}
+              </div>
+            </div></Reveal>
+
+            {/* Right: Arch image */}
+            <Reveal variant="fade-left" delay={200}><div className="relative flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="absolute inset-0 bg-amber-200/30 blur-[80px] rounded-full scale-110"></div>
+                <div className="relative z-10 w-72 md:w-80 aspect-[3/4] rounded-t-full rounded-b-3xl overflow-hidden shadow-2xl border border-stone-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop"
+                    alt="Tokyo"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-6 left-0 right-0 flex justify-center">
+                    <span className="bg-red-600 text-white px-5 py-2 text-[9px] font-bold uppercase tracking-[0.2em] shadow-lg">Export to Japan</span>
+                  </div>
+                </div>
+              </div>
+            </div></Reveal>
+
+          </div>
         </div>
       </section>
 
@@ -128,7 +221,7 @@ const Home: React.FC = () => {
         </div>
         
         <div className="relative z-10 w-full max-w-[1400px] px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-           <div className="text-white order-2 md:order-1">
+           <Reveal variant="fade-left"><div className="text-white order-2 md:order-1">
               <span className="font-script text-7xl text-amber-500/40 block mb-2 transform -rotate-2">{home.collection.tagline}</span>
               <h2 className="font-display text-7xl md:text-9xl leading-[0.8] mb-8 mix-blend-overlay whitespace-pre-line">
                 {home.collection.title}
@@ -140,9 +233,9 @@ const Home: React.FC = () => {
               <Link to="/products" className="inline-block px-12 py-4 border border-white/30 bg-white/5 backdrop-blur hover:bg-white hover:text-emerald-950 transition-all uppercase tracking-[0.2em] text-xs font-bold">
                  {home.collection.buttonText}
               </Link>
-           </div>
-           
-           <div className="relative order-1 md:order-2 group">
+           </div></Reveal>
+
+           <Reveal variant="zoom-rotate" delay={200}><div className="relative order-1 md:order-2 group">
               <div className="absolute inset-0 bg-amber-600/20 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
               <div className="relative z-10 w-full max-w-sm mx-auto aspect-[3/4] border border-white/10 bg-white/5 backdrop-blur-sm p-6 rounded-t-full rounded-b-full overflow-hidden hover:scale-105 transition-transform duration-700">
                   <img 
@@ -154,7 +247,7 @@ const Home: React.FC = () => {
                     <span className="inline-block px-4 py-1 bg-amber-500 text-emerald-950 text-[10px] font-bold uppercase tracking-widest">Limited Edition</span>
                   </div>
               </div>
-           </div>
+           </div></Reveal>
         </div>
       </section>
 
@@ -162,14 +255,15 @@ const Home: React.FC = () => {
       <section className="py-24 bg-cream-50 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200/20 rounded-full blur-[80px]"></div>
         <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
+          <Reveal variant="blur-in"><div className="text-center mb-16">
             <span className="text-amber-700 font-bold tracking-[0.4em] text-[10px] uppercase block mb-4">Testimonials</span>
             <h2 className="font-display text-5xl text-emerald-950">Niềm Tin Khách Hàng</h2>
-          </div>
+          </div></Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((item, idx) => (
-               <div key={idx} className="bg-white p-10 rounded-xl shadow-sm border border-stone-100 relative group hover:shadow-lg transition-all duration-500 hover:-translate-y-2">
+               <Reveal key={idx} variant="scale-up" delay={idx * 120}>
+               <div className="bg-white p-10 rounded-xl shadow-sm border border-stone-100 relative group hover:shadow-lg transition-all duration-500 hover:-translate-y-2">
                   <Quote className="text-amber-500/20 w-16 h-16 absolute top-6 right-6 rotate-180" />
                   <div className="flex gap-1 mb-6">
                     {[1,2,3,4,5].map(i => <Star key={i} size={14} className="text-amber-400 fill-amber-400" />)}
@@ -187,6 +281,7 @@ const Home: React.FC = () => {
                     </div>
                   </div>
                </div>
+               </Reveal>
             ))}
           </div>
         </div>
@@ -196,10 +291,10 @@ const Home: React.FC = () => {
       <section className="py-32 bg-stone-50">
          <div className="max-w-[1400px] mx-auto px-6">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-               <div>
+               <Reveal variant="fade-up"><div>
                   <span className="text-amber-700 font-bold tracking-[0.4em] text-[10px] uppercase block mb-4">Blog & News</span>
                   <h2 className="font-display text-5xl text-emerald-950">Góc Nhìn & Văn Hóa</h2>
-               </div>
+               </div></Reveal>
                {/* 
                <Link to="/news" className="text-emerald-900 border-b border-emerald-900/30 pb-1 hover:text-amber-600 hover:border-amber-600 transition-colors text-sm font-bold uppercase tracking-widest flex items-center gap-2">
                   Xem tất cả bài viết <ArrowRight size={14} />
@@ -208,8 +303,9 @@ const Home: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-               {latestPosts.map((news) => (
-                  <Link to={`/news/${news.slug}`} key={news.id} className="group cursor-pointer">
+               {latestPosts.map((news, idx) => (
+                  <Reveal key={news.id} variant="fade-up" delay={idx * 150}>
+                  <Link to={`/news/${news.slug}`} className="group cursor-pointer block">
                      <div className="aspect-[4/3] overflow-hidden rounded-lg mb-6 relative">
                         <img 
                            src={news.image} 
@@ -230,6 +326,7 @@ const Home: React.FC = () => {
                         {news.excerpt}
                      </p>
                   </Link>
+                  </Reveal>
                ))}
             </div>
          </div>
@@ -239,7 +336,7 @@ const Home: React.FC = () => {
       <section className="py-32 bg-cream-100 relative overflow-hidden">
         <div className="absolute -left-20 top-1/2 -translate-y-1/2 text-[20rem] text-emerald-900/5 font-display leading-none select-none">{home.traceabilityBanner.bgText}</div>
         
-        <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+        <Reveal variant="blur-in"><div className="max-w-5xl mx-auto px-6 text-center relative z-10">
           <Quote className="text-amber-600/50 w-12 h-12 mx-auto mb-8 rotate-180" />
           
           <h2 className="font-display text-4xl md:text-6xl text-emerald-950 mb-10 leading-tight">
@@ -251,10 +348,10 @@ const Home: React.FC = () => {
               <Hexagon size={16} /> {home.traceabilityBanner.title}
             </Link>
             <Link to="/process" className="px-10 py-4 border border-emerald-950/30 text-emerald-950 rounded-full hover:bg-emerald-950 hover:text-white transition-colors duration-300 text-xs font-bold uppercase tracking-widest flex items-center gap-3">
-              <Wine size={16} /> Quy trình sản xuất
+              <Wine size={16} /> Quy Trình Tạo Tác
             </Link>
           </div>
-        </div>
+        </div></Reveal>
       </section>
     </div>
   );

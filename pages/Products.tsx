@@ -2,13 +2,14 @@ import React from 'react';
 import { useData } from '../context/DataContext';
 import { ArrowUpRight, Wine, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Reveal from '../components/Reveal';
 
 const Products: React.FC = () => {
   const { products, siteContent } = useData(); 
   const { productsPage } = siteContent;
 
   return (
-    <div className="bg-[#f6f5f1] min-h-screen pt-20">
+    <div className="bg-[#f6f5f1] min-h-screen pt-20 overflow-x-hidden">
       
       {/* Editorial Header */}
       <div className="pt-32 pb-32 px-6 relative overflow-hidden">
@@ -26,14 +27,15 @@ const Products: React.FC = () => {
       <div className="max-w-[1400px] mx-auto px-6 pb-32">
         <div className="space-y-48">
           {products.map((product, idx) => (
-            <div key={product.id} className={`flex flex-col lg:flex-row items-center gap-16 lg:gap-40 animate-fade-in-up ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`} style={{ animationDelay: `${0.1 * idx + 0.3}s` }}>
+            <Reveal key={product.id} variant={idx % 2 === 0 ? 'fade-left' : 'fade-right'}>
+            <div className={`flex flex-col lg:flex-row items-center gap-16 lg:gap-40 ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
               
               {/* Image Stage */}
               <div className="w-full lg:w-1/2 relative group perspective-1000">
                 <div className="absolute inset-0 bg-amber-200/20 blur-[80px] rounded-full scale-75 group-hover:scale-100 transition-transform duration-1000"></div>
                 
                 {/* Numbering */}
-                <div className={`absolute -top-20 font-display text-[12rem] text-emerald-900/5 leading-none select-none z-0 ${idx % 2 === 0 ? '-left-20' : '-right-20'}`}>
+                <div className={`hidden md:block absolute -top-20 font-display text-[12rem] text-emerald-900/5 leading-none select-none z-0 ${idx % 2 === 0 ? '-left-20' : '-right-20'}`}>
                   0{idx + 1}
                 </div>
 
@@ -113,12 +115,13 @@ const Products: React.FC = () => {
                 </div>
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
 
         {/* B2B Premium Section */}
-        <div className="mt-32 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-           <div className="bg-emerald-950 rounded-[3rem] p-12 md:p-24 relative overflow-hidden text-center">
+        <div className="mt-32">
+           <Reveal variant="scale-up"><div className="bg-emerald-950 rounded-[3rem] p-12 md:p-24 relative overflow-hidden text-center">
              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/az-subtle.png')] opacity-10"></div>
              
              <div className="relative z-10 max-w-4xl mx-auto">
@@ -131,7 +134,7 @@ const Products: React.FC = () => {
                  {productsPage.b2b.buttonText}
                </Link>
              </div>
-           </div>
+           </div></Reveal>
         </div>
       </div>
     </div>

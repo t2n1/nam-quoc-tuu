@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 import { useData } from '../context/DataContext';
 
 const Hero: React.FC = () => {
@@ -94,14 +94,6 @@ const Hero: React.FC = () => {
              <span className="text-xs font-bold uppercase tracking-[0.2em] border-b border-transparent group-hover:border-white transition-all pb-1">Câu Chuyện</span>
           </Link>
 
-          {/* Temporary Admin Button */}
-          <Link 
-            to="/admin/login" 
-            className="flex items-center gap-2 px-5 py-3 rounded-full border border-white/10 bg-emerald-900/40 backdrop-blur-md text-emerald-100/60 hover:text-amber-300 hover:bg-emerald-950 hover:border-amber-500/50 text-[10px] font-bold uppercase tracking-widest transition-all shadow-lg"
-          >
-             <ShieldCheck size={12} />
-             Admin Access
-          </Link>
         </div>
       </div>
       

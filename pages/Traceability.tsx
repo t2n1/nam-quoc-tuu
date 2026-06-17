@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Search, CheckCircle, AlertTriangle, ShieldCheck, MapPin, Award } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { Distributor } from '../types';
+import Reveal from '../components/Reveal';
 
 const Traceability: React.FC = () => {
   const { phone } = useParams<{ phone: string }>();
@@ -39,7 +40,7 @@ const Traceability: React.FC = () => {
       <div className="w-full max-w-3xl">
         
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in-up">
+        <Reveal variant="blur-in"><div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-emerald-950 text-amber-500 rounded-full mb-8 shadow-2xl border-4 border-amber-500/20">
              <ShieldCheck size={40} />
           </div>
@@ -47,10 +48,10 @@ const Traceability: React.FC = () => {
           <p className="text-stone-500 font-light text-lg max-w-lg mx-auto">
             {traceabilityPage.header.subtitle}
           </p>
-        </div>
+        </div></Reveal>
 
         {/* Minimalist Search Box */}
-        <div className="bg-white rounded-full shadow-[0_20px_60px_-10px_rgba(0,0,0,0.08)] p-2 mb-16 transform transition-all duration-300 focus-within:scale-105 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+        <Reveal variant="fade-up" delay={200}><div className="bg-white rounded-full shadow-[0_20px_60px_-10px_rgba(0,0,0,0.08)] p-2 mb-16 transform transition-all duration-300 focus-within:scale-105">
           <form onSubmit={onSubmit} className="relative flex items-center">
             <input
               type="text"
@@ -66,7 +67,7 @@ const Traceability: React.FC = () => {
               <Search size={20} />
             </button>
           </form>
-        </div>
+        </div></Reveal>
 
         {/* Result Card - Certificate Style */}
         {hasSearched && (
@@ -103,7 +104,7 @@ const Traceability: React.FC = () => {
                     <div className="mt-10 pt-6 border-t border-emerald-900/10 flex justify-between items-end">
                        <div className="text-left">
                           <p className="text-[10px] text-stone-400 uppercase tracking-wider mb-1">Cấp bởi</p>
-                          <p className="font-serif font-bold text-emerald-900">HTX Bằng Phúc</p>
+                          <p className="font-serif font-bold text-emerald-900">Nam Quốc Tửu</p>
                        </div>
                        <div className="w-24">
                           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Signature_sample.svg/1200px-Signature_sample.svg.png" alt="Signature" className="w-full opacity-40" />
@@ -122,7 +123,7 @@ const Traceability: React.FC = () => {
                       Số điện thoại <span className="font-bold text-stone-900 font-mono bg-stone-100 px-2 py-0.5 rounded mx-1">{searchTerm}</span> chưa có trong hệ thống dữ liệu đại lý ủy quyền của chúng tôi.
                     </p>
                     <div className="text-sm text-stone-500 border-t border-stone-100 pt-4">
-                      Vui lòng kiểm tra lại hoặc liên hệ hotline: <a href="tel:09012345678" className="text-emerald-700 font-bold hover:underline">09012345678</a> để xác minh.
+                      Vui lòng kiểm tra lại hoặc liên hệ hotline: <a href="tel:0966383188" className="text-emerald-700 font-bold hover:underline">0966383188</a> để xác minh.
                     </div>
                  </div>
               </div>

@@ -51,18 +51,39 @@ const Navbar: React.FC = () => {
   ];
 
   return (
+    <>
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${navPadding} ${navBackground}`}>
       <div className="max-w-[1500px] mx-auto px-6 lg:px-12">
         <div className="flex justify-between items-center">
           
           {/* Logo */}
-          <Link to="/" className="group relative z-50" onClick={() => setIsOpen(false)}>
+          <Link to="/" className="group relative z-50 flex items-center gap-3" onClick={() => setIsOpen(false)}>
              {navbar.logoImage ? (
-               <img 
-                 src={navbar.logoImage} 
-                 alt={navbar.logoText} 
-                 className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 hover:scale-105"
-               />
+               <>
+                 <div
+                   aria-label={navbar.logoText}
+                   className="h-12 md:h-14 aspect-square flex-shrink-0 transition-all duration-500"
+                   style={{
+                     backgroundColor: (isOpen || !isExpanded) ? '#022c22' : '#fcfbf9',
+                     maskImage: `url(${navbar.logoImage})`,
+                     maskRepeat: 'no-repeat',
+                     maskSize: 'contain',
+                     maskPosition: 'center',
+                     WebkitMaskImage: `url(${navbar.logoImage})`,
+                     WebkitMaskRepeat: 'no-repeat',
+                     WebkitMaskSize: 'contain',
+                     WebkitMaskPosition: 'center',
+                   }}
+                 />
+                 <div className="flex flex-col leading-none">
+                   <span className={`font-serif text-lg md:text-xl font-bold tracking-tight transition-colors duration-500 ${textColor}`}>
+                     {navbar.logoText}
+                   </span>
+                   <span className={`font-sans text-[9px] tracking-[0.25em] uppercase transition-colors duration-500 ${subTextColor}`}>
+                     {navbar.logoSubText}
+                   </span>
+                 </div>
+               </>
              ) : (
                <div className="flex flex-col items-start leading-none">
                  <span className={`font-serif text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 ${textColor}`}>
@@ -120,8 +141,10 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-40 bg-[#f6f5f1] transform transition-transform duration-[0.8s] ease-[cubic-bezier(0.77,0,0.175,1)] md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+    </nav>
+
+    {/* Mobile Menu Overlay — outside <nav> to avoid containing-block clipping */}
+    <div className={`fixed inset-0 z-40 bg-[#f6f5f1] transform transition-transform duration-[0.8s] ease-[cubic-bezier(0.77,0,0.175,1)] md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         {/* Background Texture for Menu */}
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 pointer-events-none"></div>
         
@@ -159,7 +182,7 @@ const Navbar: React.FC = () => {
            </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
