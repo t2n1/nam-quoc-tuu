@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
   // Nếu Menu ĐÓNG -> Dựa vào vị trí (đầu trang chủ thì trong suốt, còn lại có nền kem).
   const navBackground = (isOpen || isExpanded) 
     ? 'bg-transparent border-transparent' 
-    : 'bg-cream-50/95 backdrop-blur-md border-stone-200/50 shadow-sm';
+    : 'bg-cream-50/95 backdrop-blur-md border-cream-300/50 shadow-sm';
 
   const navPadding = isExpanded ? 'py-8' : 'py-4';
 
@@ -144,7 +144,7 @@ const Navbar: React.FC = () => {
     </nav>
 
     {/* Mobile Menu Overlay — outside <nav> to avoid containing-block clipping */}
-    <div className={`fixed inset-0 z-40 bg-[#f6f5f1] transform transition-transform duration-[0.8s] ease-[cubic-bezier(0.77,0,0.175,1)] md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+    <div className={`fixed inset-0 z-40 bg-cream-100 transform transition-transform duration-[0.8s] ease-[cubic-bezier(0.77,0,0.175,1)] md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         {/* Background Texture for Menu */}
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 pointer-events-none"></div>
         

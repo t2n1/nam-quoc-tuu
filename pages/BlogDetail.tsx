@@ -26,7 +26,7 @@ const BlogDetail: React.FC = () => {
   }
 
   return (
-    <article className="min-h-screen bg-[#fcfbf9] pt-24 pb-20">
+    <article className="min-h-screen bg-cream-50 pt-24 pb-20">
       {/* Hero Header */}
       <div className="relative h-[60vh] overflow-hidden">
         <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
@@ -53,7 +53,7 @@ const BlogDetail: React.FC = () => {
 
       {/* Content */}
       <div className="max-w-3xl mx-auto px-6 -mt-20 relative z-10">
-        <div className="bg-white p-8 md:p-16 rounded-t-3xl shadow-xl border border-stone-100">
+        <div className="bg-cream-50 p-8 md:p-16 rounded-t-3xl shadow-xl border border-cream-300/40">
             {/* Excerpt */}
             <p className="font-serif text-xl md:text-2xl text-emerald-900 italic leading-relaxed mb-10 border-l-4 border-amber-500 pl-6">
                 {post.excerpt}
@@ -61,12 +61,12 @@ const BlogDetail: React.FC = () => {
 
             {/* Main Content Render */}
             <div 
-                className="prose prose-stone prose-lg max-w-none prose-headings:font-serif prose-headings:text-emerald-950 prose-a:text-amber-600 prose-img:rounded-xl"
+                className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-emerald-950 prose-p:text-stone-600 prose-a:text-amber-600 prose-img:rounded-xl"
                 dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/>') }}
             >
             </div>
             
-            <div className="mt-16 pt-8 border-t border-stone-200 flex justify-between items-center">
+            <div className="mt-16 pt-8 border-t border-cream-300/60 flex justify-between items-center">
                 <Link to="/" className="flex items-center gap-2 text-stone-500 hover:text-emerald-900 transition-colors font-bold text-sm uppercase tracking-wider">
                     <ArrowLeft size={16} /> Quay về trang chủ
                 </Link>

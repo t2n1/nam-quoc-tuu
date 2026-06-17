@@ -4,6 +4,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useData } from '../context/DataContext';
 import { Leaf, Sprout, Hourglass, FlaskConical, PackageCheck } from 'lucide-react';
+import Reveal from '../components/Reveal';
 
 const Process: React.FC = () => {
   const { processSteps, siteContent } = useData();
@@ -39,11 +40,12 @@ const Process: React.FC = () => {
     <div className="py-32 bg-cream-100 min-h-screen">
       <div className="max-w-[1200px] mx-auto px-6">
         
-        <div className="text-center mb-32 animate-fade-in-up">
-          <span className="font-script text-6xl text-amber-600/30 block mb-4">{processPage.header.tagline}</span>
+        <Reveal variant="blur-in"><div className="text-center mb-32">
+          <span className="text-amber-600 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">Nghệ Thuật</span>
+          <span className="font-script text-6xl text-amber-600/30 block mb-2">{processPage.header.tagline}</span>
           <h1 className="font-display text-6xl md:text-7xl text-emerald-950 mb-6">{processPage.header.title}</h1>
-          <p className="max-w-xl mx-auto text-stone-600 font-light italic animate-fade-in-up" style={{ animationDelay: '0.2s' }}>{processPage.header.subtitle}</p>
-        </div>
+          <p className="max-w-xl mx-auto text-stone-500 font-light italic">{processPage.header.subtitle}</p>
+        </div></Reveal>
 
         <div className="relative" ref={timelineRef}>
           {/* Central Line - dim base */}
@@ -57,7 +59,8 @@ const Process: React.FC = () => {
 
           <div className="space-y-24 md:space-y-0">
             {processSteps.map((step, index) => (
-              <div key={step.step} className={`md:flex items-center justify-between relative animate-fade-in-up ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ animationDelay: `${index * 0.15 + 0.3}s` }}>
+              <Reveal key={step.step} variant={index % 2 === 0 ? 'fade-right' : 'fade-left'} delay={100}>
+              <div className={`md:flex items-center justify-between relative ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                  
                  {/* Center Dot */}
                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-cream-100 border-2 border-amber-500 rounded-full z-10 hidden md:block">
@@ -83,7 +86,7 @@ const Process: React.FC = () => {
                  <div className={`w-full md:w-[45%] mt-8 md:mt-0 ${index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'}`}>
                     <div className="relative group">
                        <div className="absolute inset-0 bg-emerald-900/5 transform rotate-3 rounded-2xl transition-transform group-hover:rotate-6"></div>
-                       <div className="bg-white p-4 md:p-10 rounded-2xl border border-stone-200 shadow-xl relative z-10 flex items-center justify-center aspect-video group-hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
+                       <div className="bg-cream-50 p-4 md:p-10 rounded-2xl border border-cream-300/40 shadow-sm relative z-10 flex items-center justify-center aspect-video group-hover:-translate-y-2 transition-transform duration-500 overflow-hidden">
                           {step.image ? (
                              <img 
                                src={step.image} 
@@ -91,7 +94,7 @@ const Process: React.FC = () => {
                                className="w-full h-full object-cover rounded-lg"
                              />
                           ) : (
-                             <div className="p-6 bg-emerald-50 rounded-full text-emerald-900 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                             <div className="p-6 bg-emerald-950/8 rounded-full text-emerald-900 group-hover:bg-emerald-950 group-hover:text-amber-400 transition-colors duration-500">
                                 {getIcon(step.icon)}
                              </div>
                           )}
@@ -99,11 +102,12 @@ const Process: React.FC = () => {
                     </div>
                  </div>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
 
-        <div className="text-center mt-40 mb-8 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+        <Reveal variant="blur-in"><div className="text-center mt-40 mb-8">
           <div className="relative inline-block px-8">
             <span className="absolute -top-10 left-0 font-serif text-[8rem] leading-none text-amber-500/15 select-none">"</span>
             <p className="font-serif italic text-emerald-950 text-4xl md:text-5xl leading-snug relative z-10">
@@ -112,7 +116,7 @@ const Process: React.FC = () => {
             <span className="absolute -bottom-14 right-0 font-serif text-[8rem] leading-none text-amber-500/15 select-none rotate-180">"</span>
             <div className="w-16 h-1 bg-amber-500 mx-auto mt-10 rounded-full"></div>
           </div>
-        </div>
+        </div></Reveal>
 
       </div>
     </div>

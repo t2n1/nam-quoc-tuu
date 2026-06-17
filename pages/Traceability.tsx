@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Search, CheckCircle, AlertTriangle, ShieldCheck, MapPin, Award } from 'lucide-react';
+import { Search, CheckCircle, AlertTriangle, ShieldCheck, MapPin } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { Distributor } from '../types';
 import Reveal from '../components/Reveal';
@@ -11,7 +11,7 @@ const Traceability: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState(phone || '');
   const [result, setResult] = useState<Distributor | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
-  const { distributors, siteContent } = useData(); 
+  const { distributors, siteContent } = useData();
   const { traceabilityPage } = siteContent;
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Traceability: React.FC = () => {
       setSearchTerm(phone);
       handleSearch(phone);
     }
-  }, [phone, distributors]); 
+  }, [phone, distributors]);
 
   const handleSearch = (term: string) => {
     setHasSearched(true);
@@ -30,102 +30,110 @@ const Traceability: React.FC = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-       navigate(`/check/${searchTerm}`);
-       handleSearch(searchTerm);
+      navigate(`/check/${searchTerm}`);
+      handleSearch(searchTerm);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#f6f5f1] py-32 px-4 flex flex-col items-center justify-center">
-      <div className="w-full max-w-3xl">
-        
+    <div className="min-h-screen bg-cream-100 py-32 px-6 flex flex-col items-center justify-center">
+      <div className="w-full max-w-2xl">
+
         {/* Header */}
-        <Reveal variant="blur-in"><div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-emerald-950 text-amber-500 rounded-full mb-8 shadow-2xl border-4 border-amber-500/20">
-             <ShieldCheck size={40} />
+        <Reveal variant="blur-in">
+          <div className="text-center mb-16">
+            <div className="w-20 h-20 bg-emerald-950 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
+              <ShieldCheck size={36} />
+            </div>
+            <span className="text-amber-600 font-bold tracking-[0.4em] text-[10px] uppercase block mb-4">Xác Thực</span>
+            <h1 className="font-display text-5xl md:text-6xl text-emerald-950 mb-5 tracking-tight">
+              {traceabilityPage.header.title}
+            </h1>
+            <p className="text-stone-400 font-light text-lg max-w-md mx-auto">
+              {traceabilityPage.header.subtitle}
+            </p>
           </div>
-          <h1 className="font-display text-5xl md:text-6xl text-emerald-950 mb-6 tracking-tight">{traceabilityPage.header.title}</h1>
-          <p className="text-stone-500 font-light text-lg max-w-lg mx-auto">
-            {traceabilityPage.header.subtitle}
-          </p>
-        </div></Reveal>
+        </Reveal>
 
-        {/* Minimalist Search Box */}
-        <Reveal variant="fade-up" delay={200}><div className="bg-white rounded-full shadow-[0_20px_60px_-10px_rgba(0,0,0,0.08)] p-2 mb-16 transform transition-all duration-300 focus-within:scale-105">
-          <form onSubmit={onSubmit} className="relative flex items-center">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Nhập số điện thoại..."
-              className="w-full pl-8 pr-16 py-4 rounded-full border-none focus:ring-0 text-xl font-serif text-emerald-950 placeholder-stone-300 bg-transparent"
-            />
-            <button 
-              type="submit"
-              className="absolute right-2 top-2 bottom-2 w-12 h-12 bg-emerald-950 text-white rounded-full hover:bg-amber-600 transition-colors flex items-center justify-center shadow-lg"
-            >
-              <Search size={20} />
-            </button>
-          </form>
-        </div></Reveal>
+        {/* Search */}
+        <Reveal variant="fade-up" delay={200}>
+          <div className="bg-white rounded-full shadow-[0_8px_40px_-8px_rgba(2,44,34,0.12)] p-2 mb-16 transition-shadow duration-300 focus-within:shadow-[0_8px_40px_-4px_rgba(2,44,34,0.18)]">
+            <form onSubmit={onSubmit} className="flex items-center">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Nhập số điện thoại đại lý..."
+                className="w-full pl-8 pr-4 py-4 rounded-full border-none focus:ring-0 outline-none font-serif text-lg text-emerald-950 placeholder-stone-300 bg-transparent"
+              />
+              <button
+                type="submit"
+                className="shrink-0 w-12 h-12 bg-emerald-950 text-white rounded-full hover:bg-amber-600 transition-colors flex items-center justify-center shadow-md"
+              >
+                <Search size={18} />
+              </button>
+            </form>
+          </div>
+        </Reveal>
 
-        {/* Result Card - Certificate Style */}
+        {/* Result */}
         {hasSearched && (
-          <div className="animate-reveal">
+          <div className="animate-fade-in-up">
             {result ? (
-              <div className="bg-[#fffdf8] p-10 md:p-16 shadow-2xl rounded-xl border border-stone-200 relative overflow-hidden mx-auto max-w-2xl">
-                 {/* Decorative Border */}
-                 <div className="absolute inset-3 border-2 border-emerald-900/10 border-dashed rounded-lg pointer-events-none"></div>
-                 
-                 {/* Watermark */}
-                 <div className="absolute -right-20 -bottom-20 text-emerald-900/5 pointer-events-none">
-                    <Award size={300} />
-                 </div>
+              <div className="bg-cream-50 border border-cream-300/60 rounded-2xl p-10 md:p-14 shadow-sm relative overflow-hidden">
+                {/* Subtle bg mark */}
+                <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-emerald-950/3 rounded-full pointer-events-none" />
 
-                 <div className="relative z-10 text-center">
-                    <div className="mb-8">
-                       <span className="font-display text-4xl text-emerald-950 block mb-2">Certificate of Authenticity</span>
-                       <span className="text-[10px] uppercase tracking-[0.3em] text-amber-600 font-bold">Chứng nhận đại lý chính thức</span>
-                    </div>
-                    
-                    <div className="bg-emerald-50/50 p-8 rounded-lg mb-8 border border-emerald-900/5">
-                        <h2 className="font-serif text-3xl text-emerald-900 mb-2">{result.name}</h2>
-                        <p className="font-mono text-emerald-700 tracking-wider mb-6">{result.phone}</p>
-                        
-                        <div className="flex items-center justify-center gap-2 text-stone-600 font-light text-sm">
-                           <MapPin size={14} className="text-amber-600"/> {result.address}
-                        </div>
-                    </div>
+                <div className="relative z-10 text-center">
+                  {/* Status badge */}
+                  <div className="inline-flex items-center gap-2 bg-emerald-950 text-amber-400 text-[10px] font-bold uppercase tracking-[0.3em] px-5 py-2.5 rounded-full mb-10 shadow-md">
+                    <CheckCircle size={13} />
+                    Đại Lý Được Xác Thực
+                  </div>
 
-                    <div className="flex items-center justify-center gap-2 text-emerald-700 font-bold uppercase tracking-widest text-xs">
-                       <CheckCircle size={16} /> Verified Partner
+                  {/* Name block */}
+                  <div className="mb-10">
+                    <span className="text-amber-600 font-bold tracking-[0.4em] text-[10px] uppercase block mb-3">Chứng Nhận Chính Thức</span>
+                    <h2 className="font-serif text-3xl md:text-4xl text-emerald-950 mb-2">{result.name}</h2>
+                    <p className="font-mono text-emerald-700/70 tracking-widest text-sm">{result.phone}</p>
+                  </div>
+
+                  {/* Info row */}
+                  <div className="flex items-center justify-center gap-2 text-stone-500 font-light text-sm mb-10">
+                    <MapPin size={13} className="text-amber-600 shrink-0" />
+                    {result.address}
+                  </div>
+
+                  {/* Footer */}
+                  <div className="border-t border-cream-300/60 pt-8 flex items-center justify-between">
+                    <div className="text-left">
+                      <p className="text-[9px] text-stone-400 uppercase tracking-[0.3em] mb-1">Cấp bởi</p>
+                      <p className="font-serif text-emerald-950 font-bold">Nam Quốc Tửu</p>
+                      <p className="text-[9px] text-stone-400 tracking-wider">OCOP 4 Sao</p>
                     </div>
-                    
-                    <div className="mt-10 pt-6 border-t border-emerald-900/10 flex justify-between items-end">
-                       <div className="text-left">
-                          <p className="text-[10px] text-stone-400 uppercase tracking-wider mb-1">Cấp bởi</p>
-                          <p className="font-serif font-bold text-emerald-900">Nam Quốc Tửu</p>
-                       </div>
-                       <div className="w-24">
-                          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Signature_sample.svg/1200px-Signature_sample.svg.png" alt="Signature" className="w-full opacity-40" />
-                       </div>
+                    <div className="flex items-center gap-2 text-amber-600/60">
+                      <ShieldCheck size={28} />
                     </div>
-                 </div>
+                  </div>
+                </div>
               </div>
             ) : (
-              <div className="bg-white rounded-2xl shadow-xl border-l-4 border-red-500 p-10 flex items-start gap-8 max-w-2xl mx-auto">
-                 <div className="text-red-500 shrink-0 p-4 bg-red-50 rounded-full">
-                    <AlertTriangle size={32} />
-                 </div>
-                 <div>
-                    <h3 className="font-serif text-2xl font-bold text-red-900 mb-3">Không Tìm Thấy Thông Tin</h3>
-                    <p className="text-stone-600 mb-6 font-light leading-relaxed">
-                      Số điện thoại <span className="font-bold text-stone-900 font-mono bg-stone-100 px-2 py-0.5 rounded mx-1">{searchTerm}</span> chưa có trong hệ thống dữ liệu đại lý ủy quyền của chúng tôi.
-                    </p>
-                    <div className="text-sm text-stone-500 border-t border-stone-100 pt-4">
-                      Vui lòng kiểm tra lại hoặc liên hệ hotline: <a href="tel:0966383188" className="text-emerald-700 font-bold hover:underline">0966383188</a> để xác minh.
-                    </div>
-                 </div>
+              <div className="bg-cream-50 border border-amber-200/60 rounded-2xl p-10 flex items-start gap-6">
+                <div className="w-12 h-12 bg-amber-500/10 text-amber-700 rounded-full flex items-center justify-center shrink-0">
+                  <AlertTriangle size={22} />
+                </div>
+                <div>
+                  <h3 className="font-serif text-2xl text-emerald-950 mb-3">Không Tìm Thấy Thông Tin</h3>
+                  <p className="text-stone-500 font-light leading-relaxed mb-5">
+                    Số điện thoại <span className="font-mono text-emerald-900 bg-cream-200 px-2 py-0.5 rounded text-sm mx-1">{searchTerm}</span> chưa có trong hệ thống đại lý ủy quyền.
+                  </p>
+                  <p className="text-sm text-stone-400 border-t border-cream-300/50 pt-4">
+                    Vui lòng liên hệ hotline để xác minh:{' '}
+                    <a href="tel:0966383188" className="text-emerald-800 font-bold hover:text-amber-700 transition-colors">
+                      0966 383 188
+                    </a>
+                  </p>
+                </div>
               </div>
             )}
           </div>

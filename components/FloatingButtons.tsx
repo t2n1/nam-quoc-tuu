@@ -26,7 +26,7 @@ const FloatingButtons: React.FC = () => {
       <div className="flex items-center gap-3">
         {/* Hover label */}
         <div
-          className="bg-white text-stone-800 text-xs font-bold px-4 py-2 rounded-full shadow-lg whitespace-nowrap pointer-events-none"
+          className="bg-cream-50 text-emerald-950 text-xs font-bold px-4 py-2 rounded-full shadow-lg whitespace-nowrap pointer-events-none"
           style={{
             opacity: showLabel ? 1 : 0,
             transform: showLabel ? 'translateX(0)' : 'translateX(8px)',

@@ -46,7 +46,7 @@ const Home: React.FC = () => {
                  </div>
                  
                  {/* Floating Element */}
-                 <div className="absolute -bottom-10 -right-10 w-48 bg-white p-6 shadow-xl z-20 hidden md:block border-l-2 border-amber-600">
+                 <div className="absolute -bottom-10 -right-10 w-48 bg-cream-50 p-6 shadow-xl z-20 hidden md:block border-l-2 border-amber-600">
                     <p className="font-serif italic text-emerald-950 text-sm leading-relaxed">
                       {home.intro.floatingText}
                     </p>
@@ -155,7 +155,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Section: Vươn Ra Biển Lớn */}
-      <section className="py-32 bg-[#f8f6f1] relative overflow-hidden">
+      <section className="py-32 bg-cream-100 relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
@@ -171,11 +171,11 @@ const Home: React.FC = () => {
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-12">
-                <div className="bg-white p-6 rounded-2xl border border-stone-100 shadow-sm">
+                <div className="bg-cream-50 p-6 rounded-2xl border border-cream-300/40 shadow-sm">
                   <p className="font-display text-4xl text-emerald-950 font-bold mb-1">Tokyo</p>
                   <p className="text-[10px] text-stone-400 uppercase tracking-wider font-bold">Thị Trường Xuất Khẩu</p>
                 </div>
-                <div className="bg-white p-6 rounded-2xl border border-stone-100 shadow-sm">
+                <div className="bg-cream-50 p-6 rounded-2xl border border-cream-300/40 shadow-sm">
                   <p className="font-display text-4xl text-emerald-950 font-bold mb-1">100+</p>
                   <p className="text-[10px] text-stone-400 uppercase tracking-wider font-bold">Chỉ Tiêu Kiểm Định</p>
                 </div>
@@ -183,7 +183,7 @@ const Home: React.FC = () => {
 
               <div className="flex gap-2 items-center">
                 {[0, 1, 2].map(i => (
-                  <div key={i} className={`rounded-full transition-all ${i === 2 ? 'w-8 h-2 bg-emerald-950' : 'w-2 h-2 bg-stone-300'}`} />
+                  <div key={i} className={`rounded-full transition-all ${i === 2 ? 'w-8 h-2 bg-emerald-950' : 'w-2 h-2 bg-cream-300'}`} />
                 ))}
               </div>
             </div></Reveal>
@@ -192,7 +192,7 @@ const Home: React.FC = () => {
             <Reveal variant="fade-left" delay={200}><div className="relative flex justify-center lg:justify-end">
               <div className="relative">
                 <div className="absolute inset-0 bg-amber-200/30 blur-[80px] rounded-full scale-110"></div>
-                <div className="relative z-10 w-72 md:w-80 aspect-[3/4] rounded-t-full rounded-b-3xl overflow-hidden shadow-2xl border border-stone-100">
+                <div className="relative z-10 w-72 md:w-80 aspect-[3/4] rounded-t-full rounded-b-3xl overflow-hidden shadow-2xl border border-cream-300/50">
                   <img
                     src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop"
                     alt="Tokyo"
@@ -263,7 +263,7 @@ const Home: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((item, idx) => (
                <Reveal key={idx} variant="scale-up" delay={idx * 120}>
-               <div className="bg-white p-10 rounded-xl shadow-sm border border-stone-100 relative group hover:shadow-lg transition-all duration-500 hover:-translate-y-2">
+               <div className="bg-cream-50 p-10 rounded-xl shadow-sm border border-cream-300/40 relative group hover:shadow-md transition-all duration-500 hover:-translate-y-2">
                   <Quote className="text-amber-500/20 w-16 h-16 absolute top-6 right-6 rotate-180" />
                   <div className="flex gap-1 mb-6">
                     {[1,2,3,4,5].map(i => <Star key={i} size={14} className="text-amber-400 fill-amber-400" />)}
@@ -272,7 +272,7 @@ const Home: React.FC = () => {
                     "{item.content}"
                   </p>
                   <div className="flex items-center gap-4 mt-auto">
-                    <div className="w-12 h-12 rounded-full overflow-hidden border border-emerald-100">
+                    <div className="w-12 h-12 rounded-full overflow-hidden border border-cream-300/60">
                       <img src={item.avatar} alt={item.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" />
                     </div>
                     <div>
@@ -288,7 +288,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Section 4: News & Culture */}
-      <section className="py-32 bg-stone-50">
+      <section className="py-32 bg-cream-50">
          <div className="max-w-[1400px] mx-auto px-6">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                <Reveal variant="fade-up"><div>

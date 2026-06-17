@@ -221,7 +221,7 @@ const Story: React.FC = () => {
       </section>
 
       {/* ── HIGHLIGHT QUOTE — cinematic dark ─────────────────── */}
-      <section className="min-h-[80vh] bg-stone-950 flex items-center py-32 relative overflow-hidden">
+      <section className="min-h-[80vh] bg-emerald-950 flex items-center py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/concrete-wall.png')] opacity-10" />
         {/* Ambient glow */}
         <div className="absolute bottom-0 right-0 w-[700px] h-[400px] bg-amber-900/12 blur-[180px] rounded-full pointer-events-none" />
@@ -275,7 +275,7 @@ const Story: React.FC = () => {
             </Reveal>
           </div>
 
-          <div className="bg-cream-100 py-28 px-10 md:px-20 flex flex-col justify-center min-h-[55vh] border-l border-stone-200/50">
+          <div className="bg-cream-100 py-28 px-10 md:px-20 flex flex-col justify-center min-h-[55vh] border-l border-cream-300/30">
             <Reveal variant="fade-left" delay={150}>
               <p className="font-serif text-stone-600 leading-[2.1] text-lg text-justify">
                 {story.section3.content}

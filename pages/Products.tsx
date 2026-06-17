@@ -9,7 +9,7 @@ const Products: React.FC = () => {
   const { productsPage } = siteContent;
 
   return (
-    <div className="bg-[#f6f5f1] min-h-screen pt-20 overflow-x-hidden">
+    <div className="bg-cream-100 min-h-screen pt-20 overflow-x-hidden">
       
       {/* Editorial Header */}
       <div className="pt-32 pb-32 px-6 relative overflow-hidden">
@@ -71,7 +71,7 @@ const Products: React.FC = () => {
                 </p>
 
                 {/* Taste Profile Visualization */}
-                <div className="bg-white p-8 rounded-xl shadow-sm border border-stone-200/50 mb-12">
+                <div className="bg-cream-50 p-8 rounded-xl border border-cream-300/50 mb-12">
                    <div className="flex items-center gap-3 mb-6">
                       <Wine size={20} className="text-emerald-900"/>
                       <span className="font-bold text-emerald-950 uppercase tracking-widest text-xs">Taste Profile</span>
@@ -82,7 +82,7 @@ const Products: React.FC = () => {
                             <span>Độ Êm</span>
                             <span>9/10</span>
                          </div>
-                         <div className="h-1 bg-stone-100 rounded-full overflow-hidden">
+                         <div className="h-1 bg-cream-300/60 rounded-full overflow-hidden">
                             <div className="h-full bg-emerald-800 w-[90%] rounded-full"></div>
                          </div>
                       </div>
@@ -91,7 +91,7 @@ const Products: React.FC = () => {
                             <span>Hương Thảo Mộc</span>
                             <span>10/10</span>
                          </div>
-                         <div className="h-1 bg-stone-100 rounded-full overflow-hidden">
+                         <div className="h-1 bg-cream-300/60 rounded-full overflow-hidden">
                             <div className="h-full bg-amber-600 w-[95%] rounded-full"></div>
                          </div>
                       </div>
@@ -100,8 +100,8 @@ const Products: React.FC = () => {
                             <span>Độ Ngọt Hậu</span>
                             <span>High</span>
                          </div>
-                         <div className="h-1 bg-stone-100 rounded-full overflow-hidden">
-                            <div className="h-full bg-stone-800 w-[85%] rounded-full"></div>
+                         <div className="h-1 bg-cream-300/60 rounded-full overflow-hidden">
+                            <div className="h-full bg-emerald-900 w-[85%] rounded-full"></div>
                          </div>
                       </div>
                    </div>
