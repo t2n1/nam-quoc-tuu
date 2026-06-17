@@ -24,10 +24,10 @@ const Process: React.FC = () => {
     <div className="py-32 bg-cream-100 min-h-screen">
       <div className="max-w-[1200px] mx-auto px-6">
         
-        <div className="text-center mb-32">
+        <div className="text-center mb-32 animate-fade-in-up">
           <span className="font-script text-6xl text-amber-600/30 block mb-4">{processPage.header.tagline}</span>
           <h1 className="font-display text-6xl md:text-7xl text-emerald-950 mb-6">{processPage.header.title}</h1>
-          <p className="max-w-xl mx-auto text-stone-600 font-light italic">{processPage.header.subtitle}</p>
+          <p className="max-w-xl mx-auto text-stone-600 font-light italic animate-fade-in-up" style={{ animationDelay: '0.2s' }}>{processPage.header.subtitle}</p>
         </div>
 
         <div className="relative">
@@ -36,7 +36,7 @@ const Process: React.FC = () => {
 
           <div className="space-y-24 md:space-y-0">
             {processSteps.map((step, index) => (
-              <div key={step.step} className={`md:flex items-center justify-between relative ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <div key={step.step} className={`md:flex items-center justify-between relative animate-fade-in-up ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`} style={{ animationDelay: `${index * 0.15 + 0.3}s` }}>
                  
                  {/* Center Dot */}
                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-cream-100 border-2 border-amber-500 rounded-full z-10 hidden md:block">
@@ -82,7 +82,7 @@ const Process: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-center mt-40">
+        <div className="text-center mt-40 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
            <div className="inline-block px-10 py-8 border-y border-emerald-900/10">
              <p className="font-serif italic text-emerald-900 text-2xl">
                {processPage.bottomQuote}

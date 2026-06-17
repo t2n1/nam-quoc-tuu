@@ -16,7 +16,7 @@ const AdminBlog: React.FC = () => {
     excerpt: '',
     content: '',
     date: new Date().toLocaleDateString('vi-VN'),
-    image: 'https://images.unsplash.com/photo-1541533260371-b8fc9b030eb3?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?q=80&w=800&auto=format&fit=crop',
     category: 'Tin Tức',
     author: 'Ban Biên Tập'
   };

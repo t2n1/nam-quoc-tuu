@@ -1,7 +1,7 @@
 
 import { Benefit, ProcessStep, Product, Distributor, SiteContent, BlogPost, Testimonial, FAQItem } from './types';
 
-export const APP_NAME = "Rượu Men Lá Bằng Phúc";
+export const APP_NAME = "Rượu Nam Quốc Tửu";
 
 export const INITIAL_CONTENT: SiteContent = {
   general: {
@@ -19,7 +19,7 @@ export const INITIAL_CONTENT: SiteContent = {
   },
   navbar: {
     logoImage: "", 
-    logoText: "Bằng Phúc",
+    logoText: "Nam Quốc Tửu",
     logoSubText: "est. 18xx",
     menuHome: "Trang Chủ",
     menuStory: "Di Sản",
@@ -31,11 +31,11 @@ export const INITIAL_CONTENT: SiteContent = {
   },
   hero: {
     topTagline: "Tinh hoa đại ngàn",
-    mainTitle: "Bằng Phúc",
+    mainTitle: "Nam Quốc Tửu",
     subTitle: "Heritage Spirit",
     description: "\"Một tuyệt tác được dệt nên từ 32 loại thảo mộc rừng và nguồn nước suối Nặm Cắt thanh khiết.\"",
     buttonText: "Thưởng Thức",
-    backgroundImage: "https://images.unsplash.com/photo-1516713026847-380d0d82d499?q=80&w=2070&auto=format&fit=crop"
+    backgroundImage: "https://images.unsplash.com/photo-1758637689499-b3b477a5fecb?q=80&w=2070&auto=format&fit=crop"
   },
   home: {
     intro: {
@@ -45,7 +45,7 @@ export const INITIAL_CONTENT: SiteContent = {
       quote: "\"Một hương vị đánh thức mọi giác quan, nơi quá khứ và hiện tại giao thoa bên dòng suối Nặm Cắt.\"",
       body1: "Men Lá Bằng Phúc không chỉ là một thức uống, đó là kết tinh của thời gian. Được sinh ra từ những cánh rừng già Bắc Kạn, nơi nguồn nước suối chảy qua những tầng đá ngầm ngàn năm.",
       body2: "Sự hòa quyện giữa gạo nếp nương thơm lừng và 32 loại lá thuốc bí truyền tạo nên vị 'ngọt môi, ấm lòng' vương vấn mãi không quên.",
-      image: "https://images.unsplash.com/photo-1615551910795-3b95a8634892?q=80&w=1000&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1561535893-bb7a98c7ee45?q=80&w=1000&auto=format&fit=crop",
       floatingText: "\"Vị ngọt hậu tự nhiên không thể tìm thấy ở bất cứ đâu.\""
     },
     values: {
@@ -75,7 +75,7 @@ export const INITIAL_CONTENT: SiteContent = {
       title: "Master\nPiece",
       description: "Tuyệt phẩm thiết kế dành riêng cho những khoảnh khắc đặc biệt. Sang trọng, tinh tế và đầy ắp ý nghĩa.",
       buttonText: "Khám phá bộ sưu tập",
-      bgImage: "https://images.unsplash.com/photo-1563205096-75128038758b?q=80&w=2070&auto=format&fit=crop"
+      bgImage: "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2070&auto=format&fit=crop"
     },
     traceabilityBanner: {
       bgText: "TRUST",
@@ -164,8 +164,8 @@ export const INITIAL_CONTENT: SiteContent = {
   footer: {
     brand: {
       since: "Since 19xx",
-      titleLine1: "Rượu Men Lá",
-      titleHighlight: "Bằng Phúc",
+      titleLine1: "Rượu",
+      titleHighlight: "Nam Quốc Tửu",
       description: "Tinh hoa ẩm thực dân tộc Tày. Sản phẩm OCOP 4 sao, gìn giữ hương vị truyền thống hàng trăm năm bên dòng suối Nặm Cắt."
     },
     sections: {
@@ -173,7 +173,7 @@ export const INITIAL_CONTENT: SiteContent = {
       contactTitle: "Liên Hệ HTX"
     },
     bottom: {
-      copyright: "HTX Rượu Men Lá Bằng Phúc. All rights reserved.",
+      copyright: "HTX Rượu Nam Quốc Tửu. All rights reserved.",
       disclaimer: "Uống rượu có trách nhiệm. Không lái xe khi đã uống rượu."
     }
   }
@@ -267,7 +267,7 @@ export const MOCK_NEWS: BlogPost[] = [
     excerpt: "Mỗi dịp xuân về, người Tày tại Bằng Phúc lại dâng lên thần linh những chén rượu thơm nồng, cầu mong một năm mưa thuận gió hòa.",
     content: "Lễ hội Lồng Tồng (xuống đồng) là lễ hội quan trọng bậc nhất của người Tày...",
     date: "12/03/2024",
-    image: "https://images.unsplash.com/photo-1541533260371-b8fc9b030eb3?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?q=80&w=800&auto=format&fit=crop",
     category: "Văn Hóa",
     author: "Ban Biên Tập"
   },

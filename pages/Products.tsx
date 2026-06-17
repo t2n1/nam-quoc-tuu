@@ -12,12 +12,12 @@ const Products: React.FC = () => {
       
       {/* Editorial Header */}
       <div className="pt-32 pb-32 px-6 relative overflow-hidden">
-        <div className="max-w-[1400px] mx-auto text-center relative z-10">
+        <div className="max-w-[1400px] mx-auto text-center relative z-10 animate-fade-in-up">
           <span className="font-script text-8xl text-emerald-900/5 absolute top-0 left-1/2 -translate-x-1/2 -z-10 whitespace-nowrap">{productsPage.header.tagline}</span>
           <h1 className="font-display text-7xl md:text-9xl text-emerald-950 mb-6 tracking-tighter">
             {productsPage.header.title}
           </h1>
-          <p className="font-serif italic text-2xl text-amber-700 font-light">
+          <p className="font-serif italic text-2xl text-amber-700 font-light animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             {productsPage.header.subtitle}
           </p>
         </div>
@@ -26,7 +26,7 @@ const Products: React.FC = () => {
       <div className="max-w-[1400px] mx-auto px-6 pb-32">
         <div className="space-y-48">
           {products.map((product, idx) => (
-            <div key={product.id} className={`flex flex-col lg:flex-row items-center gap-16 lg:gap-40 ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+            <div key={product.id} className={`flex flex-col lg:flex-row items-center gap-16 lg:gap-40 animate-fade-in-up ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`} style={{ animationDelay: `${0.1 * idx + 0.3}s` }}>
               
               {/* Image Stage */}
               <div className="w-full lg:w-1/2 relative group perspective-1000">
@@ -117,7 +117,7 @@ const Products: React.FC = () => {
         </div>
 
         {/* B2B Premium Section */}
-        <div className="mt-32">
+        <div className="mt-32 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
            <div className="bg-emerald-950 rounded-[3rem] p-12 md:p-24 relative overflow-hidden text-center">
              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/az-subtle.png')] opacity-10"></div>
              
