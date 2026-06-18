@@ -5,6 +5,7 @@ import { ArrowRight, Leaf, Droplets, Award, Hexagon, Quote, Wine, Sparkles, News
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import Reveal from '../components/Reveal';
+import VietJapanMap from '../components/VietJapanMap';
 
 const Home: React.FC = () => {
   const { siteContent, blogPosts, testimonials } = useData();
@@ -155,57 +156,44 @@ const Home: React.FC = () => {
       </section>
 
       {/* Section: Vươn Ra Biển Lớn */}
-      <section className="py-32 bg-cream-100 relative overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <section className="relative overflow-hidden bg-cream-100 min-h-[560px] flex items-center">
+        {/* Map as full-section background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <VietJapanMap />
+        </div>
+        {/* Left gradient — keeps text readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cream-100 via-cream-100/85 to-cream-100/10 pointer-events-none" />
+        {/* Top / bottom fades — blends into adjacent sections */}
+        <div className="absolute inset-0 bg-gradient-to-b from-cream-100/55 via-transparent to-cream-100/55 pointer-events-none" />
 
-            {/* Left: Content */}
-            <Reveal variant="fade-right"><div>
-              <span className="text-amber-700 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">Tầm Nhìn Toàn Cầu</span>
-              <h2 className="font-display text-6xl md:text-8xl text-emerald-950 leading-[0.85] mb-4">
-                Vươn Ra<br/>Biển Lớn
-              </h2>
-              <p className="font-serif italic text-amber-700 text-xl md:text-2xl mb-8">Chinh phục thị trường Nhật Bản</p>
-              <p className="text-stone-600 font-light leading-relaxed mb-10 text-lg">
-                Tự hào là sản phẩm rượu truyền thống đầu tiên của Bắc Kạn chính thức xuất khẩu sang thị trường Nhật Bản — vượt qua hơn 100 chỉ tiêu kiểm định khắt khe về an toàn thực phẩm để khẳng định chất lượng và vị thế quốc tế.
-              </p>
+        <div className="relative z-10 w-full py-32 max-w-[1400px] mx-auto px-6">
+          <Reveal variant="fade-right"><div className="max-w-xl">
+            <span className="text-amber-700 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">Tầm Nhìn Toàn Cầu</span>
+            <h2 className="font-display text-6xl md:text-8xl text-emerald-950 leading-[0.85] mb-4">
+              Vươn Ra<br/>Biển Lớn
+            </h2>
+            <p className="font-serif italic text-amber-700 text-xl md:text-2xl mb-8">Chinh phục thị trường Nhật Bản</p>
+            <p className="text-stone-600 font-light leading-relaxed mb-10 text-lg">
+              Tự hào là sản phẩm rượu truyền thống đầu tiên của Bắc Kạn chính thức xuất khẩu sang thị trường Nhật Bản — vượt qua hơn 100 chỉ tiêu kiểm định khắt khe về an toàn thực phẩm để khẳng định chất lượng và vị thế quốc tế.
+            </p>
 
-              <div className="grid grid-cols-2 gap-4 mb-12">
-                <div className="bg-cream-50 p-6 rounded-2xl border border-cream-300/40 shadow-sm">
-                  <p className="font-display text-4xl text-emerald-950 font-bold mb-1">Tokyo</p>
-                  <p className="text-[10px] text-stone-400 uppercase tracking-wider font-bold">Thị Trường Xuất Khẩu</p>
-                </div>
-                <div className="bg-cream-50 p-6 rounded-2xl border border-cream-300/40 shadow-sm">
-                  <p className="font-display text-4xl text-emerald-950 font-bold mb-1">100+</p>
-                  <p className="text-[10px] text-stone-400 uppercase tracking-wider font-bold">Chỉ Tiêu Kiểm Định</p>
-                </div>
+            <div className="grid grid-cols-2 gap-4 mb-12">
+              <div className="bg-cream-50/80 backdrop-blur-sm p-6 rounded-2xl border border-cream-300/40 shadow-sm">
+                <p className="font-display text-4xl text-emerald-950 font-bold mb-1">Tokyo</p>
+                <p className="text-[10px] text-stone-400 uppercase tracking-wider font-bold">Thị Trường Xuất Khẩu</p>
               </div>
-
-              <div className="flex gap-2 items-center">
-                {[0, 1, 2].map(i => (
-                  <div key={i} className={`rounded-full transition-all ${i === 2 ? 'w-8 h-2 bg-emerald-950' : 'w-2 h-2 bg-cream-300'}`} />
-                ))}
+              <div className="bg-cream-50/80 backdrop-blur-sm p-6 rounded-2xl border border-cream-300/40 shadow-sm">
+                <p className="font-display text-4xl text-emerald-950 font-bold mb-1">100+</p>
+                <p className="text-[10px] text-stone-400 uppercase tracking-wider font-bold">Chỉ Tiêu Kiểm Định</p>
               </div>
-            </div></Reveal>
+            </div>
 
-            {/* Right: Arch image */}
-            <Reveal variant="fade-left" delay={200}><div className="relative flex justify-center lg:justify-end">
-              <div className="relative">
-                <div className="absolute inset-0 bg-amber-200/30 blur-[80px] rounded-full scale-110"></div>
-                <div className="relative z-10 w-72 md:w-80 aspect-[3/4] rounded-t-full rounded-b-3xl overflow-hidden shadow-2xl border border-cream-300/50">
-                  <img
-                    src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop"
-                    alt="Tokyo"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute bottom-6 left-0 right-0 flex justify-center">
-                    <span className="bg-red-600 text-white px-5 py-2 text-[9px] font-bold uppercase tracking-[0.2em] shadow-lg">Export to Japan</span>
-                  </div>
-                </div>
-              </div>
-            </div></Reveal>
-
-          </div>
+            <div className="flex gap-2 items-center">
+              {[0, 1, 2].map(i => (
+                <div key={i} className={`rounded-full transition-all ${i === 2 ? 'w-8 h-2 bg-emerald-950' : 'w-2 h-2 bg-cream-300'}`} />
+              ))}
+            </div>
+          </div></Reveal>
         </div>
       </section>
 

@@ -143,8 +143,8 @@ const Story: React.FC = () => {
 
           <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-16 items-start">
             <Reveal variant="fade-right">
-              <p className="font-serif text-emerald-100/58 leading-[2.1] text-lg text-justify">
-                <span className="float-left font-serif font-bold text-amber-500/18 leading-[0.72] mr-4 mt-2" style={{ fontSize: '6.5rem' }}>
+              <p className="font-serif text-emerald-100/60 leading-[2.1] text-lg text-justify">
+                <span className="float-left font-serif font-bold text-amber-500/20 leading-[0.72] mr-4 mt-2" style={{ fontSize: '6.5rem' }}>
                   {story.chapter1.dropCapText}
                 </span>
                 {story.chapter1.content}
