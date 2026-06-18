@@ -2,6 +2,7 @@
 import { Benefit, ProcessStep, Product, Distributor, SiteContent, BlogPost, Testimonial, FAQItem, ContactRequest } from './types';
 
 export const APP_NAME = "Rượu Nam Quốc Tửu";
+export const CONTENT_VERSION = "9";
 
 export const INITIAL_CONTENT: SiteContent = {
   general: {
