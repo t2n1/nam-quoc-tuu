@@ -1,6 +1,4 @@
 
-
-
 export interface Product {
   id: string;
   name: string;
@@ -9,6 +7,18 @@ export interface Product {
   price?: string;
   description: string;
   image: string;
+  scales?: {
+    sweetness: number; // 1-5
+    aroma: number;
+    body: number;
+    finish: number;
+    intensity?: number; // Add intensity if missing in some places
+  };
+  pairings?: {
+    name: string;
+    description?: string; // Added description
+    image: string;
+  }[];
 }
 
 export interface ProcessStep {
@@ -16,7 +26,7 @@ export interface ProcessStep {
   title: string;
   description: string[];
   icon: string;
-  image?: string; // New optional field for custom image
+  image?: string;
 }
 
 export interface Benefit {
@@ -34,9 +44,9 @@ export interface Distributor {
 export interface BlogPost {
   id: string;
   title: string;
-  slug: string; // SEO Friendly URL (e.g., cach-nau-ruou-ngon)
-  excerpt: string; // Meta description
-  content: string; // Full HTML content
+  slug: string;
+  excerpt: string;
+  content: string;
   date: string;
   image: string;
   category: string;
@@ -46,7 +56,7 @@ export interface BlogPost {
 export interface Testimonial {
   id: string;
   name: string;
-  role: string; // e.g., "Khách hàng Hà Nội" or "Chủ nhà hàng..."
+  role: string;
   content: string;
   avatar: string;
 }
@@ -56,13 +66,30 @@ export interface FAQItem {
   answer: string;
 }
 
-// CMS Types - Expanded
+export interface ContactRequest {
+  id: string;
+  name: string;
+  phone: string;
+  interest: string;
+  message: string;
+  date: string;
+  status: 'new' | 'contacted' | 'done';
+}
+
+
 export interface SiteContent {
   general: {
     hotline: string;
     address: string;
     email: string;
     facebook: string;
+    isTraceabilityEnabled: boolean;
+  };
+  seo: {
+    defaultTitle: string;
+    defaultDescription: string;
+    defaultKeywords: string;
+    ogImage: string;
   };
   ageGate: {
     heading: string;
@@ -72,7 +99,7 @@ export interface SiteContent {
     warning: string;
   };
   navbar: {
-    logoImage: string; // New field for Image Logo
+    logoImage: string;
     logoText: string;
     logoSubText: string;
     menuHome: string;
@@ -102,11 +129,42 @@ export interface SiteContent {
       image: string;
       floatingText: string;
     };
+    // New Section Headers
+    headers: {
+      botanicalsTagline: string;
+      botanicalsTitle: string;
+      botanicalsSubtitle: string;
+      testimonialsTagline: string;
+      testimonialsTitle: string;
+      testimonialsSubtitle: string;
+      blogTagline: string;
+      blogTitle: string;
+      blogSubtitle: string;
+      faqTitle: string;
+      faqSubtitle: string;
+    };
+    botanicals: { name: string; desc: string }[]; 
     values: {
       title: string;
       subtitle: string;
       description: string;
-      items: { icon: string; title: string; desc: string }[];
+      items: {
+        icon: string;
+        title: string;
+        desc: string;
+      }[];
+    };
+    japanExport: {
+      title: string;
+      subTitle: string;
+      description: string;
+      badgeText: string;
+      images: string[];
+    };
+    gallery: {
+      title: string;
+      description: string;
+      images: string[];
     };
     collection: {
       tagline: string;
@@ -114,6 +172,7 @@ export interface SiteContent {
       description: string;
       buttonText: string;
       bgImage: string;
+      image: string;
     };
     traceabilityBanner: {
       bgText: string;
@@ -123,8 +182,10 @@ export interface SiteContent {
   };
   story: {
     header: {
+      tagline: string;
       title: string;
       subtitle: string;
+      quote: string;
       image: string;
     };
     chapter1: {
@@ -151,7 +212,7 @@ export interface SiteContent {
     signature: {
       name: string;
       role: string;
-    }
+    };
   };
   productsPage: {
     header: {
@@ -164,7 +225,7 @@ export interface SiteContent {
       title: string;
       content: string;
       buttonText: string;
-    }
+    };
   };
   processPage: {
     header: {
@@ -178,7 +239,7 @@ export interface SiteContent {
     header: {
       title: string;
       subtitle: string;
-    }
+    };
   };
   contactPage: {
     title: string;

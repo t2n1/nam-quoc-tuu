@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { useData } from '../context/DataContext';
 
 const Navbar: React.FC = () => {
@@ -9,157 +9,99 @@ const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { siteContent } = useData();
-  const { navbar } = siteContent;
+  const { navbar, general } = siteContent;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Xác định trạng thái hiển thị
-  const isHome = location.pathname === '/';
-  
-  // isExpanded: Trạng thái ở đầu trang chủ (Padding lớn, nền trong suốt mặc định)
-  const isExpanded = isHome && !scrolled;
-
-  // Logic màu chữ:
-  // Nếu Menu MỞ -> Luôn dùng màu tối (Emerald-950) để tương phản với nền menu kem.
-  // Nếu Menu ĐÓNG -> Dựa vào vị trí (đầu trang chủ thì trắng, còn lại tối).
-  const textColor = (isOpen || !isExpanded) ? 'text-emerald-950' : 'text-cream-50';
-  const subTextColor = (isOpen || !isExpanded) ? 'text-emerald-900/60' : 'text-white/60';
-  const hoverColor = (isOpen || !isExpanded) ? 'hover:text-amber-600' : 'hover:text-amber-300';
-  const lineColor = (isOpen || !isExpanded) ? 'bg-amber-600' : 'bg-amber-300';
-  
-  // Logic nền Navbar:
-  // Nếu Menu MỞ -> Trong suốt (để lộ nền Overlay bên dưới).
-  // Nếu Menu ĐÓNG -> Dựa vào vị trí (đầu trang chủ thì trong suốt, còn lại có nền kem).
-  const navBackground = (isOpen || isExpanded) 
-    ? 'bg-transparent border-transparent' 
-    : 'bg-cream-50/95 backdrop-blur-md border-stone-200/50 shadow-sm';
-
-  const navPadding = isExpanded ? 'py-8' : 'py-4';
+  const navBackground = (isOpen || scrolled) 
+    ? 'bg-emerald-950/95 backdrop-blur-md border-b border-white/5 shadow-2xl py-4' 
+    : 'bg-transparent py-8';
 
   const navLinks = [
     { name: navbar.menuHome, path: '/' },
     { name: navbar.menuStory, path: '/story' },
     { name: navbar.menuProducts, path: '/products' },
     { name: navbar.menuProcess, path: '/process' },
-    { name: navbar.menuTraceability, path: '/check' },
-  ];
+    { name: navbar.menuTraceability, path: '/check', hidden: !general.isTraceabilityEnabled },
+  ].filter(link => !link.hidden);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${navPadding} ${navBackground}`}>
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-12">
-        <div className="flex justify-between items-center">
-          
-          {/* Logo */}
-          <Link to="/" className="group relative z-50" onClick={() => setIsOpen(false)}>
-             {navbar.logoImage ? (
-               <img 
-                 src={navbar.logoImage} 
-                 alt={navbar.logoText} 
-                 className="h-12 md:h-16 w-auto object-contain transition-transform duration-300 hover:scale-105"
-               />
-             ) : (
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-[150] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${navBackground}`}>
+        <div className="max-w-[1500px] mx-auto px-6 lg:px-12">
+          <div className="flex justify-between items-center">
+            
+            {/* LOGO AREA - Added shrink-0 and fixed width constraints to prevent disappearing */}
+            <Link to="/" className="group relative z-50 flex-shrink-0 flex items-center gap-2 min-w-[140px]" onClick={() => setIsOpen(false)}>
                <div className="flex flex-col items-start leading-none">
-                 <span className={`font-serif text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 ${textColor}`}>
-                   {navbar.logoText}<span className="text-amber-500">.</span>
+                 <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-amber-50 whitespace-nowrap">
+                   {navbar.logoText || 'Nam Quốc Tửu'}<span className="text-amber-500">.</span>
                  </span>
-                 <span className={`font-script text-2xl md:text-3xl transition-colors duration-500 transform -translate-y-2 translate-x-1 ${subTextColor}`}>
-                   {navbar.logoSubText}
+                 <span className="font-script text-xl sm:text-2xl md:text-3xl text-emerald-300 transform -translate-y-2 translate-x-1 block whitespace-nowrap">
+                   {navbar.logoSubText || 'est. 18xx'}
                  </span>
                </div>
-             )}
-          </Link>
-          
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-10">
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.path || (link.path !== '/' && location.pathname.startsWith(link.path));
-              // Desktop active state color logic
-              const activeClass = isActive 
-                ? (isExpanded ? 'text-amber-300' : 'text-emerald-900') 
-                : textColor;
-
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`text-[11px] font-bold tracking-[0.25em] uppercase transition-all duration-300 relative py-2 group ${activeClass} ${hoverColor}`}
+            </Link>
+            
+            {/* DESKTOP MENU */}
+            <div className="hidden lg:flex items-center gap-6 xl:gap-10">
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.path} 
+                  to={link.path} 
+                  className={`text-[11px] font-bold uppercase tracking-[0.2em] transition-all hover:text-amber-500 relative group py-2 ${location.pathname === link.path ? 'text-amber-500' : 'text-white/90'}`}
                 >
                   {link.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-px transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-right group-hover:origin-left ${lineColor}`}></span>
+                  <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-right group-hover:origin-left duration-300 ${location.pathname === link.path ? 'scale-x-100' : ''}`}></span>
                 </Link>
-              );
-            })}
-          </div>
+              ))}
+            </div>
 
-          <div className="hidden md:flex items-center">
-            <Link 
-              to="/contact" 
-              className={`px-8 py-3 border transition-all duration-500 ease-out rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105
-                ${(isExpanded && !isOpen)
-                  ? 'border-white/30 text-white hover:bg-white hover:text-emerald-950' 
-                  : 'border-emerald-950 text-emerald-950 hover:bg-emerald-950 hover:text-white'
-                }`}
-            >
-              {navbar.contactButton}
-            </Link>
+            {/* ICONS & MOBILE TOGGLE */}
+            <div className="flex items-center gap-4 md:gap-6">
+               <button className="text-white/70 hover:text-amber-500 transition-colors hidden sm:block">
+                  <Globe size={20} />
+               </button>
+               <Link to="/contact" className="hidden sm:inline-block px-6 py-2.5 border border-amber-500/50 text-amber-500 text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-amber-600 hover:text-white hover:border-amber-600 transition-all">
+                  {navbar.contactButton}
+               </Link>
+               <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-white hover:text-amber-500 transition-colors z-50 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center">
+                  {isOpen ? <X size={28} /> : <Menu size={28} />}
+               </button>
+            </div>
           </div>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className={`p-2 transition-colors md:hidden relative z-50 ${textColor}`}
-          >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
         </div>
-      </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-40 bg-[#f6f5f1] transform transition-transform duration-[0.8s] ease-[cubic-bezier(0.77,0,0.175,1)] md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        {/* Background Texture for Menu */}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 pointer-events-none"></div>
-        
-        <div className="flex flex-col h-full pt-32 px-10 pb-10 relative">
-           
-           <div className="flex flex-col space-y-8 flex-1">
-            {navLinks.map((link, idx) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className={`font-serif text-4xl text-emerald-950 hover:text-amber-700 transition-all duration-500 transform translate-y-4 opacity-0 ${isOpen ? 'animate-fade-in-up' : ''}`}
-                style={{ animationDelay: `${idx * 100}ms` }}
+        {/* MOBILE MENU OVERLAY */}
+        <div className={`fixed inset-0 bg-emerald-950/98 backdrop-blur-xl z-40 flex flex-col items-center justify-center transition-all duration-500 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+           <div className="flex flex-col items-center gap-8">
+              {navLinks.map((link, idx) => (
+                <Link 
+                  key={link.path} 
+                  to={link.path} 
+                  onClick={() => setIsOpen(false)}
+                  className={`font-display text-3xl md:text-4xl lg:text-5xl text-white hover:text-amber-500 transition-colors ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                  style={{ transitionDelay: `${idx * 100}ms` }}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Link 
+                  to="/contact" 
+                  onClick={() => setIsOpen(false)}
+                  className={`mt-8 px-10 py-4 bg-amber-600 text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-amber-500 transition-all ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                  style={{ transitionDelay: '500ms' }}
               >
-                {link.name}
+                  {navbar.mobileMenuCta}
               </Link>
-            ))}
-           </div>
-           
-           <div className="space-y-4">
-             <Link
-                to="/contact"
-                onClick={() => setIsOpen(false)}
-                className="block w-full text-center text-sm font-bold uppercase tracking-[0.2em] text-cream-100 bg-emerald-950 py-5 rounded-full shadow-lg"
-              >
-                {navbar.mobileMenuCta}
-              </Link>
-              <div className="text-center opacity-60 pt-4">
-                {navbar.logoImage ? (
-                   <img src={navbar.logoImage} alt="Logo" className="h-16 w-auto mx-auto object-contain grayscale opacity-50" />
-                ) : (
-                   <div className="font-script text-4xl text-emerald-900 mb-1">{navbar.logoText}</div>
-                )}
-              </div>
            </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 

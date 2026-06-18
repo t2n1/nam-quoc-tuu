@@ -12,8 +12,8 @@ const Footer: React.FC = () => {
     <footer className="bg-emerald-950 text-cream-200 border-t-4 border-amber-750 relative">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/az-subtle.png')] opacity-5 pointer-events-none"></div>
       
-      <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 lg:py-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
           
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-6">
@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
 
         </div>
 
-        <div className="border-t border-emerald-900 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-emerald-100/40 font-light gap-4">
+        <div className="border-t border-emerald-900 mt-10 pt-6 md:mt-16 md:pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-emerald-100/40 font-light gap-4">
           <p>© {new Date().getFullYear()} {footer.bottom.copyright}</p>
           <div className="flex items-center gap-6">
             <p className="italic">{footer.bottom.disclaimer}</p>

@@ -1,7 +1,7 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { PRODUCTS as INITIAL_PRODUCTS, MOCK_DISTRIBUTORS as INITIAL_DISTRIBUTORS, PROCESS_STEPS as INITIAL_PROCESS, INITIAL_CONTENT, MOCK_NEWS as INITIAL_NEWS, MOCK_TESTIMONIALS, MOCK_FAQS } from '../constants';
-import { Product, Distributor, ProcessStep, SiteContent, BlogPost, Testimonial, FAQItem } from '../types';
+import { PRODUCTS as INITIAL_PRODUCTS, MOCK_DISTRIBUTORS as INITIAL_DISTRIBUTORS, PROCESS_STEPS as INITIAL_PROCESS, INITIAL_CONTENT, MOCK_NEWS as INITIAL_NEWS, MOCK_TESTIMONIALS, MOCK_FAQS, MOCK_CONTACTS } from '../constants';
+import { Product, Distributor, ProcessStep, SiteContent, BlogPost, Testimonial, FAQItem, ContactRequest } from '../types';
+import { supabaseService } from '../supabaseService';
 
 interface DataContextType {
   products: Product[];
@@ -10,6 +10,7 @@ interface DataContextType {
   blogPosts: BlogPost[];
   testimonials: Testimonial[];
   faqs: FAQItem[];
+  contacts: ContactRequest[];
   siteContent: SiteContent;
   updateProduct: (product: Product) => void;
   addProduct: (product: Product) => void;
@@ -21,92 +22,92 @@ interface DataContextType {
   addBlogPost: (post: BlogPost) => void;
   updateBlogPost: (post: BlogPost) => void;
   deleteBlogPost: (id: string) => void;
-  addTestimonial: (item: Testimonial) => void; // New
-  updateTestimonial: (item: Testimonial) => void; // New
-  deleteTestimonial: (id: string) => void; // New
-  addFaq: (item: FAQItem) => void; // New
-  updateFaq: (originalQuestion: string, item: FAQItem) => void; // New
-  deleteFaq: (question: string) => void; // New
+  addTestimonial: (item: Testimonial) => void;
+  updateTestimonial: (item: Testimonial) => void;
+  deleteTestimonial: (id: string) => void;
+  addFaq: (item: FAQItem) => void;
+  updateFaq: (originalQuestion: string, item: FAQItem) => void;
+  deleteFaq: (question: string) => void;
+  updateContactStatus: (id: string, status: 'new' | 'contacted' | 'done') => void;
+  deleteContact: (id: string) => void;
   updateSiteContent: (content: SiteContent) => void;
+  // Live Editing Props
   isAuthenticated: boolean;
   login: (password: string) => boolean;
   logout: () => void;
+  isLiveEditing: boolean;
+  toggleLiveEditing: () => void;
+  updateContentByPath: (path: string, value: any) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Load initial data from localStorage if available, else use constants
-  const [products, setProducts] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('products');
-    return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
-  });
+  const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
+  const [distributors, setDistributors] = useState<Distributor[]>(INITIAL_DISTRIBUTORS);
+  const [processSteps, setProcessSteps] = useState<ProcessStep[]>(INITIAL_PROCESS);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(INITIAL_NEWS);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(MOCK_TESTIMONIALS);
+  const [faqs, setFaqs] = useState<FAQItem[]>(MOCK_FAQS);
+  const [contacts, setContacts] = useState<ContactRequest[]>(MOCK_CONTACTS);
+  const [siteContent, setSiteContent] = useState<SiteContent>(INITIAL_CONTENT);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => localStorage.getItem('isAdmin') === 'true');
+  const [isLiveEditing, setIsLiveEditing] = useState(false);
 
-  const [distributors, setDistributors] = useState<Distributor[]>(() => {
-    const saved = localStorage.getItem('distributors');
-    return saved ? JSON.parse(saved) : INITIAL_DISTRIBUTORS;
-  });
-
-  const [processSteps, setProcessSteps] = useState<ProcessStep[]>(() => {
-    const saved = localStorage.getItem('processSteps');
-    return saved ? JSON.parse(saved) : INITIAL_PROCESS;
-  });
-
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(() => {
-    const saved = localStorage.getItem('blogPosts');
-    return saved ? JSON.parse(saved) : INITIAL_NEWS;
-  });
-
-  const [testimonials, setTestimonials] = useState<Testimonial[]>(() => {
-    const saved = localStorage.getItem('testimonials');
-    return saved ? JSON.parse(saved) : MOCK_TESTIMONIALS;
-  });
-
-  const [faqs, setFaqs] = useState<FAQItem[]>(() => {
-    const saved = localStorage.getItem('faqs');
-    return saved ? JSON.parse(saved) : MOCK_FAQS;
-  });
-
-  // Load Content
-  const [siteContent, setSiteContent] = useState<SiteContent>(() => {
-    const saved = localStorage.getItem('siteContent');
-    return saved ? JSON.parse(saved) : INITIAL_CONTENT;
-  });
-
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return localStorage.getItem('isAdmin') === 'true';
-  });
-
-  // Persist to localStorage whenever data changes
+  // Load data from Supabase on mount
   useEffect(() => {
-    localStorage.setItem('products', JSON.stringify(products));
-  }, [products]);
+    const loadData = async () => {
+      try {
+        const [
+          dbProducts,
+          dbDistributors,
+          dbBlogPosts,
+          dbTestimonials,
+          dbFaqs,
+          dbContacts,
+          dbContent
+        ] = await Promise.all([
+          supabaseService.getProducts(),
+          supabaseService.getDistributors(),
+          supabaseService.getBlogPosts(),
+          supabaseService.getTestimonials(),
+          supabaseService.getFaqs(),
+          supabaseService.getContacts(),
+          supabaseService.getSiteContent()
+        ]);
 
-  useEffect(() => {
-    localStorage.setItem('distributors', JSON.stringify(distributors));
-  }, [distributors]);
+        if (dbProducts.length > 0) setProducts(dbProducts);
+        if (dbDistributors.length > 0) setDistributors(dbDistributors);
+        if (dbBlogPosts.length > 0) setBlogPosts(dbBlogPosts);
+        if (dbTestimonials.length > 0) setTestimonials(dbTestimonials);
+        if (dbFaqs.length > 0) setFaqs(dbFaqs);
+        if (dbContacts.length > 0) setContacts(dbContacts);
 
-  useEffect(() => {
-    localStorage.setItem('processSteps', JSON.stringify(processSteps));
-  }, [processSteps]);
+        if (dbContent) {
+          // Smart merge with INITIAL_CONTENT to ensure new fields are present
+          const merged = JSON.parse(JSON.stringify(INITIAL_CONTENT));
+          const mergeRecursive = (base: any, override: any) => {
+            for (const key in override) {
+              if (override[key] && typeof override[key] === 'object' && !Array.isArray(override[key])) {
+                if (!base[key]) base[key] = {};
+                mergeRecursive(base[key], override[key]);
+              } else {
+                base[key] = override[key];
+              }
+            }
+          };
+          mergeRecursive(merged, dbContent);
+          setSiteContent(merged);
+        }
+      } catch (error) {
+        console.error('Error loading data from Supabase:', error);
+      }
+    };
 
-  useEffect(() => {
-    localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-  }, [blogPosts]);
+    loadData();
+  }, []);
 
-  useEffect(() => {
-    localStorage.setItem('testimonials', JSON.stringify(testimonials));
-  }, [testimonials]);
-
-  useEffect(() => {
-    localStorage.setItem('faqs', JSON.stringify(faqs));
-  }, [faqs]);
-
-  useEffect(() => {
-    localStorage.setItem('siteContent', JSON.stringify(siteContent));
-  }, [siteContent]);
-
-  // --- Auth Actions ---
+  // Auth Actions
   const login = (password: string) => {
     if (password === 'admin123') {
       setIsAuthenticated(true);
@@ -118,113 +119,145 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const logout = () => {
     setIsAuthenticated(false);
+    setIsLiveEditing(false);
     localStorage.removeItem('isAdmin');
   };
 
-  // --- Product Actions ---
-  const updateProduct = (updatedProduct: Product) => {
+  const toggleLiveEditing = () => {
+    if (isAuthenticated) setIsLiveEditing(prev => !prev);
+  };
+
+  // Generic Update Functions (with Supabase sync)
+  const updateProduct = async (updatedProduct: Product) => {
     setProducts(prev => prev.map(p => p.id === updatedProduct.id ? updatedProduct : p));
+    await supabaseService.saveProduct(updatedProduct);
   };
 
-  const addProduct = (product: Product) => {
+  const addProduct = async (product: Product) => {
     setProducts(prev => [...prev, product]);
+    await supabaseService.saveProduct(product);
   };
 
-  const deleteProduct = (id: string) => {
+  const deleteProduct = async (id: string) => {
     setProducts(prev => prev.filter(p => p.id !== id));
+    await supabaseService.deleteProduct(id);
   };
 
-  // --- Distributor Actions ---
-  const updateDistributor = (updatedDistributor: Distributor) => {
+  const updateDistributor = async (updatedDistributor: Distributor) => {
     setDistributors(prev => prev.map(d => d.phone === updatedDistributor.phone ? updatedDistributor : d));
+    await supabaseService.saveDistributor(updatedDistributor);
   };
 
-  const addDistributor = (distributor: Distributor) => {
+  const addDistributor = async (distributor: Distributor) => {
     setDistributors(prev => [...prev, distributor]);
+    await supabaseService.saveDistributor(distributor);
   };
 
-  const deleteDistributor = (phone: string) => {
+  const deleteDistributor = async (phone: string) => {
     setDistributors(prev => prev.filter(d => d.phone !== phone));
+    await supabaseService.deleteDistributor(phone);
   };
 
-  // --- Process Actions ---
-  const updateProcessStep = (updatedStep: ProcessStep) => {
-    setProcessSteps(prev => prev.map(s => s.step === updatedStep.step ? updatedStep : s));
-  };
+  // Note: Process steps are currently tied to SiteContent in some implementations or constant. 
+  // If they need to be separate tables, we can add them later. Use siteContent for simplicity if preferred.
+  const updateProcessStep = (updatedStep: ProcessStep) => setProcessSteps(prev => prev.map(s => s.step === updatedStep.step ? updatedStep : s));
 
-  // --- Blog Actions ---
-  const addBlogPost = (post: BlogPost) => {
+  const addBlogPost = async (post: BlogPost) => {
     setBlogPosts(prev => [post, ...prev]);
+    await supabaseService.saveBlogPost(post);
   };
 
-  const updateBlogPost = (updatedPost: BlogPost) => {
+  const updateBlogPost = async (updatedPost: BlogPost) => {
     setBlogPosts(prev => prev.map(p => p.id === updatedPost.id ? updatedPost : p));
+    await supabaseService.saveBlogPost(updatedPost);
   };
 
-  const deleteBlogPost = (id: string) => {
+  const deleteBlogPost = async (id: string) => {
     setBlogPosts(prev => prev.filter(p => p.id !== id));
+    await supabaseService.deleteBlogPost(id);
   };
 
-  // --- Testimonial Actions ---
-  const addTestimonial = (item: Testimonial) => {
+  const addTestimonial = async (item: Testimonial) => {
     setTestimonials(prev => [...prev, item]);
+    await supabaseService.saveTestimonial(item);
   };
 
-  const updateTestimonial = (updatedItem: Testimonial) => {
+  const updateTestimonial = async (updatedItem: Testimonial) => {
     setTestimonials(prev => prev.map(t => t.id === updatedItem.id ? updatedItem : t));
+    await supabaseService.saveTestimonial(updatedItem);
   };
 
-  const deleteTestimonial = (id: string) => {
+  const deleteTestimonial = async (id: string) => {
     setTestimonials(prev => prev.filter(t => t.id !== id));
+    await supabaseService.deleteTestimonial(id);
   };
 
-  // --- FAQ Actions ---
-  const addFaq = (item: FAQItem) => {
+  const addFaq = async (item: FAQItem) => {
     setFaqs(prev => [...prev, item]);
+    await supabaseService.saveFaq(item);
   };
 
-  const updateFaq = (originalQuestion: string, updatedItem: FAQItem) => {
+  const updateFaq = async (originalQuestion: string, updatedItem: FAQItem) => {
     setFaqs(prev => prev.map(f => f.question === originalQuestion ? updatedItem : f));
+    await supabaseService.saveFaq(updatedItem);
   };
 
-  const deleteFaq = (question: string) => {
+  const deleteFaq = async (question: string) => {
     setFaqs(prev => prev.filter(f => f.question !== question));
+    await supabaseService.deleteFaq(question);
   };
 
-  // --- Content Actions ---
-  const updateSiteContent = (content: SiteContent) => {
+  const updateContactStatus = async (id: string, status: 'new' | 'contacted' | 'done') => {
+    const contact = contacts.find(c => c.id === id);
+    if (!contact) return;
+    const updated = { ...contact, status };
+    setContacts(prev => prev.map(c => c.id === id ? updated : c));
+    await supabaseService.saveContact(updated);
+  };
+
+  const deleteContact = async (id: string) => {
+    setContacts(prev => prev.filter(c => c.id !== id));
+    await supabaseService.deleteContact(id);
+  };
+
+  const updateSiteContent = async (content: SiteContent) => {
     setSiteContent(content);
-  }
+    await supabaseService.updateSiteContent(content);
+  };
+
+  const updateContentByPath = async (path: string, value: any) => {
+    let finalContent: SiteContent | null = null;
+    setSiteContent(prev => {
+      const newData = JSON.parse(JSON.stringify(prev));
+      const keys = path.split('.');
+      let current = newData;
+      for (let i = 0; i < keys.length - 1; i++) {
+        if (!current[keys[i]]) current[keys[i]] = {};
+        current = current[keys[i]];
+      }
+      current[keys[keys.length - 1]] = value;
+      finalContent = newData;
+      return newData;
+    });
+
+    if (finalContent) {
+      await supabaseService.updateSiteContent(finalContent);
+    }
+  };
 
   return (
     <DataContext.Provider value={{
-      products,
-      distributors,
-      processSteps,
-      blogPosts,
-      testimonials,
-      faqs,
-      siteContent,
-      updateProduct,
-      addProduct,
-      deleteProduct,
-      updateDistributor,
-      addDistributor,
-      deleteDistributor,
+      products, distributors, processSteps, blogPosts, testimonials, faqs, contacts, siteContent,
+      updateProduct, addProduct, deleteProduct,
+      updateDistributor, addDistributor, deleteDistributor,
       updateProcessStep,
-      addBlogPost,
-      updateBlogPost,
-      deleteBlogPost,
-      addTestimonial,
-      updateTestimonial,
-      deleteTestimonial,
-      addFaq,
-      updateFaq,
-      deleteFaq,
+      addBlogPost, updateBlogPost, deleteBlogPost,
+      addTestimonial, updateTestimonial, deleteTestimonial,
+      addFaq, updateFaq, deleteFaq,
+      updateContactStatus, deleteContact,
       updateSiteContent,
-      isAuthenticated,
-      login,
-      logout
+      isAuthenticated, login, logout,
+      isLiveEditing, toggleLiveEditing, updateContentByPath
     }}>
       {children}
     </DataContext.Provider>

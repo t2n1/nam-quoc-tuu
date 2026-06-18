@@ -33,10 +33,10 @@ const BlogDetail: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-950/40 to-transparent"></div>
         <div className="absolute bottom-0 left-0 w-full p-6 md:p-12">
             <div className="max-w-4xl mx-auto">
-                <span className="inline-block px-3 py-1 bg-amber-500 text-emerald-950 text-xs font-bold uppercase tracking-widest mb-4 rounded-sm">
+                <span className="inline-block px-3 py-1 bg-amber-500 text-emerald-950 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4 rounded-sm">
                     {post.category}
                 </span>
-                <h1 className="font-display text-4xl md:text-6xl text-white leading-tight mb-6">
+                <h1 className="font-display text-3xl sm:text-4xl md:text-6xl text-white leading-tight mb-6">
                     {post.title}
                 </h1>
                 <div className="flex flex-wrap items-center gap-6 text-emerald-100/70 text-sm font-medium">
@@ -53,15 +53,15 @@ const BlogDetail: React.FC = () => {
 
       {/* Content */}
       <div className="max-w-3xl mx-auto px-6 -mt-20 relative z-10">
-        <div className="bg-white p-8 md:p-16 rounded-t-3xl shadow-xl border border-stone-100">
+        <div className="bg-white p-6 sm:p-8 md:p-16 rounded-t-3xl shadow-xl border border-stone-100">
             {/* Excerpt */}
-            <p className="font-serif text-xl md:text-2xl text-emerald-900 italic leading-relaxed mb-10 border-l-4 border-amber-500 pl-6">
+            <p className="font-serif text-lg md:text-xl lg:text-2xl text-emerald-900 italic leading-relaxed mb-10 border-l-4 border-amber-500 pl-4 md:pl-6">
                 {post.excerpt}
             </p>
 
             {/* Main Content Render */}
             <div 
-                className="prose prose-stone prose-lg max-w-none prose-headings:font-serif prose-headings:text-emerald-950 prose-a:text-amber-600 prose-img:rounded-xl"
+                className="prose prose-stone prose-lg max-w-none prose-headings:font-serif prose-headings:text-emerald-950 prose-a:text-amber-600 prose-img:rounded-xl prose-p:font-sans prose-p:font-light prose-p:leading-relaxed prose-li:font-sans"
                 dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/>') }}
             >
             </div>

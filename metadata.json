@@ -1,5 +1,7 @@
 {
-  "name": "Rượu Men Lá Bằng Phúc",
-  "description": "Website giới thiệu sản phẩm OCOP 4 sao Rượu Men Lá Bằng Phúc - Tinh hoa đại ngàn Bắc Kạn.",
-  "requestFramePermissions": []
+  "name": "Rượu Nam Quốc Tửu",
+  "description": "Website giới thiệu sản phẩm OCOP 4 sao Rượu Nam Quốc Tửu - Tinh hoa đại ngàn Bắc Kạn.",
+  "requestFramePermissions": [
+    "camera"
+  ]
 }
