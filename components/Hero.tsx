@@ -109,6 +109,7 @@ const Hero: React.FC = () => {
           >
              <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#F5F5F0]/70 group-hover:text-amber-400 transition-colors duration-300">Câu Chuyện</span>
           </Link>
+
         </div>
       </div>
       

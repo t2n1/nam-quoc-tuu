@@ -46,6 +46,7 @@
               'scale-slow': 'scaleSlow 20s linear infinite alternate',
               'marquee-left': 'marqueeLeft 40s linear infinite',
               'marquee-right': 'marqueeRight 40s linear infinite',
+              'marquee': 'marquee 40s linear infinite',
               'spin-slow': 'spin 12s linear infinite',
               'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
             },
@@ -59,8 +60,8 @@
                 '100%': { opacity: '1', transform: 'translateY(0)' },
               },
               reveal: {
-                '0%': { clipPath: 'inset(100% 0 0 0)' },
-                '100%': { clipPath: 'inset(0 0 0 0)' },
+                '0%': { transform: 'translateY(100%)' },
+                '100%': { transform: 'translateY(0)' },
               },
               scaleSlow: {
                 '0%': { transform: 'scale(1)' },
@@ -74,10 +75,14 @@
                 '0%': { transform: 'translateX(-50%)' },
                 '100%': { transform: 'translateX(0)' },
               },
+              marquee: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-50%)' },
+              },
               pulseSoft: {
                 '0%, 100%': { opacity: '1' },
                 '50%': { opacity: '0.5' },
-              }
+              },
             }
           }
         }

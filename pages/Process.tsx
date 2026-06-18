@@ -1,164 +1,196 @@
-
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useData } from '../context/DataContext';
-import { Leaf, Sprout, Hourglass, FlaskConical, PackageCheck, MoveDown, Sparkles } from 'lucide-react';
+import { Leaf, Sprout, Hourglass, FlaskConical, PackageCheck } from 'lucide-react';
+import Reveal from '../components/Reveal';
 
 const Process: React.FC = () => {
   const { processSteps, siteContent } = useData();
-  const { processPage } = siteContent;
-  const [activeStep, setActiveStep] = useState(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const { processPage, story } = siteContent;
+  const heroImgRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const progressLineRef = useRef<HTMLDivElement>(null);
 
-  const getIcon = (iconName: string, isActive: boolean) => {
-    const size = 28;
-    const className = `transition-all duration-700 ${isActive ? 'text-amber-400 scale-110' : 'text-emerald-300'}`;
+  useEffect(() => {
+    const onScroll = () => {
+      if (!heroImgRef.current) return;
+      heroImgRef.current.style.transform = `scale(1.1) translateY(${window.scrollY * 0.25}px)`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const update = () => {
+      if (!timelineRef.current || !progressLineRef.current) return;
+      const rect = timelineRef.current.getBoundingClientRect();
+      const scrolled = window.innerHeight / 2 - rect.top;
+      const progress = Math.min(Math.max(scrolled / rect.height, 0), 1);
+      progressLineRef.current.style.transform = `scaleY(${progress})`;
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+
+  const getIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Leaf': return <Leaf size={size} className={className} />;
-      case 'Sprout': return <Sprout size={size} className={className} />;
-      case 'Hourglass': return <Hourglass size={size} className={className} />;
-      case 'FlaskConical': return <FlaskConical size={size} className={className} />;
-      case 'PackageCheck': return <PackageCheck size={size} className={className} />;
-      default: return <Leaf size={size} className={className} />;
+      case 'Leaf': return <Leaf size={22} />;
+      case 'Sprout': return <Sprout size={22} />;
+      case 'Hourglass': return <Hourglass size={22} />;
+      case 'FlaskConical': return <FlaskConical size={22} />;
+      case 'PackageCheck': return <PackageCheck size={22} />;
+      default: return <Leaf size={22} />;
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollTop = window.scrollY;
-      setScrollProgress(Math.min(scrollTop / docHeight, 1));
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveStep(Number(entry.target.getAttribute('data-index')));
-          }
-        });
-      },
-      { threshold: 0.5, rootMargin: "-10% 0px -10% 0px" }
-    );
-
-    stepRefs.current.forEach((el) => { if (el) observer.observe(el); });
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      observer.disconnect();
-    };
-  }, []);
-
   return (
-    <div className="bg-emerald-950 min-h-screen text-amber-50 relative overflow-hidden">
-      
-      {/* Texture Overlay */}
-      <div className="fixed inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] opacity-20 pointer-events-none z-0"></div>
+    <div className="min-h-screen overflow-x-hidden">
 
-      {/* 1. HERO SECTION */}
-      <section className="relative h-screen flex flex-col items-center justify-center px-6 z-10">
-         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent z-0"></div>
-         <div className="relative z-10 text-center animate-fade-in-up">
-            <div className="flex items-center justify-center gap-4 mb-8">
-               <div className="h-px w-12 bg-amber-500/30"></div>
-               <span className="text-amber-400 text-[10px] font-bold uppercase tracking-[0.4em]">{processPage.header.tagline}</span>
-               <div className="h-px w-12 bg-amber-500/30"></div>
-            </div>
-            <h1 className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] mb-6 md:mb-8 leading-none drop-shadow-2xl">{processPage.header.title}</h1>
-            <p className="font-serif text-lg sm:text-xl md:text-2xl text-emerald-100/60 max-w-2xl mx-auto italic font-light px-4">{processPage.header.subtitle}</p>
-         </div>
-         <div className="absolute bottom-12 animate-bounce text-amber-500/50"><MoveDown size={32} /></div>
+      {/* ── HERO ──────────────────────────────────────────────── */}
+      <section className="h-screen relative overflow-hidden flex items-end pb-28">
+        <div ref={heroImgRef} className="absolute inset-0 scale-110 will-change-transform">
+          <img
+            src={story.header.image}
+            alt="Quy Trình Tạo Tác"
+            className="w-full h-full object-cover brightness-[0.45]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-emerald-950/30 to-emerald-950" />
+        </div>
+
+        <div className="absolute top-1/2 right-8 -translate-y-1/2 z-10 hidden md:flex flex-col items-center gap-3">
+          <div className="w-px h-20 bg-white/15" />
+          <span className="text-white/30 text-[9px] tracking-[0.5em] uppercase" style={{ writingMode: 'vertical-rl' }}>
+            Craftsmanship
+          </span>
+          <div className="w-px h-20 bg-white/15" />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-8 w-full">
+          <p
+            className="font-script text-amber-400 text-5xl md:text-7xl block animate-fade-in-up"
+            style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+          >
+            {processPage.header.tagline}
+          </p>
+          <h1
+            className="font-display text-white font-bold leading-none tracking-tighter animate-fade-in-up"
+            style={{ fontSize: 'clamp(3.5rem, 10vw, 9rem)', animationDelay: '0.55s', animationFillMode: 'both' }}
+          >
+            {processPage.header.title}
+          </h1>
+          <div
+            className="flex items-center gap-6 mt-8 animate-fade-in-up"
+            style={{ animationDelay: '0.85s', animationFillMode: 'both' }}
+          >
+            <div className="h-px w-16 bg-amber-400/40" />
+            <span className="text-white/50 font-serif italic text-sm tracking-widest">
+              Nam Quốc Tửu  •  Bằng Phúc, Bắc Kạn
+            </span>
+          </div>
+        </div>
+
+        <div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center animate-fade-in-up"
+          style={{ animationDelay: '1.3s', animationFillMode: 'both' }}
+        >
+          <span className="text-white/25 text-[8px] tracking-[0.4em] uppercase mb-2">Cuộn xuống</span>
+          <div className="w-px h-12 bg-gradient-to-b from-white/10 to-amber-400/50" />
+        </div>
       </section>
 
-      {/* --- THE GOLDEN THREAD (Continuous Journey) --- */}
-      <div className="absolute top-[80vh] left-6 md:left-1/2 -translate-x-1/2 w-[1px] md:w-[2px] h-[calc(100%-120vh)] bg-emerald-900/50 z-0 origin-top">
-         <div 
-            className="w-full bg-gradient-to-b from-amber-300 to-amber-600 shadow-[0_0_15px_rgba(245,158,11,0.6)] transition-all duration-100 ease-linear rounded-full" 
-            style={{ height: `${(scrollProgress * 100)}%` }}
-         ></div>
+      {/* ── TIMELINE ──────────────────────────────────────────── */}
+      <div className="bg-cream-100 py-28 px-6">
+        <div className="max-w-[1100px] mx-auto">
+
+          <div className="relative" ref={timelineRef}>
+            {/* Base line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-emerald-900/10 hidden md:block" />
+            {/* Animated progress line */}
+            <div
+              ref={progressLineRef}
+              className="absolute left-1/2 top-0 bottom-0 w-px hidden md:block origin-top"
+              style={{
+                transform: 'scaleY(0)',
+                background: 'linear-gradient(to bottom, rgba(245,158,11,0.8), rgba(245,158,11,0.3))',
+                boxShadow: '0 0 8px 1px rgba(245,158,11,0.4)',
+              }}
+            />
+
+            <div className="space-y-16 md:space-y-0">
+              {processSteps.map((step, index) => (
+                <Reveal key={step.step} variant={index % 2 === 0 ? 'fade-right' : 'fade-left'} delay={80}>
+                  <div className={`md:flex items-center justify-between relative md:py-14 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+
+                    {/* Center dot */}
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-cream-100 border-2 border-amber-500 rounded-full z-10 hidden md:block">
+                      <div className="absolute inset-0 bg-amber-400 rounded-full animate-ping opacity-20" />
+                    </div>
+
+                    {/* Text side */}
+                    <div className={`w-full md:w-[44%] ${index % 2 === 0 ? 'md:text-right md:pr-14' : 'md:text-left md:pl-14'}`}>
+                      <div className={`flex items-baseline gap-3 mb-3 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
+                        <span className="font-display text-5xl text-emerald-900/15 font-bold leading-none select-none">0{step.step}</span>
+                        <h3 className="font-serif text-xl text-emerald-950 font-semibold">{step.title}</h3>
+                      </div>
+                      <ul className={`space-y-2 ${index % 2 === 0 ? 'md:ml-auto' : ''}`} style={{ maxWidth: '340px', marginLeft: index % 2 === 0 ? 'auto' : undefined }}>
+                        {step.description.map((desc, i) => (
+                          <li key={i} className="text-stone-500 text-sm leading-relaxed font-light">
+                            {desc}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Image / icon side */}
+                    <div className={`w-full md:w-[44%] mt-6 md:mt-0 ${index % 2 === 0 ? 'md:pl-14' : 'md:pr-14'}`}>
+                      <div className="relative group">
+                        <div className="absolute inset-0 bg-emerald-900/5 rotate-2 rounded-xl transition-transform group-hover:rotate-3" />
+                        <div className="bg-cream-50 rounded-xl border border-cream-300/40 relative z-10 overflow-hidden flex items-center justify-center group-hover:-translate-y-1 transition-transform duration-500" style={{ aspectRatio: '16/9' }}>
+                          {step.image ? (
+                            <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="p-5 bg-emerald-950/[0.08] rounded-full text-emerald-900 group-hover:bg-emerald-950 group-hover:text-amber-400 transition-colors duration-500">
+                              {getIcon(step.icon)}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* 2. STEPS JOURNEY */}
-      <section className="relative pb-20 pt-16 md:pb-32 md:pt-20 lg:pb-40 max-w-[1400px] mx-auto px-6 z-10">
-         {processSteps.map((step, index) => {
-            const isActive = activeStep === index;
-            return (
-               <div 
-                  key={step.step}
-                  data-index={index}
-                  ref={el => (stepRefs.current[index] = el)}
-                  className={`relative flex flex-col md:flex-row items-center justify-between mb-24 md:mb-32 lg:mb-48 last:mb-20 gap-8 md:gap-12 ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}
-               >
-                  {/* Step Marker Jewel */}
-                  <div className="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 z-20">
-                     <div className={`flex items-center justify-center w-12 h-12 md:w-20 md:h-20 rounded-full border-2 transition-all duration-700 bg-emerald-950 ${isActive ? 'border-amber-500 scale-110 shadow-[0_0_30px_rgba(245,158,11,0.3)]' : 'border-emerald-800 scale-100'}`}>
-                        {getIcon(step.icon, isActive)}
-                     </div>
-                  </div>
+      {/* ── CLOSING QUOTE — dark ──────────────────────────────── */}
+      <section className="bg-emerald-950 py-36 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/concrete-wall.png')] opacity-10" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
 
-                  {/* Content Card */}
-                  <div className={`w-full md:w-[42%] text-left ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'} pl-16 md:pl-0`}>
-                     <span className={`font-display text-5xl md:text-6xl lg:text-7xl font-bold transition-all duration-700 ${isActive ? 'text-amber-500/20' : 'text-emerald-900'}`}>0{step.step}</span>
-                     <h3 className={`font-display text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6 transition-colors duration-700 ${isActive ? 'text-amber-100' : 'text-emerald-700'}`}>{step.title}</h3>
-                     <ul className={`space-y-4 ${index % 2 === 0 ? 'md:items-end' : 'md:items-start'} flex flex-col`}>
-                        {step.description.map((desc, i) => (
-                           <li key={i} className={`text-emerald-100/60 font-light text-lg leading-relaxed flex items-center gap-3 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                              <span className={`w-1.5 h-1.5 rounded-full shrink-0 transition-colors duration-700 ${isActive ? 'bg-amber-500' : 'bg-emerald-800'}`}></span> 
-                              {desc}
-                           </li>
-                        ))}
-                     </ul>
-                  </div>
-
-                  {/* Visual Side */}
-                  <div className="w-full md:w-[42%] pl-16 md:pl-0">
-                     <div className={`relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl transition-all duration-[1.5s] ${isActive ? 'scale-100 opacity-100 border-amber-500/20' : 'scale-90 opacity-30 grayscale border-transparent'} border`}>
-                        {step.image ? (
-                          <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
-                        ) : (
-                          <div className="w-full h-full bg-emerald-900/50 flex items-center justify-center italic text-emerald-800">Visualizing the craft...</div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-transparent"></div>
-                     </div>
-                  </div>
-               </div>
-            );
-         })}
+        <div className="max-w-3xl mx-auto px-8 text-center relative z-10">
+          <Reveal variant="blur-in">
+            <div className="font-serif text-amber-500/10 leading-none select-none" style={{ fontSize: '8rem' }}>"</div>
+          </Reveal>
+          <Reveal variant="blur-in" delay={150}>
+            <p className="font-serif italic text-white text-2xl md:text-3xl leading-[1.8] -mt-8">
+              {processPage.bottomQuote}
+            </p>
+          </Reveal>
+          <Reveal variant="fade-up" delay={350}>
+            <div className="flex justify-center items-center gap-3 mt-10">
+              <div className="w-8 h-px bg-amber-500/20" />
+              <div className="w-1.5 h-1.5 bg-amber-500/35 rotate-45" />
+              <div className="w-2 h-2 bg-amber-500/45 rotate-45" />
+              <div className="w-1.5 h-1.5 bg-amber-500/35 rotate-45" />
+              <div className="w-8 h-px bg-amber-500/20" />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
-      {/* 3. PHILOSOPHY QUOTE (Redesigned - Clean & Elegant) */}
-      <section className="relative py-24 md:py-32 lg:py-48 bg-[#022c22] overflow-hidden border-t border-white/5 flex items-center justify-center">
-         {/* Ambient Background */}
-         <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-amber-600/5 rounded-full blur-[100px]"></div>
-            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] opacity-30"></div>
-         </div>
-
-         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
-             
-             {/* Center Ornament instead of Quotes */}
-             <div className="mb-16 flex justify-center animate-fade-in-up">
-                <div className="relative group">
-                    <div className="absolute inset-0 bg-amber-500 blur-xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                    <Hourglass className="relative text-amber-500/80" size={48} strokeWidth={0.8} />
-                </div>
-             </div>
-             
-             <div className="relative animate-reveal">
-                <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-emerald-50 leading-tight tracking-tight relative z-10 drop-shadow-2xl">
-                   {processPage.bottomQuote}
-                </h2>
-                
-                {/* Elegant Underline */}
-                <div className="w-32 h-px bg-gradient-to-r from-transparent via-amber-500/60 to-transparent mx-auto mt-12 mb-10"></div>
-             </div>
-
-             <div className="flex items-center justify-center gap-4 opacity-70 animate-fade-in-up" style={{animationDelay: '0.3s'}}>
-                <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">Triết lý Nam Quốc Tửu</span>
-             </div>
-         </div>
-      </section>
     </div>
   );
 };

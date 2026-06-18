@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Phone, MapPin, Mail, Facebook, Lock } from 'lucide-react';
+import { Phone, MapPin, Mail, Facebook } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 
@@ -51,11 +51,11 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-4">
                 <Phone className="shrink-0 text-amber-600" size={16} />
-                <span className="font-mono text-lg tracking-wider">{general.hotline}</span>
+                <a href={`tel:${general.hotline}`} className="font-mono text-lg tracking-wider hover:text-amber-400 transition-colors">{general.hotline}</a>
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="shrink-0 text-amber-600" size={16} />
-                <span>{general.email}</span>
+                <a href={`mailto:${general.email}`} className="hover:text-amber-400 transition-colors">{general.email}</a>
               </div>
             </div>
           </div>
@@ -66,9 +66,6 @@ const Footer: React.FC = () => {
           <p>© {new Date().getFullYear()} {footer.bottom.copyright}</p>
           <div className="flex items-center gap-6">
             <p className="italic">{footer.bottom.disclaimer}</p>
-            <Link to="/admin/login" className="flex items-center gap-1 opacity-50 hover:opacity-100 hover:text-amber-500 transition-opacity">
-               <Lock size={10} /> Admin
-            </Link>
           </div>
         </div>
       </div>
