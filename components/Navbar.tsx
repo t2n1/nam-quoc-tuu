@@ -58,42 +58,36 @@ const Navbar: React.FC = () => {
           
           {/* Logo */}
           <Link to="/" className="group relative z-50 flex items-center gap-3" onClick={() => setIsOpen(false)}>
-             {navbar.logoImage ? (
-               <>
-                 <div
-                   aria-label={navbar.logoText}
-                   className="h-12 md:h-14 aspect-square flex-shrink-0 transition-all duration-500"
-                   style={{
-                     backgroundColor: (isOpen || !isExpanded) ? '#022c22' : '#fcfbf9',
-                     maskImage: `url(${navbar.logoImage})`,
-                     maskRepeat: 'no-repeat',
-                     maskSize: 'contain',
-                     maskPosition: 'center',
-                     WebkitMaskImage: `url(${navbar.logoImage})`,
-                     WebkitMaskRepeat: 'no-repeat',
-                     WebkitMaskSize: 'contain',
-                     WebkitMaskPosition: 'center',
-                   }}
-                 />
-                 <div className="flex flex-col leading-none">
-                   <span className={`font-serif text-lg md:text-xl font-bold tracking-tight transition-colors duration-500 ${textColor}`}>
-                     {navbar.logoText}
-                   </span>
-                   <span className={`font-sans text-[9px] tracking-[0.25em] uppercase transition-colors duration-500 ${subTextColor}`}>
-                     {navbar.logoSubText}
-                   </span>
-                 </div>
-               </>
-             ) : (
-               <div className="flex flex-col items-start leading-none">
-                 <span className={`font-serif text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-500 ${textColor}`}>
-                   {navbar.logoText}<span className="text-amber-500">.</span>
-                 </span>
-                 <span className={`font-script text-2xl md:text-3xl transition-colors duration-500 transform -translate-y-2 translate-x-1 ${subTextColor}`}>
-                   {navbar.logoSubText}
-                 </span>
-               </div>
-             )}
+            {(() => {
+              const logoSrc = navbar.logoImage || '/logo-nqt.svg';
+              return (
+                <>
+                  <div
+                    aria-label={navbar.logoText}
+                    className="h-12 md:h-14 aspect-square flex-shrink-0 transition-all duration-500"
+                    style={{
+                      backgroundColor: (isOpen || !isExpanded) ? '#022c22' : '#fcfbf9',
+                      maskImage: `url(${logoSrc})`,
+                      maskRepeat: 'no-repeat',
+                      maskSize: 'contain',
+                      maskPosition: 'center',
+                      WebkitMaskImage: `url(${logoSrc})`,
+                      WebkitMaskRepeat: 'no-repeat',
+                      WebkitMaskSize: 'contain',
+                      WebkitMaskPosition: 'center',
+                    }}
+                  />
+                  <div className="flex flex-col leading-none">
+                    <span className={`font-serif text-lg md:text-xl font-bold tracking-tight transition-colors duration-500 ${textColor}`}>
+                      {navbar.logoText}
+                    </span>
+                    <span className={`font-sans text-[9px] tracking-[0.25em] uppercase transition-colors duration-500 ${subTextColor}`}>
+                      {navbar.logoSubText}
+                    </span>
+                  </div>
+                </>
+              );
+            })()}
           </Link>
           
           {/* Desktop Menu */}
@@ -173,11 +167,7 @@ const Navbar: React.FC = () => {
                 {navbar.mobileMenuCta}
               </Link>
               <div className="text-center opacity-60 pt-4">
-                {navbar.logoImage ? (
-                   <img src={navbar.logoImage} alt="Logo" className="h-16 w-auto mx-auto object-contain grayscale opacity-50" />
-                ) : (
-                   <div className="font-script text-4xl text-emerald-900 mb-1">{navbar.logoText}</div>
-                )}
+                <img src={navbar.logoImage || '/logo-nqt.svg'} alt="Logo" className="h-16 w-auto mx-auto object-contain grayscale opacity-50" />
               </div>
            </div>
         </div>
