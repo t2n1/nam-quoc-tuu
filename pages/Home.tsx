@@ -1,14 +1,17 @@
 
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import Hero from '../components/Hero';
-import { ArrowRight, Leaf, Droplets, Award, Hexagon, Quote, Wine, Sparkles, Newspaper, Star, Wind } from 'lucide-react';
+import { ArrowRight, Leaf, Droplets, Award, Hexagon, Quote, Wine, Sparkles, Newspaper, Star, Wind, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import Reveal from '../components/Reveal';
 import VietJapanMap from '../components/VietJapanMap';
 
 const Home: React.FC = () => {
-  const { siteContent, blogPosts, testimonials } = useData();
+  const { siteContent, blogPosts, testimonials, products } = useData();
+  const [activeIdx, setActiveIdx] = useState(0);
+  const prev = useCallback(() => setActiveIdx(i => (i - 1 + products.length) % products.length), [products.length]);
+  const next = useCallback(() => setActiveIdx(i => (i + 1) % products.length), [products.length]);
   const { home } = siteContent;
 
   // Helper to map icon name to component
@@ -197,45 +200,134 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 3: Collection Preview - Full Screen Parallax */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Section 3: Wine Cellar Carousel */}
+      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-emerald-950 select-none">
+        {/* Background texture */}
         <div className="absolute inset-0 z-0">
-          <img 
-             src={home.collection.bgImage}
-             alt="Background"
-             className="w-full h-full object-cover grayscale brightness-[0.25]"
-          />
-          <div className="absolute inset-0 bg-emerald-950/20 mix-blend-color"></div>
+          <img src={home.collection.bgImage} alt="" className="w-full h-full object-cover grayscale brightness-[0.08]" />
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/az-subtle.png')] opacity-10" />
+          {/* Shelf line */}
+          <div className="absolute bottom-[28%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-700/40 to-transparent" />
+          <div className="absolute bottom-[28%] left-0 right-0 h-8 bg-gradient-to-b from-black/30 to-transparent" />
         </div>
-        
-        <div className="relative z-10 w-full max-w-[1400px] px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-           <Reveal variant="fade-left"><div className="text-white order-2 md:order-1">
-              <span className="font-script text-7xl text-amber-500/40 block mb-2 transform -rotate-2">{home.collection.tagline}</span>
-              <h2 className="font-display text-7xl md:text-9xl leading-[0.8] mb-8 mix-blend-overlay whitespace-pre-line">
-                {home.collection.title}
-              </h2>
-              <div className="w-24 h-px bg-amber-500 mb-8 opacity-50"></div>
-              <p className="text-xl font-light text-white/70 max-w-md mb-12 border-l border-white/20 pl-6 leading-relaxed">
-                {home.collection.description}
-              </p>
-              <Link to="/products" className="inline-block px-12 py-4 border border-white/30 bg-white/5 backdrop-blur hover:bg-white hover:text-emerald-950 transition-all uppercase tracking-[0.2em] text-xs font-bold">
-                 {home.collection.buttonText}
-              </Link>
-           </div></Reveal>
 
-           <Reveal variant="zoom-rotate" delay={200}><div className="relative order-1 md:order-2 group">
-              <div className="absolute inset-0 bg-amber-600/20 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-              <div className="relative z-10 w-full max-w-sm mx-auto aspect-[3/4] border border-white/10 bg-white/5 backdrop-blur-sm p-6 rounded-t-full rounded-b-full overflow-hidden hover:scale-105 transition-transform duration-700">
-                  <img 
-                    src="https://picsum.photos/id/431/600/800" 
-                    alt="Product" 
-                    className="w-full h-full object-cover rounded-t-full rounded-b-full brightness-75 group-hover:brightness-100 transition-all duration-700"
+        {/* Header */}
+        <div className="relative z-10 text-center mb-6 md:mb-10">
+          <span className="font-script text-5xl text-amber-500/50 block mb-1">{home.collection.tagline}</span>
+          <h2 className="font-display text-4xl md:text-6xl text-white/90 leading-tight tracking-tight">{home.collection.title.replace('\n', ' ')}</h2>
+        </div>
+
+        {/* Carousel */}
+        <div className="relative z-10 w-full flex items-end justify-center" style={{ height: '52vh' }}>
+          {/* Spotlight on active */}
+          <div
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none transition-all duration-700"
+            style={{
+              width: '260px',
+              height: '100%',
+              background: 'radial-gradient(ellipse 50% 90% at 50% 100%, rgba(251,191,36,0.18) 0%, transparent 70%)',
+            }}
+          />
+
+          {products.map((product, idx) => {
+            const offset = idx - activeIdx;
+            const wrappedOffset = ((offset + Math.floor(products.length / 2)) % products.length) - Math.floor(products.length / 2);
+            const absOffset = Math.abs(wrappedOffset);
+            if (absOffset > 2) return null;
+            const scale = absOffset === 0 ? 1 : absOffset === 1 ? 0.72 : 0.52;
+            const opacity = absOffset === 0 ? 1 : absOffset === 1 ? 0.45 : 0.2;
+            const xPct = wrappedOffset * 170;
+            const zIndex = 10 - absOffset;
+            const isActive = absOffset === 0;
+            return (
+              <div
+                key={product.id}
+                onClick={() => setActiveIdx(idx)}
+                className="absolute bottom-0 cursor-pointer"
+                style={{
+                  transform: `translateX(${xPct}px) scale(${scale})`,
+                  transformOrigin: 'bottom center',
+                  opacity,
+                  zIndex,
+                  transition: 'transform 0.6s cubic-bezier(0.34,1.3,0.64,1), opacity 0.6s ease',
+                  width: '180px',
+                }}
+              >
+                <div
+                  className="relative rounded-2xl overflow-hidden"
+                  style={{
+                    background: isActive ? 'rgba(255,255,255,0.06)' : 'transparent',
+                    boxShadow: isActive ? '0 0 60px 0 rgba(251,191,36,0.12), 0 40px 80px -20px rgba(0,0,0,0.7)' : '0 20px 40px -10px rgba(0,0,0,0.5)',
+                    padding: isActive ? '12px 12px 0' : '8px 8px 0',
+                    backdropFilter: isActive ? 'blur(8px)' : 'none',
+                  }}
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full object-contain"
+                    style={{ height: '38vh', display: 'block' }}
+                    draggable={false}
                   />
-                  <div className="absolute bottom-10 left-0 w-full text-center">
-                    <span className="inline-block px-4 py-1 bg-amber-500 text-emerald-950 text-[10px] font-bold uppercase tracking-widest">Limited Edition</span>
-                  </div>
+                </div>
               </div>
-           </div></Reveal>
+            );
+          })}
+        </div>
+
+        {/* Active product info */}
+        <div className="relative z-10 mt-8 text-center transition-all duration-500" style={{ minHeight: '80px' }}>
+          <p className="font-display text-2xl md:text-3xl text-white/90 leading-tight">
+            {products[activeIdx]?.name}
+          </p>
+          <p className="font-serif italic text-amber-400/70 text-base mt-1">
+            {products[activeIdx]?.volume}
+          </p>
+        </div>
+
+        {/* Navigation */}
+        <div className="relative z-10 flex items-center gap-8 mt-6">
+          <button
+            onClick={prev}
+            className="w-12 h-12 rounded-full border border-white/15 bg-white/5 backdrop-blur flex items-center justify-center text-white/60 hover:border-amber-500/60 hover:text-amber-400 hover:bg-amber-500/10 transition-all duration-300"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          {/* Dots */}
+          <div className="flex items-center gap-2">
+            {products.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveIdx(idx)}
+                className="transition-all duration-300"
+                style={{
+                  width: idx === activeIdx ? '24px' : '6px',
+                  height: '6px',
+                  borderRadius: '3px',
+                  background: idx === activeIdx ? 'rgba(251,191,36,0.8)' : 'rgba(255,255,255,0.2)',
+                }}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={next}
+            className="w-12 h-12 rounded-full border border-white/15 bg-white/5 backdrop-blur flex items-center justify-center text-white/60 hover:border-amber-500/60 hover:text-amber-400 hover:bg-amber-500/10 transition-all duration-300"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+
+        {/* CTA */}
+        <div className="relative z-10 mt-6">
+          <Link
+            to="/products"
+            className="inline-flex items-center gap-3 px-8 py-3 border border-white/20 bg-white/5 backdrop-blur text-white/70 hover:bg-amber-500 hover:border-amber-500 hover:text-white transition-all uppercase tracking-[0.2em] text-[10px] font-bold rounded-full"
+          >
+            {home.collection.buttonText}
+            <ArrowRight size={14} />
+          </Link>
         </div>
       </section>
 
