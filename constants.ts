@@ -28,7 +28,7 @@ export const INITIAL_CONTENT: SiteContent = {
   navbar: {
     logoImage: "", 
     logoText: "Nam Quốc Tửu",
-    logoSubText: "",
+    logoSubText: "Tinh Hoa Đại Ngàn",
     menuHome: "Trang Chủ",
     menuStory: "Di Sản",
     menuProducts: "Bộ Sưu Tập",

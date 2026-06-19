@@ -17,7 +17,26 @@ const Footer: React.FC = () => {
           
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-6">
-            <h3 className="font-serif text-3xl text-white">{footer.brand.titleLine1} <br/> <span className="italic text-amber-500">{footer.brand.titleHighlight}</span></h3>
+            <div className="flex items-center gap-4">
+              <div
+                className="h-14 w-14 flex-shrink-0"
+                style={{
+                  backgroundColor: '#fcfbf9',
+                  maskImage: 'url(/logo-nqt.svg)',
+                  maskRepeat: 'no-repeat',
+                  maskSize: 'contain',
+                  maskPosition: 'center',
+                  WebkitMaskImage: 'url(/logo-nqt.svg)',
+                  WebkitMaskRepeat: 'no-repeat',
+                  WebkitMaskSize: 'contain',
+                  WebkitMaskPosition: 'center',
+                }}
+              />
+              <div className="flex flex-col leading-none">
+                <span className="font-serif text-2xl text-white font-bold tracking-tight">{footer.brand.titleHighlight}</span>
+                <span className="font-sans text-[9px] tracking-[0.25em] uppercase text-amber-400/80 mt-1">Tinh Hoa Đại Ngàn</span>
+              </div>
+            </div>
             <p className="text-sm leading-relaxed text-emerald-100/60 font-light max-w-sm">
               {footer.brand.description}
             </p>
