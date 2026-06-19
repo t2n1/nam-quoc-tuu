@@ -14,7 +14,7 @@ export const INITIAL_CONTENT: SiteContent = {
   },
   seo: {
     defaultTitle: "Rượu Nam Quốc Tửu | Tinh Hoa Đại Ngàn",
-    defaultDescription: "Sản phẩm OCOP 4 sao, 100% men lá tự nhiên từ 32 loại thảo mộc. Hương vị êm dịu, không đau đầu, đậm đà bản sắc dân tộc Tày.",
+    defaultDescription: "Thương hiệu rượu truyền thống OCOP 4 sao của người Tày, Bắc Kạn. Bộ sưu tập đa dạng — từ Rượu Men Lá đặc trưng 32 thảo mộc đến các dòng đặc sản rừng núi. Tinh Hoa Đại Ngàn vươn tầm quốc tế.",
     defaultKeywords: "rượu men lá, rượu nam quốc tửu, ocop bắc kạn, rượu ngô, đặc sản tây bắc, rượu thảo dược",
     ogImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
   },
@@ -215,9 +215,9 @@ export const INITIAL_CONTENT: SiteContent = {
   footer: {
     brand: {
       since: "",
-      titleLine1: "Rượu Men Lá",
+      titleLine1: "",
       titleHighlight: "Nam Quốc Tửu",
-      description: "Tinh hoa ẩm thực dân tộc Tày. Sản phẩm OCOP 4 sao, gìn giữ hương vị truyền thống hàng trăm năm bên dòng suối Nặm Cắt."
+      description: "Thương hiệu rượu truyền thống của người Tày, Bắc Kạn. Bộ sưu tập đa dạng — từ Rượu Men Lá đặc trưng OCOP 4 sao đến các dòng ngâm từ đặc sản rừng núi — gìn giữ hương vị trăm năm bên dòng suối Nặm Cắt."
     },
     sections: {
       linksTitle: "Khám Phá",
