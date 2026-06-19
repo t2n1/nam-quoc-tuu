@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import japanSvgRaw from '../assets/japan.svg?raw';
+
+// Strip XML declaration and <svg> wrapper — keep only the <path> elements
+const japanInner = japanSvgRaw
+  .replace(/<\?xml[^>]*\?>/g, '')
+  .replace(/<!--[\s\S]*?-->/g, '')
+  .replace(/<svg[^>]*>/g, '')
+  .replace(/<\/svg>/g, '');
 
 const VietJapanMap: React.FC = () => {
-  // Route: từ bờ đông miền nam Việt Nam → Kyushu (Nhật Bản)
-  const route = "M 188 422 C 560 48 900 68 1058 388";
+  // Tàu đi qua Biển Đông → Thái Bình Dương → vào Yokohama từ phía nam
+  const route = "M 188 422 C 620 460 1130 460 1155 299";
+  const japanGroupRef = useRef<SVGGElement>(null);
+
+  useEffect(() => {
+    if (japanGroupRef.current) {
+      japanGroupRef.current.innerHTML = japanInner;
+    }
+  }, []);
 
   return (
     <svg
       viewBox="0 0 1400 600"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio="xMaxYMid slice"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full"
     >
@@ -39,11 +54,7 @@ const VietJapanMap: React.FC = () => {
           stroke="rgba(2,44,34,0.035)" strokeWidth="1" strokeDasharray="4 18" />
       ))}
 
-      {/* ────────────────────────────────────────────
-          VIỆT NAM — góc trái bên dưới
-          Bờ biển phía đông (Biển Đông): bên phải
-          Biên giới Lào/Campuchia: bên trái
-      ──────────────────────────────────────────── */}
+      {/* ── VIỆT NAM ── */}
       <g filter="url(#landShadow)">
         <path
           d="
@@ -76,81 +87,17 @@ const VietJapanMap: React.FC = () => {
         fill="rgba(2,44,34,0.55)" letterSpacing="3.5">VIỆT NAM
       </text>
 
-      {/* ────────────────────────────────────────────
-          NHẬT BẢN — bên phải
-          4 đảo chính: Honshu, Hokkaido, Kyushu, Shikoku
-      ──────────────────────────────────────────── */}
-      <g filter="url(#landShadow)">
-
-        {/* Honshu — đảo lớn nhất, chạy chéo SW→NE */}
-        <path
-          d="
-            M 1058 392
-            L 1062 370 L 1064 348 L 1065 325
-            L 1066 302 L 1068 279 L 1072 256
-            L 1077 234 L 1083 213 L 1090 193
-            L 1097 175 L 1105 158 L 1114 143
-            L 1124 130 L 1136 120 L 1148 114
-            L 1160 113 L 1170 118 L 1177 128
-            L 1179 142 L 1175 156 L 1166 170
-            L 1154 183 L 1141 196 L 1128 210
-            L 1114 225 L 1100 241 L 1088 258
-            L 1077 277 L 1068 297 L 1062 320
-            L 1058 345 L 1056 368 L 1056 388
-            Z
-          "
-          fill="rgba(2,44,34,0.11)"
-          stroke="rgba(2,44,34,0.26)"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-
-        {/* Hokkaido — cực bắc */}
-        <path
-          d="
-            M 1152 108
-            L 1168 95 L 1186 86 L 1206 82
-            L 1228 82 L 1248 88 L 1264 100
-            L 1272 115 L 1268 130 L 1252 140
-            L 1230 145 L 1208 142 L 1186 132
-            L 1168 118 Z
-          "
-          fill="rgba(2,44,34,0.09)"
-          stroke="rgba(2,44,34,0.22)"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-
-        {/* Kyushu — tây nam */}
-        <path
-          d="
-            M 1018 408
-            L 1032 392 L 1048 384 L 1062 386
-            L 1070 398 L 1070 416 L 1060 430
-            L 1044 436 L 1028 430 L 1018 418
-            Z
-          "
-          fill="rgba(2,44,34,0.09)"
-          stroke="rgba(2,44,34,0.22)"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-
-        {/* Shikoku — nhỏ, nằm giữa */}
-        <path
-          d="
-            M 1070 364
-            L 1084 352 L 1102 354 L 1115 364
-            L 1110 377 L 1092 380 L 1076 374
-            Z
-          "
-          fill="rgba(2,44,34,0.08)"
-          stroke="rgba(2,44,34,0.18)"
-          strokeWidth="1"
-          strokeLinejoin="round"
-        />
-      </g>
-      <text x="1160" y="168" textAnchor="middle"
+      {/* ── NHẬT BẢN — 47 prefectures từ japan.svg ── */}
+      <g
+        ref={japanGroupRef}
+        transform="translate(840, 50) scale(1.0)"
+        filter="url(#landShadow)"
+        fill="rgba(2,44,34,0.09)"
+        stroke="rgba(2,44,34,0.20)"
+        strokeWidth="1.19"
+        strokeLinejoin="round"
+      />
+      <text x="1155" y="42" textAnchor="middle"
         fontFamily="Georgia, serif" fontSize="11" fontWeight="bold"
         fill="rgba(2,44,34,0.55)" letterSpacing="3.5">NHẬT BẢN
       </text>
@@ -162,11 +109,11 @@ const VietJapanMap: React.FC = () => {
       {/* ── ROUTE draw-in ── */}
       <path d={route} fill="none"
         stroke="url(#routeGrad)" strokeWidth="2.2"
-        strokeDasharray="820" strokeDashoffset="820"
+        strokeDasharray="1200" strokeDashoffset="1200"
         strokeLinecap="round" opacity="0.82"
       >
         <animate attributeName="stroke-dashoffset"
-          from="820" to="0" dur="2.8s" fill="freeze" />
+          from="1200" to="0" dur="2.8s" fill="freeze" />
       </path>
 
       {/* ── Moving dashes ── */}
@@ -193,43 +140,93 @@ const VietJapanMap: React.FC = () => {
       </circle>
       <circle cx="188" cy="422" r="3.5" fill="rgb(245,158,11)" />
 
-      {/* ── DESTINATION dot — Kyushu, Japan ── */}
-      <circle cx="1058" cy="388" r="38" fill="url(#dotGlow)">
+      {/* ── DESTINATION dot — Cảng Yokohama (Kanagawa) ── */}
+      <circle cx="1155" cy="299" r="38" fill="url(#dotGlow)">
         <animate attributeName="r" values="30;54;30" dur="3s" begin="1.5s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="1.5s" repeatCount="indefinite" />
       </circle>
-      <circle cx="1058" cy="388" r="7" fill="rgb(180,83,9)" />
-      <circle cx="1058" cy="388" r="7" fill="none"
+      <circle cx="1155" cy="299" r="7" fill="rgb(180,83,9)" />
+      <circle cx="1155" cy="299" r="7" fill="none"
         stroke="rgba(245,158,11,0.65)" strokeWidth="1.5">
         <animate attributeName="r" values="7;22;7" dur="3s" begin="1.5s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.65;0;0.65" dur="3s" begin="1.5s" repeatCount="indefinite" />
       </circle>
-      <circle cx="1058" cy="388" r="3.5" fill="rgb(245,158,11)" />
+      <circle cx="1155" cy="299" r="3.5" fill="rgb(245,158,11)" />
 
       {/* ── SHIP ── */}
       <g opacity="0">
-        <ellipse cx="-15" cy="5" rx="7" ry="2.2" fill="rgba(255,255,255,0.42)" />
-        <path d="M -14 2 L 15 0 L 13 7 L -12 7 Z" fill="rgb(180,83,9)" />
-        <rect x="-10" y="-6" width="15" height="8" rx="1.5" fill="rgb(115,50,13)" />
-        <rect x="-9" y="-1" width="12" height="1.5" fill="rgba(180,83,9,0.4)" />
-        <rect x="-2.5" y="-14" width="4.5" height="8" rx="1.2" fill="rgb(2,44,34)" />
-        <circle cx="-1" cy="-18" r="3.5" fill="rgba(50,35,10,0.28)">
-          <animate attributeName="r"       values="3.5;9;3.5"   dur="2.2s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.28;0;0.28" dur="2.2s" repeatCount="indefinite" />
-          <animate attributeName="cy"      values="-18;-28;-18" dur="2.2s" repeatCount="indefinite" />
-        </circle>
         <animate attributeName="opacity"
           from="0" to="1" begin="2.9s" dur="0.8s" fill="freeze" />
         <animateMotion dur="14s" begin="2.9s" repeatCount="indefinite" rotate="auto">
           <mpath href="#shipRoute" />
         </animateMotion>
+        {/* inner group: thu nhỏ khi gần tới Nhật */}
+        <g>
+          <animateTransform attributeName="transform" type="scale"
+            values="1;1;1;0.75;0.5;0.5"
+            keyTimes="0;0.60;0.72;0.85;0.95;1"
+            dur="14s" begin="2.9s" repeatCount="indefinite" />
+          <ellipse cx="-15" cy="5" rx="7" ry="2.2" fill="rgba(255,255,255,0.42)" />
+          <path d="M -14 2 L 15 0 L 13 7 L -12 7 Z" fill="rgb(180,83,9)" />
+          <rect x="-10" y="-6" width="15" height="8" rx="1.5" fill="rgb(115,50,13)" />
+          <rect x="-9" y="-1" width="12" height="1.5" fill="rgba(180,83,9,0.4)" />
+          <rect x="-2.5" y="-14" width="4.5" height="8" rx="1.2" fill="rgb(2,44,34)" />
+          <circle cx="-1" cy="-18" r="3.5" fill="rgba(50,35,10,0.28)">
+            <animate attributeName="r"       values="3.5;9;3.5"   dur="2.2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.28;0;0.28" dur="2.2s" repeatCount="indefinite" />
+            <animate attributeName="cy"      values="-18;-28;-18" dur="2.2s" repeatCount="indefinite" />
+          </circle>
+        </g>
       </g>
 
       {/* ── Khoảng cách ── */}
-      <text x="700" y="44" textAnchor="middle"
+      <text x="660" y="428" textAnchor="middle"
         fontFamily="Georgia, serif" fontSize="11" fontStyle="italic"
         fill="rgba(180,83,9,0.48)" letterSpacing="3">~ 3.800 km
       </text>
+
+      {/* ── SÓNG NƯỚC — xung quanh phía nam và đông Nhật Bản ── */}
+      {[
+        { cx: 1080, cy: 430, rx: 38, ry: 14, delay: 0 },
+        { cx: 1080, cy: 430, rx: 38, ry: 14, delay: 1.2 },
+        { cx: 1080, cy: 430, rx: 38, ry: 14, delay: 2.4 },
+        { cx: 1190, cy: 360, rx: 28, ry: 18, delay: 0.6 },
+        { cx: 1190, cy: 360, rx: 28, ry: 18, delay: 1.8 },
+        { cx: 1240, cy: 240, rx: 22, ry: 14, delay: 0.3 },
+        { cx: 1240, cy: 240, rx: 22, ry: 14, delay: 1.8 },
+      ].map(({ cx, cy, rx, ry, delay }, i) => (
+        <ellipse key={`wave-${i}`} cx={cx} cy={cy} rx={rx} ry={ry}
+          fill="none" stroke="rgba(2,44,34,0.13)" strokeWidth="1">
+          <animate attributeName="rx" values={`${rx};${rx * 2.8};${rx}`}
+            dur="3.6s" begin={`${delay}s`} repeatCount="indefinite" />
+          <animate attributeName="ry" values={`${ry};${ry * 2.8};${ry}`}
+            dur="3.6s" begin={`${delay}s`} repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.7;0;0.7"
+            dur="3.6s" begin={`${delay}s`} repeatCount="indefinite" />
+        </ellipse>
+      ))}
+
+      {/* ── CHIM — bay quanh vùng đông bắc Nhật Bản ── */}
+      {[
+        { x: 1195, y: 155, dx: 55, dy: -18, dur: 7,   delay: 1.5 },
+        { x: 1230, y: 180, dx: 40, dy: -25, dur: 9,   delay: 3.2 },
+        { x: 1160, y: 132, dx: 70, dy: -10, dur: 8.5, delay: 0.8 },
+        { x: 1255, y: 210, dx: 35, dy: -30, dur: 10,  delay: 5   },
+        { x: 1178, y: 168, dx: 60, dy: -22, dur: 7.5, delay: 6.5 },
+      ].map(({ x, y, dx, dy, dur, delay }, i) => (
+        <g key={`bird-${i}`} fill="none" stroke="rgba(2,44,34,0.42)"
+          strokeWidth="1.3" strokeLinecap="round">
+          {/* cánh trái và cánh phải */}
+          <path d={`M 0,0 Q -5,-3 -9,0`} />
+          <path d={`M 0,0 Q 5,-3 9,0`} />
+          <animateMotion
+            path={`M ${x},${y} C ${x + dx * 0.3},${y + dy * 0.4} ${x + dx * 0.7},${y + dy * 0.8} ${x + dx},${y + dy}`}
+            dur={`${dur}s`} begin={`${delay}s`} repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0;0.9;0.9;0"
+            keyTimes="0;0.08;0.88;1"
+            dur={`${dur}s`} begin={`${delay}s`} repeatCount="indefinite" />
+        </g>
+      ))}
 
       {/* ── COMPASS ── */}
       <g transform="translate(1348, 548)">
@@ -244,12 +241,17 @@ const VietJapanMap: React.FC = () => {
         </text>
       </g>
 
-      {/* ── EXPORT badge ── */}
-      <g transform="translate(1058, 388)">
-        <rect x="-55" y="22" width="110" height="21" rx="4" fill="rgba(2,44,34,0.88)" />
-        <text x="0" y="36.5" textAnchor="middle"
-          fontFamily="Arial, sans-serif" fontSize="8" fontWeight="bold"
-          fill="rgb(245,158,11)" letterSpacing="3">EXPORT TO JAPAN
+      {/* ── EXPORT label ── */}
+      <g transform="translate(1155, 299)">
+        <line x1="-2" y1="-12" x2="-2" y2="-44"
+          stroke="rgba(180,83,9,0.32)" strokeWidth="0.8" />
+        <text x="-8" y="-49" textAnchor="end"
+          fontFamily="Arial, sans-serif" fontSize="7.5" fontWeight="bold"
+          fill="rgba(180,83,9,0.72)" letterSpacing="3.5">EXPORT TO JAPAN
+        </text>
+        <text x="-8" y="-61" textAnchor="end"
+          fontFamily="Georgia, serif" fontSize="8.5" fontStyle="italic"
+          fill="rgba(2,44,34,0.52)" letterSpacing="1">Cảng Yokohama
         </text>
       </g>
     </svg>
