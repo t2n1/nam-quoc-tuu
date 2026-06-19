@@ -234,17 +234,11 @@ export const PRODUCTS: Product[] = [
   {
     id: 'p1',
     name: "Rượu Men Lá Chai Thủy Tinh",
-    volume: "500ml",
+    volume: "500ml · 25% Vol",
     type: "Lẻ",
-    description: "Thiết kế sang trọng, phù hợp làm quà biếu hoặc sử dụng trong các bữa ăn gia đình ấm cúng. Chai thủy tinh cao cấp bảo quản trọn vẹn hương vị.",
-    image: "https://picsum.photos/id/431/600/800",
-    scales: {
-      sweetness: 2,
-      aroma: 4,
-      body: 4,
-      finish: 5,
-      intensity: 4
-    },
+    description: "Chai thủy tinh tròn cao cấp, nhãn đen vàng sang trọng. Rượu men lá truyền thống đặc sản Bắc Kạn — ủ từ gạo lên men cùng 32 loại thảo mộc rừng, hạ thổ 6 tháng. Sản phẩm OCOP 4 sao đạt chuẩn xuất khẩu Nhật Bản.",
+    image: "/products/ruou-men-la-500ml.png",
+    scales: { sweetness: 2, aroma: 5, body: 4, finish: 5, intensity: 4 },
     pairings: [
       { name: "Thịt Lợn Bản Gác Bếp", description: "Vị khói bếp quyện cùng men lá nồng nàn.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400" },
       { name: "Cá Suối Nướng Trõ", description: "Vị ngọt cá suối làm dịu độ nồng của rượu.", image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=400" }
@@ -252,23 +246,108 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'p2',
-    name: "Rượu Men Lá Can Lớn",
-    volume: "10 Lít",
-    type: "Sỉ",
-    description: "Giải pháp kinh tế cho nhà hàng, quán ăn hoặc các sự kiện lớn. Giữ trọn hương vị truyền thống trong can nhựa thực phẩm an toàn.",
-    image: "https://picsum.photos/id/225/600/800",
-    scales: {
-      sweetness: 2,
-      aroma: 3,
-      body: 5,
-      finish: 4,
-      intensity: 5
-    },
+    name: "Rượu Sạch Men Lá Chai Dẹt",
+    volume: "500ml · 25% Vol",
+    type: "Lẻ",
+    description: "Chai thủy tinh dẹt thiết kế hiện đại, tiện mang theo. Rượu sạch men lá dược liệu — gạo lên men chưng cát, nước suối Nặm Cắt tự nhiên, men lá thu hái tay từ rừng Chợ Đồn. OCOP 4 sao · ISO 9001:2015.",
+    image: "/products/ruou-men-la-500ml-2.png",
+    scales: { sweetness: 2, aroma: 4, body: 4, finish: 4, intensity: 4 },
     pairings: [
-      { name: "Lẩu Gà Đen H’Mông", description: "Sự ấm nóng thảo dược hòa quyện ngày đông.", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400" },
+      { name: "Thịt Lợn Bản Gác Bếp", description: "Vị khói bếp quyện cùng men lá nồng nàn.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400" },
       { name: "Dê Núi Chợ Đồn", description: "Thịt dê núi chắc ngọt hợp vị rượu mạnh.", image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=400" }
     ]
-  }
+  },
+  {
+    id: 'p3',
+    name: "Rượu Men Lá Can 5 Lít",
+    volume: "5 Lít · 19,8% Vol",
+    type: "Sỉ",
+    description: "Can nhựa thực phẩm an toàn 5 lít — giải pháp kinh tế tối ưu cho nhà hàng, quán ăn, tiệc cưới và sự kiện lớn. Giữ trọn hương vị truyền thống, dễ bảo quản và vận chuyển.",
+    image: "/products/ruou-men-la-5-lit.png",
+    scales: { sweetness: 2, aroma: 3, body: 5, finish: 4, intensity: 5 },
+    pairings: [
+      { name: "Lẩu Gà Đen H'Mông", description: "Sự ấm nóng thảo dược hòa quyện ngày đông.", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400" },
+      { name: "Dê Núi Chợ Đồn", description: "Thịt dê núi chắc ngọt hợp vị rượu mạnh.", image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=400" }
+    ]
+  },
+  {
+    id: 'p4',
+    name: "Rượu Men Lá Chai 1 Lít",
+    volume: "1 Lít · 25% Vol",
+    type: "Lẻ",
+    description: "Chai 1 lít tiện dụng cho gia đình hoặc làm quà biếu dịp lễ Tết. Rượu men lá nguyên chất, hương thơm đặc trưng vùng cao Bắc Kạn, ủ đủ 6 tháng hạ thổ.",
+    image: "/products/ruou-men-la-500ml.png",
+    scales: { sweetness: 2, aroma: 4, body: 4, finish: 5, intensity: 4 },
+    pairings: [
+      { name: "Thịt Lợn Bản Gác Bếp", description: "Vị khói bếp quyện cùng men lá nồng nàn.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400" },
+      { name: "Cá Suối Nướng Trõ", description: "Vị ngọt cá suối làm dịu độ nồng của rượu.", image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=400" }
+    ]
+  },
+  {
+    id: 'p5',
+    name: "Rượu Nếp Cái Hoa Vàng",
+    volume: "500ml · 29,5% Vol",
+    type: "Lẻ",
+    description: "Nấu từ giống nếp cái hoa vàng thuần chủng, lên men bằng men lá rừng truyền thống. Vị ngọt thanh, hậu vị dài, hương thơm lúa nếp đặc trưng. Thích hợp dùng thưởng thức hoặc làm quà biếu cao cấp.",
+    image: "/products/ruou-men-la-500ml.png",
+    scales: { sweetness: 4, aroma: 5, body: 3, finish: 4, intensity: 3 },
+    pairings: [
+      { name: "Xôi Nếp Nương", description: "Đôi hoàn hảo — nếp với nếp, hương vị thuần khiết.", image: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=400" },
+      { name: "Thịt Lợn Bản Gác Bếp", description: "Vị béo ngậy cân bằng sự thanh ngọt của nếp vàng.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400" }
+    ]
+  },
+  {
+    id: 'p6',
+    name: "Rượu Nếp Cẩm",
+    volume: "500ml · 25% Vol",
+    type: "Lẻ",
+    description: "Lên men từ gạo nếp cẩm tím — giàu anthocyanin, chất chống oxy hóa tự nhiên. Màu tím hồng đặc trưng, vị ngọt nhẹ, thơm nồng. Tốt cho tuần hoàn máu, phù hợp cho phụ nữ sau sinh.",
+    image: "/products/ruou-men-la-500ml.png",
+    scales: { sweetness: 4, aroma: 4, body: 3, finish: 3, intensity: 2 },
+    pairings: [
+      { name: "Bánh Chưng Nếp Cẩm", description: "Kết hợp thuần Việt, hương vị Tết truyền thống.", image: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=400" },
+      { name: "Cá Suối Nướng Trõ", description: "Vị nhẹ cá suối tôn thêm màu sắc rượu cẩm.", image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=400" }
+    ]
+  },
+  {
+    id: 'p7',
+    name: "Rượu Táo Mèo",
+    volume: "500ml · 22% Vol",
+    type: "Lẻ",
+    description: "Ngâm từ quả táo mèo (sơn tra) rừng Bắc Kạn — vị chua ngọt tự nhiên, thơm dịu. Táo mèo giàu vitamin C, hỗ trợ tiêu hóa, giảm mỡ máu. Rượu ngâm truyền thống, uống ấm bụng, tốt cho sức khoẻ.",
+    image: "/products/ruou-men-la-500ml.png",
+    scales: { sweetness: 4, aroma: 4, body: 2, finish: 3, intensity: 2 },
+    pairings: [
+      { name: "Thịt Lợn Bản Gác Bếp", description: "Vị chua ngọt táo mèo cắt béo thịt lợn.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400" },
+      { name: "Lẩu Gà Đen H'Mông", description: "Hài hòa vị thuốc bắc trong lẩu gà đen.", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400" }
+    ]
+  },
+  {
+    id: 'p8',
+    name: "Rượu Chuối Hột",
+    volume: "500ml · 22% Vol",
+    type: "Lẻ",
+    description: "Ngâm từ chuối hột rừng — vị ngọt thơm tự nhiên của chuối, hậu vị dịu. Chuối hột có tác dụng lợi tiểu, hỗ trợ thận, thường dùng trong y học dân gian vùng cao. Rượu ngâm nguyên chất, không phụ gia.",
+    image: "/products/ruou-men-la-500ml.png",
+    scales: { sweetness: 4, aroma: 3, body: 2, finish: 3, intensity: 2 },
+    pairings: [
+      { name: "Dê Núi Chợ Đồn", description: "Vị ngọt chuối dịu bớt độ gắt của dê núi.", image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=400" },
+      { name: "Cá Suối Nướng Trõ", description: "Kết hợp nhẹ nhàng, phù hợp thưởng thức chậm rãi.", image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=400" }
+    ]
+  },
+  {
+    id: 'p9',
+    name: "Rượu Dừa",
+    volume: "500ml · 20% Vol",
+    type: "Lẻ",
+    description: "Rượu ngâm trong quả dừa tươi — hương dừa béo ngậy, vị ngọt thanh tự nhiên, nồng độ nhẹ dễ uống. Đặc sản độc đáo kết hợp tinh hoa miền Bắc và hương vị nhiệt đới. Phù hợp làm quà biếu lạ miệng.",
+    image: "/products/ruou-men-la-500ml.png",
+    scales: { sweetness: 5, aroma: 3, body: 2, finish: 3, intensity: 2 },
+    pairings: [
+      { name: "Hải Sản Nướng", description: "Vị dừa nhẹ tôn lên vị ngọt hải sản.", image: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=400" },
+      { name: "Thịt Lợn Bản Gác Bếp", description: "Béo ngậy dừa cân bằng vị mặn khói của thịt.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400" }
+    ]
+  },
 ];
 
 export const PROCESS_STEPS: ProcessStep[] = [
