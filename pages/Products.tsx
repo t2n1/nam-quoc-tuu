@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useData } from '../context/DataContext';
-import { ArrowUpRight, Wine, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
 
@@ -111,40 +111,6 @@ const Products: React.FC = () => {
                   <p className="text-stone-600 text-lg font-light leading-relaxed mb-12 border-l border-amber-500/30 pl-6">
                     {product.description}
                   </p>
-
-                  {/* Taste Profile */}
-                  <div className="bg-cream-50 p-8 rounded-xl border border-cream-300/50 mb-12">
-                    <div className="flex items-center gap-3 mb-6">
-                      <Wine size={20} className="text-emerald-900" />
-                      <span className="font-bold text-emerald-950 uppercase tracking-widest text-xs">Taste Profile</span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-8">
-                      <div>
-                        <div className="flex justify-between text-xs text-stone-500 mb-2 font-bold uppercase tracking-wider">
-                          <span>Độ Êm</span><span>9/10</span>
-                        </div>
-                        <div className="h-1 bg-cream-300/60 rounded-full overflow-hidden">
-                          <div className="h-full bg-emerald-800 w-[90%] rounded-full" />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="flex justify-between text-xs text-stone-500 mb-2 font-bold uppercase tracking-wider">
-                          <span>Hương Thảo Mộc</span><span>10/10</span>
-                        </div>
-                        <div className="h-1 bg-cream-300/60 rounded-full overflow-hidden">
-                          <div className="h-full bg-amber-600 w-[95%] rounded-full" />
-                        </div>
-                      </div>
-                      <div className="col-span-2">
-                        <div className="flex justify-between text-xs text-stone-500 mb-2 font-bold uppercase tracking-wider">
-                          <span>Độ Ngọt Hậu</span><span>High</span>
-                        </div>
-                        <div className="h-1 bg-cream-300/60 rounded-full overflow-hidden">
-                          <div className="h-full bg-emerald-900 w-[85%] rounded-full" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
                   <Link
                     to="/contact"
