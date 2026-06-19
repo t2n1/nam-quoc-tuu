@@ -17,7 +17,8 @@ const SEOMetadata: React.FC<SEOProps> = ({ title, description, type = 'website',
   const { siteContent } = useData();
   const location = useLocation();
   const siteName = "Rượu Nam Quốc Tửu";
-  const fullUrl = `https://vcheck.jp${location.pathname}`;
+  const siteOrigin = typeof window !== 'undefined' ? window.location.origin : '';
+  const fullUrl = `${siteOrigin}${location.pathname}`;
 
   useEffect(() => {
     const metaTitle = title ? `${title} | ${siteName}` : `${siteName} | Tinh Hoa Đại Ngàn Bắc Kạn`;
@@ -62,8 +63,8 @@ const SEOMetadata: React.FC<SEOProps> = ({ title, description, type = 'website',
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": siteName,
-      "url": "https://vcheck.jp",
-      "logo": "https://vcheck.jp/logo.png",
+      "url": siteOrigin,
+      "logo": `${siteOrigin}/logo-nqt.svg`,
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": siteContent.general.hotline,
@@ -116,7 +117,7 @@ const SEOMetadata: React.FC<SEOProps> = ({ title, description, type = 'website',
           "streetAddress": siteContent.general.address, // Ideally this should be the specific distributor address
           "addressCountry": "VN"
         },
-        "image": image || "https://images.unsplash.com/photo-1615551910795-3b95a8634892?q=80&w=1000"
+        "image": image || "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000"
       };
     }
 

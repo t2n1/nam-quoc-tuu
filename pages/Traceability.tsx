@@ -44,7 +44,7 @@ const Traceability: React.FC = () => {
         title={result ? `Xác thực: Đại lý ${result.name} - ${result.phone}` : traceabilityPage.header.title} 
         description={result ? `Chứng nhận đại lý ủy quyền chính hãng OCOP 4 sao cho ${result.name} tại ${result.address}. Tra cứu ngay!` : traceabilityPage.header.subtitle} 
         phoneCheck={phone}
-        image="https://images.unsplash.com/photo-1615551910795-3b95a8634892?q=80&w=1000&auto=format&fit=crop"
+        image="https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000&auto=format&fit=crop"
       />
       
       {/* Dynamic Header */}

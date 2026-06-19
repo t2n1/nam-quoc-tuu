@@ -33,7 +33,7 @@ const AgeGate: React.FC = () => {
     <div className="fixed inset-0 z-[60] flex items-center justify-center">
       {/* Cinematic Background */}
       <div className="absolute inset-0 bg-emerald-950">
-         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516713026847-380d0d82d499?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
          <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/80 to-emerald-950/60"></div>
          {/* Texture */}
          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>

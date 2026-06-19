@@ -16,7 +16,7 @@ export const INITIAL_CONTENT: SiteContent = {
     defaultTitle: "Rượu Nam Quốc Tửu | Tinh Hoa Đại Ngàn",
     defaultDescription: "Sản phẩm OCOP 4 sao, 100% men lá tự nhiên từ 32 loại thảo mộc. Hương vị êm dịu, không đau đầu, đậm đà bản sắc dân tộc Tày.",
     defaultKeywords: "rượu men lá, rượu nam quốc tửu, ocop bắc kạn, rượu ngô, đặc sản tây bắc, rượu thảo dược",
-    ogImage: "https://images.unsplash.com/photo-1516713026847-380d0d82d499?q=80&w=2070&auto=format&fit=crop"
+    ogImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
   },
   ageGate: {
     heading: "Xác Nhận Độ Tuổi",
@@ -43,7 +43,7 @@ export const INITIAL_CONTENT: SiteContent = {
     subTitle: "Heritage Spirit",
     description: "\"Một tuyệt tác được dệt nên từ 32 loại thảo mộc rừng và nguồn nước suối Nặm Cắt thanh khiết.\"",
     buttonText: "Thưởng Thức",
-    backgroundImage: "https://images.unsplash.com/photo-1516713026847-380d0d82d499?q=80&w=2070&auto=format&fit=crop"
+    backgroundImage: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
   },
   home: {
     intro: {
@@ -53,7 +53,7 @@ export const INITIAL_CONTENT: SiteContent = {
       quote: "\"Một hương vị đánh thức mọi giác quan, nơi quá khứ và hiện tại giao thoa bên dòng suối Nặm Cắt.\"",
       body1: "Nam Quốc Tửu không chỉ là một thức uống, đó là kết tinh của thời gian. Được sinh ra từ những cánh rừng già Bắc Kạn, nơi nguồn nước suối chảy qua những tầng đá ngầm ngàn năm.",
       body2: "Sự hòa quyện giữa gạo nếp nương thơm lừng và 32 loại lá thuốc bí truyền tạo nên vị 'ngọt môi, ấm lòng' vương vấn mãi không quên.",
-      image: "https://images.unsplash.com/photo-1615551910795-3b95a8634892?q=80&w=1000&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000&auto=format&fit=crop",
       floatingText: "\"Vị ngọt hậu tự nhiên không thể tìm thấy ở bất cứ đâu.\""
     },
     headers: {
@@ -113,9 +113,9 @@ export const INITIAL_CONTENT: SiteContent = {
       description: "Hình ảnh sản phẩm thực tế và những khoảnh khắc đáng nhớ tại Nhật Bản.",
       images: [
         "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000",
-        "https://images.unsplash.com/photo-1615551910795-3b95a8634892?q=80&w=1000",
+        "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000",
         "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=800",
-        "https://images.unsplash.com/photo-1563205096-75128038758b?q=80&w=2070"
+        "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=2070"
       ]
     },
     collection: {
@@ -123,7 +123,7 @@ export const INITIAL_CONTENT: SiteContent = {
       title: "Master\nPiece",
       description: "Tuyệt phẩm thiết kế dành riêng cho những khoảnh khắc đặc biệt. Sang trọng, tinh tế và đầy ắp ý nghĩa.",
       buttonText: "Khám phá bộ sưu tập",
-      bgImage: "https://images.unsplash.com/photo-1563205096-75128038758b?q=80&w=2070&auto=format&fit=crop",
+      bgImage: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=2070&auto=format&fit=crop",
       image: "https://picsum.photos/id/431/600/800"
     },
     traceabilityBanner: {
@@ -340,7 +340,7 @@ export const MOCK_NEWS: BlogPost[] = [
     excerpt: "Mỗi dịp xuân về, người Tày tại Bằng Phúc lại dâng lên thần linh những chén rượu thơm nồng, cầu mong một năm mưa thuận gió hòa.",
     content: "Lễ hội Lồng Tồng (xuống đồng) là lễ hội quan trọng bậc nhất của người Tày...",
     date: "12/03/2024",
-    image: "https://images.unsplash.com/photo-1541533260371-b8fc9b030eb3?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?q=80&w=800&auto=format&fit=crop",
     category: "Văn Hóa",
     author: "Ban Biên Tập"
   },

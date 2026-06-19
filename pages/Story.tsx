@@ -289,11 +289,7 @@ const Story: React.FC = () => {
       <section className="bg-cream-100 py-32">
         <Reveal variant="fade-in" delay={100}>
           <div className="text-center">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Signature_sample.svg/1200px-Signature_sample.svg.png"
-              alt="Chữ ký"
-              className="h-20 mx-auto opacity-30 mb-8 grayscale"
-            />
+            <div className="font-script text-5xl text-emerald-900 opacity-30 mb-8 select-none">Nam Quốc Tửu</div>
             <div className="flex items-center justify-center gap-3 mb-5">
               <div className="w-12 h-px bg-emerald-900/15" />
               <div className="w-1.5 h-1.5 bg-amber-600/45 rotate-45" />
