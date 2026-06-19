@@ -28,7 +28,7 @@ export const INITIAL_CONTENT: SiteContent = {
   navbar: {
     logoImage: "", 
     logoText: "Nam Quốc Tửu",
-    logoSubText: "est. 18xx",
+    logoSubText: "",
     menuHome: "Trang Chủ",
     menuStory: "Di Sản",
     menuProducts: "Bộ Sưu Tập",
@@ -214,7 +214,7 @@ export const INITIAL_CONTENT: SiteContent = {
   },
   footer: {
     brand: {
-      since: "Since 19xx",
+      since: "",
       titleLine1: "Rượu Men Lá",
       titleHighlight: "Nam Quốc Tửu",
       description: "Tinh hoa ẩm thực dân tộc Tày. Sản phẩm OCOP 4 sao, gìn giữ hương vị truyền thống hàng trăm năm bên dòng suối Nặm Cắt."

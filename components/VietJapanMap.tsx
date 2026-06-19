@@ -1,11 +1,12 @@
 import React from 'react';
 
 const VietJapanMap: React.FC = () => {
-  const route = "M 225 335 C 490 55 930 55 1188 228";
+  // Route: từ bờ đông miền nam Việt Nam → Kyushu (Nhật Bản)
+  const route = "M 188 422 C 560 48 900 68 1058 388";
 
   return (
     <svg
-      viewBox="0 0 1400 500"
+      viewBox="0 0 1400 600"
       preserveAspectRatio="xMidYMid slice"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full"
@@ -13,15 +14,8 @@ const VietJapanMap: React.FC = () => {
       <defs>
         <path id="shipRoute" d={route} />
 
-        <filter id="blur20" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="20" />
-        </filter>
-        <filter id="blur12" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="12" />
-        </filter>
-
         <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="rgb(180,83,9)"   stopOpacity="0.9" />
+          <stop offset="0%" stopColor="rgb(180,83,9)" stopOpacity="0.9" />
           <stop offset="100%" stopColor="rgb(245,158,11)" stopOpacity="0.9" />
         </linearGradient>
 
@@ -29,74 +23,156 @@ const VietJapanMap: React.FC = () => {
           <stop offset="0%" stopColor="rgb(245,158,11)" stopOpacity="0.45" />
           <stop offset="100%" stopColor="rgb(245,158,11)" stopOpacity="0" />
         </radialGradient>
+
+        <filter id="landShadow" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="2" dy="3" stdDeviation="5" floodColor="rgba(2,44,34,0.18)" />
+        </filter>
       </defs>
 
-      {/* ── GRID ────────────────────────────────────── */}
-      {[100, 200, 300, 400].map(y => (
+      {/* ── GRID ── */}
+      {[120, 240, 360, 480].map(y => (
         <line key={y} x1="0" y1={y} x2="1400" y2={y}
-          stroke="rgba(2,44,34,0.05)" strokeWidth="1" strokeDasharray="4 14" />
+          stroke="rgba(2,44,34,0.035)" strokeWidth="1" strokeDasharray="4 18" />
       ))}
-      {[140, 280, 420, 560, 700, 840, 980, 1120, 1260].map(x => (
-        <line key={x} x1={x} y1="0" x2={x} y2="500"
-          stroke="rgba(2,44,34,0.05)" strokeWidth="1" strokeDasharray="4 14" />
+      {[280, 560, 840, 1120].map(x => (
+        <line key={x} x1={x} y1="0" x2={x} y2="600"
+          stroke="rgba(2,44,34,0.035)" strokeWidth="1" strokeDasharray="4 18" />
       ))}
 
-      {/* ── LAND MASS HINTS (soft blurred fills — no hard outlines) ─── */}
-      {/* Southeast Asia coast */}
-      <ellipse cx="80" cy="260" rx="100" ry="200"
-        fill="rgba(2,44,34,0.06)" filter="url(#blur20)" />
-      {/* Vietnam peninsula */}
-      <ellipse cx="218" cy="360" rx="36" ry="112"
-        fill="rgba(2,44,34,0.10)" filter="url(#blur20)"
-        transform="rotate(-8,218,360)" />
-      {/* Vietnam inner shade */}
-      <ellipse cx="218" cy="360" rx="20" ry="80"
-        fill="rgba(2,44,34,0.06)" filter="url(#blur12)"
-        transform="rotate(-8,218,360)" />
+      {/* ────────────────────────────────────────────
+          VIỆT NAM — góc trái bên dưới
+          Bờ biển phía đông (Biển Đông): bên phải
+          Biên giới Lào/Campuchia: bên trái
+      ──────────────────────────────────────────── */}
+      <g filter="url(#landShadow)">
+        <path
+          d="
+            M 112 292
+            L 135 285 L 155 285 L 172 292 L 185 305
+            L 190 322 L 190 342 L 188 364
+            L 184 388 L 178 412
+            L 172 435 L 168 458
+            L 164 480 L 158 500
+            L 145 518 L 128 535
+            L 108 550 L 90 562
+            L 78 568 L 68 560
+            L 70 542 L 78 522
+            L 88 504 L 98 485
+            L 105 462 L 108 438
+            L 108 412 L 108 385
+            L 108 358 L 108 330
+            L 108 305 L 112 292
+            Z
+          "
+          fill="rgba(2,44,34,0.10)"
+          stroke="rgba(2,44,34,0.28)"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+      </g>
+      <text x="130" y="586" textAnchor="middle"
+        fontFamily="Georgia, serif" fontSize="11" fontWeight="bold"
+        fill="rgba(2,44,34,0.55)" letterSpacing="3.5">VIỆT NAM
+      </text>
 
-      {/* Japan — Honshu */}
-      <ellipse cx="1192" cy="232" rx="100" ry="32"
-        fill="rgba(2,44,34,0.10)" filter="url(#blur20)"
-        transform="rotate(-22,1192,232)" />
-      {/* Japan — Hokkaido */}
-      <ellipse cx="1234" cy="166" rx="55" ry="26"
-        fill="rgba(2,44,34,0.09)" filter="url(#blur12)"
-        transform="rotate(-12,1234,166)" />
-      {/* Japan — Kyushu */}
-      <ellipse cx="1130" cy="274" rx="32" ry="24"
-        fill="rgba(2,44,34,0.08)" filter="url(#blur12)" />
-      {/* Japan coast cluster */}
-      <ellipse cx="1165" cy="248" rx="70" ry="55"
-        fill="rgba(2,44,34,0.04)" filter="url(#blur20)" />
+      {/* ────────────────────────────────────────────
+          NHẬT BẢN — bên phải
+          4 đảo chính: Honshu, Hokkaido, Kyushu, Shikoku
+      ──────────────────────────────────────────── */}
+      <g filter="url(#landShadow)">
 
-      {/* ── ROUTE — shadow glow ─────────────────────── */}
+        {/* Honshu — đảo lớn nhất, chạy chéo SW→NE */}
+        <path
+          d="
+            M 1058 392
+            L 1062 370 L 1064 348 L 1065 325
+            L 1066 302 L 1068 279 L 1072 256
+            L 1077 234 L 1083 213 L 1090 193
+            L 1097 175 L 1105 158 L 1114 143
+            L 1124 130 L 1136 120 L 1148 114
+            L 1160 113 L 1170 118 L 1177 128
+            L 1179 142 L 1175 156 L 1166 170
+            L 1154 183 L 1141 196 L 1128 210
+            L 1114 225 L 1100 241 L 1088 258
+            L 1077 277 L 1068 297 L 1062 320
+            L 1058 345 L 1056 368 L 1056 388
+            Z
+          "
+          fill="rgba(2,44,34,0.11)"
+          stroke="rgba(2,44,34,0.26)"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+
+        {/* Hokkaido — cực bắc */}
+        <path
+          d="
+            M 1152 108
+            L 1168 95 L 1186 86 L 1206 82
+            L 1228 82 L 1248 88 L 1264 100
+            L 1272 115 L 1268 130 L 1252 140
+            L 1230 145 L 1208 142 L 1186 132
+            L 1168 118 Z
+          "
+          fill="rgba(2,44,34,0.09)"
+          stroke="rgba(2,44,34,0.22)"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+
+        {/* Kyushu — tây nam */}
+        <path
+          d="
+            M 1018 408
+            L 1032 392 L 1048 384 L 1062 386
+            L 1070 398 L 1070 416 L 1060 430
+            L 1044 436 L 1028 430 L 1018 418
+            Z
+          "
+          fill="rgba(2,44,34,0.09)"
+          stroke="rgba(2,44,34,0.22)"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+
+        {/* Shikoku — nhỏ, nằm giữa */}
+        <path
+          d="
+            M 1070 364
+            L 1084 352 L 1102 354 L 1115 364
+            L 1110 377 L 1092 380 L 1076 374
+            Z
+          "
+          fill="rgba(2,44,34,0.08)"
+          stroke="rgba(2,44,34,0.18)"
+          strokeWidth="1"
+          strokeLinejoin="round"
+        />
+      </g>
+      <text x="1160" y="168" textAnchor="middle"
+        fontFamily="Georgia, serif" fontSize="11" fontWeight="bold"
+        fill="rgba(2,44,34,0.55)" letterSpacing="3.5">NHẬT BẢN
+      </text>
+
+      {/* ── ROUTE shadow glow ── */}
       <path d={route} fill="none"
-        stroke="rgba(180,83,9,0.12)" strokeWidth="18" strokeLinecap="round" />
+        stroke="rgba(180,83,9,0.10)" strokeWidth="18" strokeLinecap="round" />
 
-      {/* ── ROUTE — draw-in ─────────────────────────── */}
-      <path
-        d={route}
-        fill="none"
-        stroke="url(#routeGrad)"
-        strokeWidth="2.2"
-        strokeDasharray="700"
-        strokeDashoffset="700"
-        strokeLinecap="round"
-        opacity="0.82"
+      {/* ── ROUTE draw-in ── */}
+      <path d={route} fill="none"
+        stroke="url(#routeGrad)" strokeWidth="2.2"
+        strokeDasharray="820" strokeDashoffset="820"
+        strokeLinecap="round" opacity="0.82"
       >
         <animate attributeName="stroke-dashoffset"
-          from="700" to="0" dur="2.8s" fill="freeze" />
+          from="820" to="0" dur="2.8s" fill="freeze" />
       </path>
 
-      {/* ── ROUTE — moving dashes ───────────────────── */}
-      <path
-        d={route}
-        fill="none"
-        stroke="rgba(245,158,11,0.5)"
-        strokeWidth="3"
-        strokeDasharray="9 28"
-        strokeLinecap="round"
-        opacity="0"
+      {/* ── Moving dashes ── */}
+      <path d={route} fill="none"
+        stroke="rgba(245,158,11,0.5)" strokeWidth="3"
+        strokeDasharray="9 28" strokeLinecap="round" opacity="0"
       >
         <animate attributeName="opacity"
           from="0" to="0.5" begin="2.6s" dur="0.5s" fill="freeze" />
@@ -104,51 +180,44 @@ const VietJapanMap: React.FC = () => {
           from="0" to="-37" begin="2.6s" dur="1.2s" repeatCount="indefinite" />
       </path>
 
-      {/* ── ORIGIN DOT — Bắc Kạn ───────────────────── */}
-      <circle cx="225" cy="335" r="38" fill="url(#dotGlow)">
-        <animate attributeName="r"       values="30;56;30" dur="3s" repeatCount="indefinite" />
+      {/* ── ORIGIN dot — cảng xuất phát miền nam VN ── */}
+      <circle cx="188" cy="422" r="38" fill="url(#dotGlow)">
+        <animate attributeName="r" values="30;54;30" dur="3s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite" />
       </circle>
-      <circle cx="225" cy="335" r="7" fill="rgb(180,83,9)" />
-      <circle cx="225" cy="335" r="7" fill="none"
+      <circle cx="188" cy="422" r="7" fill="rgb(180,83,9)" />
+      <circle cx="188" cy="422" r="7" fill="none"
         stroke="rgba(245,158,11,0.65)" strokeWidth="1.5">
-        <animate attributeName="r"       values="7;22;7"   dur="3s" repeatCount="indefinite" />
+        <animate attributeName="r" values="7;22;7" dur="3s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.65;0;0.65" dur="3s" repeatCount="indefinite" />
       </circle>
-      <circle cx="225" cy="335" r="3.5" fill="rgb(245,158,11)" />
+      <circle cx="188" cy="422" r="3.5" fill="rgb(245,158,11)" />
 
-      {/* ── DESTINATION DOT — Tokyo ─────────────────── */}
-      <circle cx="1188" cy="228" r="38" fill="url(#dotGlow)">
-        <animate attributeName="r"       values="30;56;30" dur="3s" begin="1.5s" repeatCount="indefinite" />
+      {/* ── DESTINATION dot — Kyushu, Japan ── */}
+      <circle cx="1058" cy="388" r="38" fill="url(#dotGlow)">
+        <animate attributeName="r" values="30;54;30" dur="3s" begin="1.5s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" begin="1.5s" repeatCount="indefinite" />
       </circle>
-      <circle cx="1188" cy="228" r="7" fill="rgb(180,83,9)" />
-      <circle cx="1188" cy="228" r="7" fill="none"
+      <circle cx="1058" cy="388" r="7" fill="rgb(180,83,9)" />
+      <circle cx="1058" cy="388" r="7" fill="none"
         stroke="rgba(245,158,11,0.65)" strokeWidth="1.5">
-        <animate attributeName="r"       values="7;22;7"      dur="3s" begin="1.5s" repeatCount="indefinite" />
+        <animate attributeName="r" values="7;22;7" dur="3s" begin="1.5s" repeatCount="indefinite" />
         <animate attributeName="opacity" values="0.65;0;0.65" dur="3s" begin="1.5s" repeatCount="indefinite" />
       </circle>
-      <circle cx="1188" cy="228" r="3.5" fill="rgb(245,158,11)" />
+      <circle cx="1058" cy="388" r="3.5" fill="rgb(245,158,11)" />
 
-      {/* ── SHIP ────────────────────────────────────── */}
+      {/* ── SHIP ── */}
       <g opacity="0">
-        {/* Wake */}
         <ellipse cx="-15" cy="5" rx="7" ry="2.2" fill="rgba(255,255,255,0.42)" />
-        {/* Hull */}
         <path d="M -14 2 L 15 0 L 13 7 L -12 7 Z" fill="rgb(180,83,9)" />
-        {/* Body */}
         <rect x="-10" y="-6" width="15" height="8" rx="1.5" fill="rgb(115,50,13)" />
-        {/* Deck stripe */}
         <rect x="-9" y="-1" width="12" height="1.5" fill="rgba(180,83,9,0.4)" />
-        {/* Smokestack */}
         <rect x="-2.5" y="-14" width="4.5" height="8" rx="1.2" fill="rgb(2,44,34)" />
-        {/* Smoke */}
         <circle cx="-1" cy="-18" r="3.5" fill="rgba(50,35,10,0.28)">
           <animate attributeName="r"       values="3.5;9;3.5"   dur="2.2s" repeatCount="indefinite" />
           <animate attributeName="opacity" values="0.28;0;0.28" dur="2.2s" repeatCount="indefinite" />
           <animate attributeName="cy"      values="-18;-28;-18" dur="2.2s" repeatCount="indefinite" />
         </circle>
-
         <animate attributeName="opacity"
           from="0" to="1" begin="2.9s" dur="0.8s" fill="freeze" />
         <animateMotion dur="14s" begin="2.9s" repeatCount="indefinite" rotate="auto">
@@ -156,49 +225,30 @@ const VietJapanMap: React.FC = () => {
         </animateMotion>
       </g>
 
-      {/* ── LABELS ──────────────────────────────────── */}
-      <text x="225" y="370" textAnchor="middle"
-        fontFamily="Georgia, serif" fontSize="14" fontWeight="bold"
-        fill="rgba(2,44,34,0.72)" letterSpacing="3">BẮC KẠN
-      </text>
-      <text x="225" y="387" textAnchor="middle"
-        fontFamily="Arial, sans-serif" fontSize="9.5"
-        fill="rgba(2,44,34,0.38)" letterSpacing="4.5">VIỆT NAM
+      {/* ── Khoảng cách ── */}
+      <text x="700" y="44" textAnchor="middle"
+        fontFamily="Georgia, serif" fontSize="11" fontStyle="italic"
+        fill="rgba(180,83,9,0.48)" letterSpacing="3">~ 3.800 km
       </text>
 
-      <text x="1188" y="264" textAnchor="middle"
-        fontFamily="Georgia, serif" fontSize="14" fontWeight="bold"
-        fill="rgba(2,44,34,0.72)" letterSpacing="3">TOKYO
-      </text>
-      <text x="1188" y="281" textAnchor="middle"
-        fontFamily="Arial, sans-serif" fontSize="9.5"
-        fill="rgba(2,44,34,0.38)" letterSpacing="4.5">NHẬT BẢN
-      </text>
-
-      {/* Distance */}
-      <text x="706" y="42" textAnchor="middle"
-        fontFamily="Georgia, serif" fontSize="12" fontStyle="italic"
-        fill="rgba(180,83,9,0.55)" letterSpacing="3">~ 3.800 km
-      </text>
-
-      {/* ── COMPASS ─────────────────────────────────── */}
-      <g transform="translate(1348, 448)">
-        <circle r="28" fill="rgba(249,245,237,0.80)" stroke="rgba(180,83,9,0.18)" strokeWidth="1" />
-        <path d="M 0 -20 L 4.5 -5 L 0 0 L -4.5 -5 Z" fill="rgb(2,44,34)" opacity="0.62" />
-        <path d="M 0 20 L 4.5 5 L 0 0 L -4.5 5 Z"   fill="rgba(2,44,34,0.2)" />
-        <path d="M 20 0 L 5 -4.5 L 0 0 L 5 4.5 Z"   fill="rgba(2,44,34,0.2)" />
-        <path d="M -20 0 L -5 -4.5 L 0 0 L -5 4.5 Z" fill="rgba(2,44,34,0.2)" />
-        <text x="0" y="-24" textAnchor="middle"
-          fontFamily="Georgia, serif" fontSize="9" fontWeight="bold"
+      {/* ── COMPASS ── */}
+      <g transform="translate(1348, 548)">
+        <circle r="26" fill="rgba(249,245,237,0.82)" stroke="rgba(180,83,9,0.18)" strokeWidth="1" />
+        <path d="M 0 -18 L 4.5 -4 L 0 0 L -4.5 -4 Z" fill="rgb(2,44,34)" opacity="0.62" />
+        <path d="M 0 18 L 4.5 4 L 0 0 L -4.5 4 Z"   fill="rgba(2,44,34,0.2)" />
+        <path d="M 18 0 L 4 -4.5 L 0 0 L 4 4.5 Z"   fill="rgba(2,44,34,0.2)" />
+        <path d="M -18 0 L -4 -4.5 L 0 0 L -4 4.5 Z" fill="rgba(2,44,34,0.2)" />
+        <text x="0" y="-22" textAnchor="middle"
+          fontFamily="Georgia, serif" fontSize="8" fontWeight="bold"
           fill="rgba(2,44,34,0.62)">N
         </text>
       </g>
 
-      {/* ── EXPORT BADGE ─────────────────────────────── */}
-      <g transform="translate(1188, 228)">
-        <rect x="-58" y="20" width="116" height="22" rx="4.5" fill="rgba(2,44,34,0.88)" />
-        <text x="0" y="34.5" textAnchor="middle"
-          fontFamily="Arial, sans-serif" fontSize="8.5" fontWeight="bold"
+      {/* ── EXPORT badge ── */}
+      <g transform="translate(1058, 388)">
+        <rect x="-55" y="22" width="110" height="21" rx="4" fill="rgba(2,44,34,0.88)" />
+        <text x="0" y="36.5" textAnchor="middle"
+          fontFamily="Arial, sans-serif" fontSize="8" fontWeight="bold"
           fill="rgb(245,158,11)" letterSpacing="3">EXPORT TO JAPAN
         </text>
       </g>

@@ -17,9 +17,6 @@ const Footer: React.FC = () => {
           
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-6">
-            <div className="inline-block border border-amber-500/30 px-4 py-1 rounded-full text-amber-500 text-[10px] tracking-[0.2em] uppercase mb-2">
-              {footer.brand.since}
-            </div>
             <h3 className="font-serif text-3xl text-white">{footer.brand.titleLine1} <br/> <span className="italic text-amber-500">{footer.brand.titleHighlight}</span></h3>
             <p className="text-sm leading-relaxed text-emerald-100/60 font-light max-w-sm">
               {footer.brand.description}

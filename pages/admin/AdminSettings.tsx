@@ -261,7 +261,7 @@ const AdminSettings: React.FC = () => {
                      <SectionHeader title="Chân Trang (Footer)" subtitle="Nội dung hiển thị ở cuối tất cả các trang." />
                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <GroupCard title="Cột 1: Thương Hiệu">
-                           <InputField label="Badge (VD: Since 19xx)" path="footer.brand.since" />
+                           <InputField label="Badge Footer" path="footer.brand.since" />
                            <div className="grid grid-cols-2 gap-6">
                               <InputField label="Dòng 1" path="footer.brand.titleLine1" />
                               <InputField label="Dòng 2 (Nổi bật)" path="footer.brand.titleHighlight" />

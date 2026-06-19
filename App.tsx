@@ -2,8 +2,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, Navigate, Outlet } from 'react-router-dom';
 import LoadingScreen from './components/LoadingScreen';
-import FloatingButtons from './components/FloatingButtons';
-import ScrollToTopButton from './components/ScrollToTopButton';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AgeGate from './components/AgeGate';
@@ -124,8 +122,6 @@ const PublicLayout = () => {
       <Soundscape />
       <FloatingCTA />
       <Footer />
-      <FloatingButtons />
-      <ScrollToTopButton />
     </div>
   );
 };

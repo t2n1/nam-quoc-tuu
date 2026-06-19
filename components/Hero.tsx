@@ -72,10 +72,6 @@ const Hero: React.FC = () => {
              <span className="text-amber-100/90 text-[11px] tracking-[0.3em] uppercase font-bold">OCOP 4 Sao</span>
           </div>
           <span className="hidden md:inline-block text-white/20 text-[10px]">•</span>
-          <div className="flex items-center gap-3 border border-white/10 bg-white/5 backdrop-blur-md px-6 py-2 rounded-full hover:bg-white/10 transition-colors">
-             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-             <span className="text-amber-100/90 text-[11px] tracking-[0.3em] uppercase font-bold">Since 18xx</span>
-          </div>
         </div>
 
         {/* Description */}
