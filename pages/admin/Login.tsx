@@ -90,7 +90,7 @@ const AdminLogin: React.FC = () => {
         
         <div className="mt-8 text-center">
            <p className="text-[10px] text-emerald-800 font-medium">
-             &copy; {new Date().getFullYear()} HTX Rượu Nam Quốc Tửu
+             &copy; {new Date().getFullYear()} Nam Quốc Tửu
            </p>
         </div>
       </div>

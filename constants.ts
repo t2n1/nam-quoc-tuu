@@ -159,7 +159,7 @@ export const INITIAL_CONTENT: SiteContent = {
     },
     section3: {
       title: "Tầm Nhìn OCOP",
-      content: "Hôm nay, HTX Rượu Nam Quốc Tửu tự hào khoác lên mình tấm áo mới: OCOP 4 sao. Chúng tôi kết hợp quy trình thủ công truyền thống với công nghệ lọc Aldehyde hiện đại, đảm bảo từng giọt rượu đến tay khách hàng không chỉ ngon mà còn an toàn tuyệt đối cho sức khỏe."
+      content: "Hôm nay, Nam Quốc Tửu tự hào khoác lên mình tấm áo mới: OCOP 4 sao. Chúng tôi kết hợp quy trình thủ công truyền thống với công nghệ lọc Aldehyde hiện đại, đảm bảo từng giọt rượu đến tay khách hàng không chỉ ngon mà còn an toàn tuyệt đối cho sức khỏe."
     },
     signature: {
       name: "Bà Tâm",
@@ -221,10 +221,10 @@ export const INITIAL_CONTENT: SiteContent = {
     },
     sections: {
       linksTitle: "Khám Phá",
-      contactTitle: "Liên Hệ HTX"
+      contactTitle: "Liên Hệ"
     },
     bottom: {
-      copyright: "HTX Rượu Nam Quốc Tửu. All rights reserved.",
+      copyright: "Nam Quốc Tửu. All rights reserved.",
       disclaimer: "Uống rượu có trách nhiệm. Không lái xe khi đã uống rượu."
     }
   }
@@ -427,7 +427,7 @@ export const MOCK_NEWS: BlogPost[] = [
     id: 'n2',
     title: "Nam Quốc Tửu đạt chuẩn OCOP 4 sao: Hành trình khẳng định vị thế",
     slug: "bang-phuc-dat-chuan-ocop-4-sao",
-    excerpt: "Sau nhiều nỗ lực cải tiến quy trình lọc và bao bì, sản phẩm của HTX đã chính thức được công nhận OCOP 4 sao.",
+    excerpt: "Sau nhiều nỗ lực cải tiến quy trình lọc và bao bì, sản phẩm đã chính thức được công nhận OCOP 4 sao.",
     content: "Đây là kết quả của sự nỗ lực không ngừng nghỉ...",
     date: "28/02/2024",
     image: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=800&auto=format&fit=crop",
@@ -485,7 +485,7 @@ export const MOCK_FAQS: FAQItem[] = [
     answer: "Chúng tôi có chính sách chiết khấu hấp dẫn và hỗ trợ marketing cho các đại lý. Vui lòng liên hệ trực tiếp hotline hoặc điền form đăng ký để được bộ phận kinh doanh tư vấn chi tiết."
   },
   {
-    question: "HTX có hỗ trợ vận chuyển đi tỉnh không?",
+    question: "Công ty có hỗ trợ vận chuyển đi tỉnh không?",
     answer: "Có. Chúng tôi liên kết với các đơn vị vận chuyển uy tín để giao hàng toàn quốc (Viettel Post, GHTK...). Sản phẩm được đóng gói chống sốc kỹ lưỡng, đảm bảo an toàn tuyệt đối khi đến tay khách hàng."
   }
 ];

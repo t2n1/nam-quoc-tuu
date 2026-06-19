@@ -137,7 +137,7 @@ const Traceability: React.FC = () => {
                              </div>
                              <div className="font-script text-3xl text-emerald-950">Nong Van Tam</div>
                              <div className="h-px w-32 bg-stone-300 my-1"></div>
-                             <div className="text-[10px] uppercase tracking-widest text-stone-400">Giám đốc HTX</div>
+                             <div className="text-[10px] uppercase tracking-widest text-stone-400">Giám đốc</div>
                          </div>
                       </div>
 
