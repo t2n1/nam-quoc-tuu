@@ -91,20 +91,12 @@ const Products: React.FC = () => {
                   <div className={`hidden md:block absolute -top-20 font-display text-[12rem] text-emerald-900/5 leading-none select-none z-0 ${idx % 2 === 0 ? '-left-20' : '-right-20'}`}>
                     0{idx + 1}
                   </div>
-                  <div className="relative z-10 aspect-[4/5] overflow-hidden rounded-[2rem] shadow-2xl transition-transform duration-700 group-hover:rotate-1">
-                    <div className="absolute inset-0 border border-white/20 z-20 rounded-[2rem] pointer-events-none" />
+                  <div className="relative z-10 aspect-[4/5] overflow-hidden rounded-[2rem] shadow-2xl transition-transform duration-700 group-hover:rotate-1 bg-white/60">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110"
+                      className="w-full h-full object-contain transition-transform duration-[2s] ease-out group-hover:scale-105 p-4"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/60 via-transparent to-transparent opacity-60" />
-                    <div className="absolute bottom-8 left-8 text-white">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Sparkles size={14} className="text-amber-400" />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.2em]">{product.type} Edition</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
