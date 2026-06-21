@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { siteContent } = useData();
-  const { navbar } = siteContent;
+  const { navbar, general } = siteContent;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,13 +47,13 @@ const Navbar: React.FC = () => {
     { name: navbar.menuStory, path: '/story' },
     { name: navbar.menuProducts, path: '/products' },
     { name: navbar.menuProcess, path: '/process' },
-    { name: navbar.menuTraceability, path: '/check' },
+    ...(general.isTraceabilityEnabled ? [{ name: navbar.menuTraceability, path: '/check' }] : []),
   ];
 
   return (
     <>
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${navPadding} ${navBackground}`}>
-      <div className="max-w-[1500px] mx-auto px-6 lg:px-12">
+      <div className="max-w-[1500px] mx-auto px-5 md:px-8 lg:px-12">
         <div className="flex justify-between items-center">
           
           {/* Logo */}
@@ -62,21 +62,24 @@ const Navbar: React.FC = () => {
               const logoSrc = navbar.logoImage || '/logo-nqt.svg';
               return (
                 <>
-                  <div
-                    aria-label={navbar.logoText}
-                    className="h-12 md:h-14 aspect-square flex-shrink-0 transition-all duration-500"
-                    style={{
-                      backgroundColor: (isOpen || !isExpanded) ? '#022c22' : '#fcfbf9',
-                      maskImage: `url(${logoSrc})`,
-                      maskRepeat: 'no-repeat',
-                      maskSize: 'contain',
-                      maskPosition: 'center',
-                      WebkitMaskImage: `url(${logoSrc})`,
-                      WebkitMaskRepeat: 'no-repeat',
-                      WebkitMaskSize: 'contain',
-                      WebkitMaskPosition: 'center',
-                    }}
-                  />
+                  <div className="relative flex-shrink-0">
+                    <div
+                      aria-label={navbar.logoText}
+                      className="h-12 md:h-14 aspect-square transition-all duration-500"
+                      style={{
+                        backgroundColor: (isOpen || !isExpanded) ? '#022c22' : '#fcfbf9',
+                        maskImage: `url(${logoSrc})`,
+                        maskRepeat: 'no-repeat',
+                        maskSize: 'contain',
+                        maskPosition: 'center',
+                        WebkitMaskImage: `url(${logoSrc})`,
+                        WebkitMaskRepeat: 'no-repeat',
+                        WebkitMaskSize: 'contain',
+                        WebkitMaskPosition: 'center',
+                      }}
+                    />
+                    <span className={`absolute top-0 right-0.5 text-[11px] font-bold leading-none transition-colors duration-500 ${(isOpen || !isExpanded) ? 'text-emerald-900/50' : 'text-white/50'}`}>®</span>
+                  </div>
                   <div className="flex flex-col leading-none">
                     <span className={`font-serif text-lg md:text-xl font-bold tracking-tight transition-colors duration-500 ${textColor}`}>
                       {navbar.logoText}
@@ -167,7 +170,10 @@ const Navbar: React.FC = () => {
                 {navbar.mobileMenuCta}
               </Link>
               <div className="text-center opacity-60 pt-4">
-                <img src={navbar.logoImage || '/logo-nqt.svg'} alt="Logo" className="h-16 w-auto mx-auto object-contain grayscale opacity-50" />
+                <div className="relative inline-block">
+                  <img src={navbar.logoImage || '/logo-nqt.svg'} alt="Logo" className="h-16 w-auto object-contain grayscale opacity-50" />
+                  <span className="absolute top-0 right-0.5 text-[11px] font-bold leading-none text-emerald-950/50">®</span>
+                </div>
               </div>
            </div>
         </div>

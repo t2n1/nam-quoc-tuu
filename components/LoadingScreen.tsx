@@ -39,6 +39,25 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
   useEffect(() => {
     const duration = 5200;
     const start = performance.now();
+    let rafId: number;
+    let completed = false;
+
+    const complete = () => {
+      if (completed) return;
+      completed = true;
+      cancelAnimationFrame(rafId);
+      clearTimeout(fallbackTimer);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      // Snap to 100%
+      if (arcRef.current) arcRef.current.style.strokeDashoffset = '0';
+      if (pctRef.current) pctRef.current.textContent = '100';
+      tickRefs.current.forEach((el, i) => {
+        if (!el) return;
+        el.setAttribute('stroke', TICKS[i].major ? '#F59E0B' : 'rgba(245,158,11,0.6)');
+        el.setAttribute('stroke-width', TICKS[i].major ? '1.5' : '0.7');
+      });
+      setTimeout(() => { setFadeOut(true); setTimeout(onComplete, 700); }, 300);
+    };
 
     const tick = (now: number) => {
       const t = Math.min((now - start) / duration, 1);
@@ -57,16 +76,31 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
         el.setAttribute('stroke-width', lit && TICKS[i].major ? '1.5' : '0.7');
       });
 
-      // Logo scale pulses gently as it fills
       if (logoRef.current) {
         const pulse = 1 + Math.sin(now / 1200) * 0.018;
         logoRef.current.style.transform = `scale(${pulse})`;
       }
 
-      if (t < 1) requestAnimationFrame(tick);
-      else setTimeout(() => { setFadeOut(true); setTimeout(onComplete, 700); }, 500);
+      if (t < 1) { rafId = requestAnimationFrame(tick); }
+      else { complete(); }
     };
-    requestAnimationFrame(tick);
+
+    rafId = requestAnimationFrame(tick);
+
+    // Fallback: nếu rAF bị kẹt (mobile low-power, background tab...), force complete
+    const fallbackTimer = setTimeout(complete, duration + 1200);
+
+    // Nếu user quay lại sau khi background app, skip thẳng đến 100%
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') complete();
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(fallbackTimer);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
   }, [onComplete]);
 
   // ── Particle canvas loop ───────────────────────────────────────
@@ -214,24 +248,36 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
         </svg>
 
         {/* Crane logo — center of ring */}
-        <div
-          ref={logoRef}
-          style={{
-            width: '168px',
-            height: '168px',
-            backgroundColor: '#FFE4B1',
-            maskImage: 'url(/logo-nqt.svg)',
-            maskRepeat: 'no-repeat',
-            maskSize: 'contain',
-            maskPosition: 'center',
-            WebkitMaskImage: 'url(/logo-nqt.svg)',
-            WebkitMaskRepeat: 'no-repeat',
-            WebkitMaskSize: 'contain',
-            WebkitMaskPosition: 'center',
-            filter: 'drop-shadow(0 0 18px rgba(255,228,177,0.18))',
-            transition: 'transform 0.1s ease-out',
-          }}
-        />
+        <div style={{ position: 'relative', width: '168px', height: '168px' }}>
+          <div
+            ref={logoRef}
+            style={{
+              width: '168px',
+              height: '168px',
+              backgroundColor: '#FFE4B1',
+              maskImage: 'url(/logo-nqt.svg)',
+              maskRepeat: 'no-repeat',
+              maskSize: 'contain',
+              maskPosition: 'center',
+              WebkitMaskImage: 'url(/logo-nqt.svg)',
+              WebkitMaskRepeat: 'no-repeat',
+              WebkitMaskSize: 'contain',
+              WebkitMaskPosition: 'center',
+              filter: 'drop-shadow(0 0 18px rgba(255,228,177,0.18))',
+              transition: 'transform 0.1s ease-out',
+            }}
+          />
+          <span style={{
+            position: 'absolute',
+            top: '8px',
+            right: '10px',
+            fontSize: '17px',
+            fontWeight: 'bold',
+            lineHeight: 1,
+            color: 'rgba(255,228,177,0.65)',
+            fontFamily: 'sans-serif',
+          }}>®</span>
+        </div>
       </div>
 
       {/* Brand name + progress */}

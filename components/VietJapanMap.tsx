@@ -1,4 +1,12 @@
 import React, { useRef, useEffect } from 'react';
+
+type MapPin = {
+  cx: number;
+  cy: number;
+  label: string;
+  sublabel: string;
+  photo: string;
+};
 import japanSvgRaw from '../assets/japan.svg?raw';
 
 // Strip XML declaration and <svg> wrapper — keep only the <path> elements
@@ -8,10 +16,18 @@ const japanInner = japanSvgRaw
   .replace(/<svg[^>]*>/g, '')
   .replace(/<\/svg>/g, '');
 
-const VietJapanMap: React.FC = () => {
-  // Tàu đi qua Biển Đông → Thái Bình Dương → vào Yokohama từ phía nam
+const VietJapanMap: React.FC<{ pins?: MapPin[] }> = ({ pins = [] }) => {
   const route = "M 188 422 C 620 460 1130 460 1155 299";
   const japanGroupRef = useRef<SVGGElement>(null);
+
+  // Card positions: each pin gets a photo card connected by a leader line
+  const cardCfgs = [
+    { cardX: 1253, cardY: 152, lineEndX: 1253, lineEndY: 197 }, // MAKUHARI — upper right ocean
+    { cardX: 1245, cardY: 358, lineEndX: 1245, lineEndY: 402 }, // TOKYO BIG SIGHT — lower right ocean
+  ];
+  const cardW = 115;
+  const cardH = 88;
+  const imgH = 62;
 
   useEffect(() => {
     if (japanGroupRef.current) {
@@ -21,8 +37,8 @@ const VietJapanMap: React.FC = () => {
 
   return (
     <svg
-      viewBox="0 0 1400 600"
-      preserveAspectRatio="xMaxYMid slice"
+      viewBox="595 0 780 600"
+      preserveAspectRatio="xMidYMid slice"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full"
     >
@@ -254,6 +270,84 @@ const VietJapanMap: React.FC = () => {
           fill="rgba(2,44,34,0.52)" letterSpacing="1">Cảng Yokohama
         </text>
       </g>
+
+      {/* ── CLIP PATHS for photo cards ── */}
+      {pins.length > 0 && (
+        <defs>
+          {pins.map((_, i) => {
+            const cfg = cardCfgs[i];
+            if (!cfg) return null;
+            return (
+              <clipPath key={`clip-${i}`} id={`pin-card-${i}`}>
+                <rect x={cfg.cardX} y={cfg.cardY} width={cardW} height={imgH} rx="5" />
+              </clipPath>
+            );
+          })}
+        </defs>
+      )}
+
+      {/* ── EVENT PINS with always-visible leader cards ── */}
+      {pins.map((pin, i) => {
+        const cfg = cardCfgs[i];
+        return (
+          <g key={i}>
+            {/* Animated glow ring */}
+            <circle cx={pin.cx} cy={pin.cy} r="28" fill="url(#dotGlow)">
+              <animate attributeName="r" values="18;38;18" dur="2.4s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.65;0;0.65" dur="2.4s" repeatCount="indefinite" />
+            </circle>
+            {/* Pin dot */}
+            <circle cx={pin.cx} cy={pin.cy} r="6" fill="rgb(180,83,9)" />
+            <circle cx={pin.cx} cy={pin.cy} r="3" fill="white" />
+
+            {cfg && (
+              <>
+                {/* Dashed leader line from pin to card */}
+                <line
+                  x1={pin.cx} y1={pin.cy}
+                  x2={cfg.lineEndX} y2={cfg.lineEndY}
+                  stroke="rgba(180,83,9,0.50)" strokeWidth="0.85"
+                  strokeDasharray="5 3.5"
+                />
+                {/* Dot at line end */}
+                <circle cx={cfg.lineEndX} cy={cfg.lineEndY} r="2.5" fill="rgba(180,83,9,0.55)" />
+
+                {/* Card shadow + white background */}
+                <rect
+                  x={cfg.cardX} y={cfg.cardY}
+                  width={cardW} height={cardH} rx="6"
+                  fill="rgba(249,245,237,0.97)"
+                  stroke="rgba(180,83,9,0.16)" strokeWidth="0.8"
+                  filter="url(#landShadow)"
+                />
+                {/* Photo clipped to top of card */}
+                <image
+                  href={pin.photo}
+                  x={cfg.cardX} y={cfg.cardY}
+                  width={cardW} height={imgH}
+                  preserveAspectRatio="xMidYMid slice"
+                  clipPath={`url(#pin-card-${i})`}
+                />
+                {/* Divider line */}
+                <line
+                  x1={cfg.cardX} y1={cfg.cardY + imgH}
+                  x2={cfg.cardX + cardW} y2={cfg.cardY + imgH}
+                  stroke="rgba(180,83,9,0.12)" strokeWidth="0.6"
+                />
+                {/* Event label */}
+                <text
+                  x={cfg.cardX + cardW / 2}
+                  y={cfg.cardY + imgH + 17}
+                  textAnchor="middle"
+                  fontFamily="Arial, sans-serif" fontSize="6.5" fontWeight="bold"
+                  fill="rgba(2,44,34,0.75)" letterSpacing="0.7">
+                  {pin.label}
+                </text>
+              </>
+            )}
+          </g>
+        );
+      })}
     </svg>
   );
 };

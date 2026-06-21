@@ -6,11 +6,11 @@ export const CONTENT_VERSION = "9";
 
 export const INITIAL_CONTENT: SiteContent = {
   general: {
-    hotline: "090 123 4567",
-    address: "Thôn Nà Pài, xã Bằng Phúc, huyện Chợ Đồn, tỉnh Bắc Kạn",
-    email: "htx.menlabangphuc@gmail.com",
+    hotline: "0966383188",
+    address: "Đường Bàng Bá Lân 2, Phường Bắc Giang, Tỉnh Bắc Ninh",
+    email: "ctyhoanhao188@gmail.com",
     facebook: "#",
-    isTraceabilityEnabled: true
+    isTraceabilityEnabled: false
   },
   seo: {
     defaultTitle: "Rượu Nam Quốc Tửu | Tinh Hoa Đại Ngàn",
@@ -146,7 +146,7 @@ export const INITIAL_CONTENT: SiteContent = {
       quote: "\"Giữa cái lạnh thấu xương của núi rừng Đông Bắc, người Tày đã tìm ra ngọn lửa sưởi ấm tâm hồn.\"",
       dropCapText: "T",
       content: "ừ hàng trăm năm nay, tại xã Bằng Phúc, huyện Chợ Đồn, ngọn lửa lò nấu rượu chưa bao giờ tắt. Đó không chỉ là sinh kế, mà là nét văn hóa ăn sâu vào máu thịt của người dân nơi đây. Mỗi mẻ rượu ra lò đều chứa đựng sự tỉ mỉ, kiên nhẫn và lòng tôn kính với thiên nhiên.",
-      image: "https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&w=1000&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1471086569966-db3eebc25a59?q=80&w=1000&auto=format&fit=crop",
       imageCaption: "Hình 01. Những bánh men lá được phơi khô tự nhiên"
     },
     section2: {
@@ -276,7 +276,7 @@ export const PRODUCTS: Product[] = [
     volume: "1 Lít · 25% Vol",
     type: "Lẻ",
     description: "Chai 1 lít tiện dụng cho gia đình hoặc làm quà biếu dịp lễ Tết. Rượu men lá nguyên chất, hương thơm đặc trưng vùng cao Bắc Kạn, ủ đủ 6 tháng hạ thổ.",
-    image: "/products/ruou-men-la-500ml.png",
+    image: "/products/ruou-men-la-mat.png",
     scales: { sweetness: 2, aroma: 4, body: 4, finish: 5, intensity: 4 },
     pairings: [
       { name: "Thịt Lợn Bản Gác Bếp", description: "Vị khói bếp quyện cùng men lá nồng nàn.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400" },
@@ -289,7 +289,7 @@ export const PRODUCTS: Product[] = [
     volume: "500ml · 29,5% Vol",
     type: "Lẻ",
     description: "Nấu từ giống nếp cái hoa vàng thuần chủng, lên men bằng men lá rừng truyền thống. Vị ngọt thanh, hậu vị dài, hương thơm lúa nếp đặc trưng. Thích hợp dùng thưởng thức hoặc làm quà biếu cao cấp.",
-    image: "/products/ruou-men-la-500ml.png",
+    image: "/products/ruou-nep-cai-hoa-vang.png",
     scales: { sweetness: 4, aroma: 5, body: 3, finish: 4, intensity: 3 },
     pairings: [
       { name: "Xôi Nếp Nương", description: "Đôi hoàn hảo — nếp với nếp, hương vị thuần khiết.", image: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=400" },
@@ -302,7 +302,7 @@ export const PRODUCTS: Product[] = [
     volume: "500ml · 25% Vol",
     type: "Lẻ",
     description: "Lên men từ gạo nếp cẩm tím — giàu anthocyanin, chất chống oxy hóa tự nhiên. Màu tím hồng đặc trưng, vị ngọt nhẹ, thơm nồng. Tốt cho tuần hoàn máu, phù hợp cho phụ nữ sau sinh.",
-    image: "/products/ruou-men-la-500ml.png",
+    image: "/products/ruou-nep-cam.png",
     scales: { sweetness: 4, aroma: 4, body: 3, finish: 3, intensity: 2 },
     pairings: [
       { name: "Bánh Chưng Nếp Cẩm", description: "Kết hợp thuần Việt, hương vị Tết truyền thống.", image: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=400" },
@@ -315,7 +315,7 @@ export const PRODUCTS: Product[] = [
     volume: "500ml · 22% Vol",
     type: "Lẻ",
     description: "Ngâm từ quả táo mèo (sơn tra) rừng Bắc Kạn — vị chua ngọt tự nhiên, thơm dịu. Táo mèo giàu vitamin C, hỗ trợ tiêu hóa, giảm mỡ máu. Rượu ngâm truyền thống, uống ấm bụng, tốt cho sức khoẻ.",
-    image: "/products/ruou-men-la-500ml.png",
+    image: "/products/ruou-tao-meo.png",
     scales: { sweetness: 4, aroma: 4, body: 2, finish: 3, intensity: 2 },
     pairings: [
       { name: "Thịt Lợn Bản Gác Bếp", description: "Vị chua ngọt táo mèo cắt béo thịt lợn.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400" },
@@ -328,7 +328,7 @@ export const PRODUCTS: Product[] = [
     volume: "500ml · 22% Vol",
     type: "Lẻ",
     description: "Ngâm từ chuối hột rừng — vị ngọt thơm tự nhiên của chuối, hậu vị dịu. Chuối hột có tác dụng lợi tiểu, hỗ trợ thận, thường dùng trong y học dân gian vùng cao. Rượu ngâm nguyên chất, không phụ gia.",
-    image: "/products/ruou-men-la-500ml.png",
+    image: "/products/ruou-chuoi-hot.png",
     scales: { sweetness: 4, aroma: 3, body: 2, finish: 3, intensity: 2 },
     pairings: [
       { name: "Dê Núi Chợ Đồn", description: "Vị ngọt chuối dịu bớt độ gắt của dê núi.", image: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=400" },
@@ -338,10 +338,10 @@ export const PRODUCTS: Product[] = [
   {
     id: 'p9',
     name: "Rượu Dừa",
-    volume: "500ml · 20% Vol",
+    volume: "500ml · 29% Vol",
     type: "Lẻ",
-    description: "Rượu ngâm trong quả dừa tươi — hương dừa béo ngậy, vị ngọt thanh tự nhiên, nồng độ nhẹ dễ uống. Đặc sản độc đáo kết hợp tinh hoa miền Bắc và hương vị nhiệt đới. Phù hợp làm quà biếu lạ miệng.",
-    image: "/products/ruou-men-la-500ml.png",
+    description: "Rượu ngâm trong quả dừa tươi Bến Tre — hương dừa béo ngậy, vị ngọt thanh tự nhiên, nồng độ nhẹ dễ uống. Đặc sản độc đáo kết hợp tinh hoa miền Bắc và hương vị nhiệt đới. Phù hợp làm quà biếu lạ miệng.",
+    image: "/products/ruou-dua.png",
     scales: { sweetness: 5, aroma: 3, body: 2, finish: 3, intensity: 2 },
     pairings: [
       { name: "Hải Sản Nướng", description: "Vị dừa nhẹ tôn lên vị ngọt hải sản.", image: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=400" },

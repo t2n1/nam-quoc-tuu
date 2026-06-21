@@ -75,7 +75,7 @@ const Story: React.FC = () => {
           <div className="w-px h-20 bg-white/15" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-8 w-full">
+        <div className="relative z-10 max-w-6xl mx-auto px-5 md:px-8 lg:px-12 w-full">
           <p
             className="font-script text-amber-400 text-5xl md:text-7xl block animate-fade-in-up"
             style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
@@ -117,7 +117,7 @@ const Story: React.FC = () => {
         {/* Top border accent */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/30 to-transparent" />
 
-        <div className="max-w-6xl mx-auto px-8 relative z-10">
+        <div className="max-w-6xl mx-auto px-5 md:px-8 lg:px-12 relative z-10">
 
           <Reveal variant="blur-in">
             <div className="mb-16">
@@ -189,7 +189,7 @@ const Story: React.FC = () => {
         <div className="absolute -bottom-48 -right-48 w-[600px] h-[600px] bg-amber-100/50 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-200/60 to-transparent" />
 
-        <div className="max-w-6xl mx-auto px-8">
+        <div className="max-w-6xl mx-auto px-5 md:px-8 lg:px-12">
           <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-20 items-start">
 
             <Reveal variant="fade-right">
@@ -230,7 +230,7 @@ const Story: React.FC = () => {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
 
-        <div className="max-w-4xl mx-auto px-8 text-center relative z-10">
+        <div className="max-w-4xl mx-auto px-5 md:px-8 lg:px-12 text-center relative z-10">
           <Reveal variant="blur-in">
             <div className="font-serif text-amber-500/12 leading-none select-none mb-0" style={{ fontSize: '10rem' }}>"</div>
           </Reveal>
@@ -259,7 +259,7 @@ const Story: React.FC = () => {
       {/* ── SECTION 3 — split screen ─────────────────────────── */}
       <section className="relative overflow-hidden">
         <div className="md:grid md:grid-cols-2">
-          <div className="bg-emerald-950 py-28 px-10 md:px-20 flex flex-col justify-center min-h-[55vh] relative overflow-hidden">
+          <div className="bg-emerald-950 py-28 px-5 md:px-8 lg:px-16 flex flex-col justify-center min-h-[55vh] relative overflow-hidden">
             <div className="pointer-events-none select-none absolute -right-6 bottom-0 top-0 flex items-end pb-8 overflow-hidden opacity-[0.03]">
               <span className="font-serif font-bold text-white leading-none" style={{ fontSize: '20rem' }}>V</span>
             </div>
@@ -275,7 +275,7 @@ const Story: React.FC = () => {
             </Reveal>
           </div>
 
-          <div className="bg-cream-100 py-28 px-10 md:px-20 flex flex-col justify-center min-h-[55vh] border-l border-cream-300/30">
+          <div className="bg-cream-100 py-28 px-5 md:px-8 lg:px-16 flex flex-col justify-center min-h-[55vh] border-l border-cream-300/30">
             <Reveal variant="fade-left" delay={150}>
               <p className="font-serif text-stone-600 leading-[2.1] text-lg text-justify">
                 {story.section3.content}

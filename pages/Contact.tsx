@@ -16,7 +16,7 @@ const Contact: React.FC = () => {
     <div className="bg-cream-50 min-h-screen text-emerald-950">
       
       {/* 1. CINEMATIC HEADER (DARK) */}
-      <section className="bg-emerald-950 pt-32 pb-16 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32 px-6 relative overflow-hidden">
+      <section className="bg-emerald-950 pt-32 pb-16 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32 px-5 md:px-8 lg:px-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] opacity-20"></div>
         <div className="max-w-[1400px] mx-auto text-center relative z-10">
           <span className="font-sans text-[10px] font-bold tracking-[0.4em] uppercase text-amber-500 mb-6 md:mb-8 block">Get in Touch</span>
@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
       </section>
 
       {/* 2. CONTACT CONTENT (LIGHT) */}
-      <section className="py-20 md:py-32 px-6 bg-white relative z-20">
+      <section className="py-20 md:py-32 px-5 md:px-8 lg:px-12 bg-white relative z-20">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
           
           {/* Info Side */}

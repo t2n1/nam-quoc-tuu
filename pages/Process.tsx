@@ -65,7 +65,7 @@ const Process: React.FC = () => {
           <div className="w-px h-20 bg-white/15" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-8 w-full">
+        <div className="relative z-10 max-w-6xl mx-auto px-5 md:px-8 lg:px-12 w-full">
           <p
             className="font-script text-amber-400 text-5xl md:text-7xl block animate-fade-in-up"
             style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
@@ -99,8 +99,8 @@ const Process: React.FC = () => {
       </section>
 
       {/* ── TIMELINE ──────────────────────────────────────────── */}
-      <div className="bg-cream-100 py-28 px-6">
-        <div className="max-w-[1100px] mx-auto">
+      <div className="bg-cream-100 py-28">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-8 lg:px-12">
 
           <div className="relative" ref={timelineRef}>
             {/* Base line */}
@@ -170,7 +170,7 @@ const Process: React.FC = () => {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/concrete-wall.png')] opacity-10" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
 
-        <div className="max-w-3xl mx-auto px-8 text-center relative z-10">
+        <div className="max-w-3xl mx-auto px-5 md:px-8 lg:px-12 text-center relative z-10">
           <Reveal variant="blur-in">
             <div className="font-serif text-amber-500/10 leading-none select-none" style={{ fontSize: '8rem' }}>"</div>
           </Reveal>

@@ -49,7 +49,7 @@ const ProductDetail: React.FC = () => {
       </div>
 
       {/* 1. HERO PRODUCT SECTION */}
-      <section className="pb-20 md:pb-32 px-6 relative z-10">
+      <section className="pb-20 md:pb-32 px-5 md:px-8 lg:px-12 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 lg:gap-32 items-center">
             <div className="relative">
@@ -121,7 +121,7 @@ const ProductDetail: React.FC = () => {
       {/* 2. FOOD PAIRING SECTION */}
       <section className="py-16 md:py-28 lg:py-40 bg-stone-50 text-emerald-950 relative overflow-hidden">
          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] opacity-5"></div>
-         <div className="max-w-7xl mx-auto px-6 relative z-10">
+         <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 relative z-10">
             <div className="flex flex-col md:flex-row items-center justify-between mb-16 md:mb-32 gap-6 md:gap-8 lg:gap-12">
                <div className="max-w-2xl text-center md:text-left">
                   <span className="text-amber-600 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">Perfect Pairing</span>
@@ -153,7 +153,7 @@ const ProductDetail: React.FC = () => {
 
       {/* 3. FINAL CALL TO ACTION */}
       <section className="py-20 md:py-32 lg:py-48 bg-emerald-950 relative border-t border-white/5">
-         <div className="max-w-4xl mx-auto px-6 text-center">
+         <div className="max-w-4xl mx-auto px-5 md:px-8 lg:px-12 text-center">
             <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-9xl text-white mb-16 leading-tight">Mang tinh hoa <br/> <span className="text-amber-600 font-script text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] block -mt-2 md:-mt-8">Về nhà.</span></h2>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6 md:gap-8 lg:gap-12 pt-10 md:pt-16 border-t border-white/5">
                <Link to="/products" className="text-xs font-bold uppercase tracking-widest text-emerald-400 hover:text-amber-500 transition-colors flex items-center gap-2">

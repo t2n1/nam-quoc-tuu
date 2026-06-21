@@ -31,11 +31,9 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Ornate Frame (Indochine Style) */}
-      <div className="absolute inset-4 md:inset-6 lg:inset-10 border border-white/10 pointer-events-none z-20">
-        <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-amber-500/60"></div>
-        <div className="absolute top-0 right-0 w-6 h-6 border-t border-r border-amber-500/60"></div>
-        <div className="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-amber-500/60"></div>
-        <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-amber-500/60"></div>
+      <div className="absolute inset-4 md:inset-6 lg:inset-10 border-b border-l border-r border-white/10 pointer-events-none z-20">
+        <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-amber-500/60"></div>
+        <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-amber-500/60"></div>
       </div>
 
       {/* Main Content - Increased pt to push content down away from header */}
@@ -116,11 +114,6 @@ const Hero: React.FC = () => {
          </span>
       </div>
 
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 opacity-0 animate-fade-in-up" style={{ animationDelay: '1.4s' }}>
-         <div className="w-[1px] h-12 bg-gradient-to-b from-transparent via-amber-500 to-transparent"></div>
-         <span className="text-[9px] uppercase tracking-[0.3em] text-amber-500/70">Khám phá</span>
-      </div>
     </div>
   );
 };

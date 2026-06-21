@@ -12,26 +12,29 @@ const Footer: React.FC = () => {
     <footer className="bg-emerald-950 text-cream-200 border-t-4 border-amber-750 relative">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/az-subtle.png')] opacity-5 pointer-events-none"></div>
       
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 lg:py-20 relative z-10">
+      <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-12 md:py-16 lg:py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
           
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-6">
             <div className="flex items-center gap-4">
-              <div
-                className="h-14 w-14 flex-shrink-0"
-                style={{
-                  backgroundColor: '#fcfbf9',
-                  maskImage: 'url(/logo-nqt.svg)',
-                  maskRepeat: 'no-repeat',
-                  maskSize: 'contain',
-                  maskPosition: 'center',
-                  WebkitMaskImage: 'url(/logo-nqt.svg)',
-                  WebkitMaskRepeat: 'no-repeat',
-                  WebkitMaskSize: 'contain',
-                  WebkitMaskPosition: 'center',
-                }}
-              />
+              <div className="relative flex-shrink-0">
+                <div
+                  className="h-14 w-14"
+                  style={{
+                    backgroundColor: '#fcfbf9',
+                    maskImage: 'url(/logo-nqt.svg)',
+                    maskRepeat: 'no-repeat',
+                    maskSize: 'contain',
+                    maskPosition: 'center',
+                    WebkitMaskImage: 'url(/logo-nqt.svg)',
+                    WebkitMaskRepeat: 'no-repeat',
+                    WebkitMaskSize: 'contain',
+                    WebkitMaskPosition: 'center',
+                  }}
+                />
+                <span className="absolute top-0 right-0.5 text-[11px] font-bold leading-none text-amber-400/70">®</span>
+              </div>
               <div className="flex flex-col leading-none">
                 <span className="font-serif text-2xl text-white font-bold tracking-tight">{footer.brand.titleHighlight}</span>
                 <span className="font-sans text-[9px] tracking-[0.25em] uppercase text-amber-400/80 mt-1">Tinh Hoa Đại Ngàn</span>
@@ -53,7 +56,7 @@ const Footer: React.FC = () => {
               <li><Link to="/" className="hover:text-amber-400 hover:pl-2 transition-all">Trang Chủ</Link></li>
               <li><Link to="/story" className="hover:text-amber-400 hover:pl-2 transition-all">Câu Chuyện & Di Sản</Link></li>
               <li><Link to="/products" className="hover:text-amber-400 hover:pl-2 transition-all">Bộ Sưu Tập</Link></li>
-              <li><Link to="/check" className="hover:text-amber-400 hover:pl-2 transition-all">Tra Cứu Nguồn Gốc</Link></li>
+              {general.isTraceabilityEnabled && <li><Link to="/check" className="hover:text-amber-400 hover:pl-2 transition-all">Tra Cứu Nguồn Gốc</Link></li>}
             </ul>
           </div>
 
