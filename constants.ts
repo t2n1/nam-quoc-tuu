@@ -146,7 +146,7 @@ export const INITIAL_CONTENT: SiteContent = {
       quote: "\"Giữa cái lạnh thấu xương của núi rừng Đông Bắc, người Tày đã tìm ra ngọn lửa sưởi ấm tâm hồn.\"",
       dropCapText: "T",
       content: "ừ hàng trăm năm nay, tại xã Bằng Phúc, huyện Chợ Đồn, ngọn lửa lò nấu rượu chưa bao giờ tắt. Đó không chỉ là sinh kế, mà là nét văn hóa ăn sâu vào máu thịt của người dân nơi đây. Mỗi mẻ rượu ra lò đều chứa đựng sự tỉ mỉ, kiên nhẫn và lòng tôn kính với thiên nhiên.",
-      image: "https://images.unsplash.com/photo-1471086569966-db3eebc25a59?q=80&w=1000&auto=format&fit=crop",
+      image: "/men-la.png",
       imageCaption: "Hình 01. Những bánh men lá được phơi khô tự nhiên"
     },
     section2: {

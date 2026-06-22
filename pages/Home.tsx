@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import Hero from '../components/Hero';
 import {
   ArrowRight, Leaf, Droplets, Award, Hexagon,
@@ -45,6 +45,75 @@ const Home: React.FC = () => {
   const { siteContent, blogPosts, testimonials, products } = useData();
   const { home, general } = siteContent;
   const [lightbox, setLightbox] = React.useState<string | null>(null);
+
+  const stripRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartScroll = useRef(0);
+  const dragVelocity = useRef(0); // extra px/frame added by drag
+
+  useEffect(() => {
+    const BASE_SPEED = 0.6; // px per frame auto-scroll
+    const el = stripRef.current;
+    if (!el) return;
+
+    const tick = () => {
+      if (el) {
+        const speed = BASE_SPEED + dragVelocity.current;
+        el.scrollLeft += speed;
+        // seamless loop: reset when first copy is done
+        if (el.scrollLeft >= el.scrollWidth / 2) {
+          el.scrollLeft -= el.scrollWidth / 2;
+        }
+        // decay drag velocity
+        dragVelocity.current *= 0.92;
+        if (Math.abs(dragVelocity.current) < 0.01) dragVelocity.current = 0;
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  const onMouseDown = useCallback((e: React.MouseEvent) => {
+    isDragging.current = true;
+    dragStartX.current = e.pageX;
+    dragStartScroll.current = stripRef.current?.scrollLeft ?? 0;
+    if (stripRef.current) stripRef.current.style.cursor = 'grabbing';
+  }, []);
+
+  const onMouseUp = useCallback(() => {
+    isDragging.current = false;
+    if (stripRef.current) stripRef.current.style.cursor = 'grab';
+  }, []);
+
+  const onMouseLeave = useCallback(() => {
+    isDragging.current = false;
+    if (stripRef.current) stripRef.current.style.cursor = 'grab';
+  }, []);
+
+  const onMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging.current || !stripRef.current) return;
+    e.preventDefault();
+    const dx = dragStartX.current - e.pageX;
+    stripRef.current.scrollLeft = dragStartScroll.current + dx;
+    // feed velocity so RAF keeps momentum
+    dragVelocity.current = dx * 0.05;
+  }, []);
+
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    dragStartX.current = e.touches[0].pageX;
+    dragStartScroll.current = stripRef.current?.scrollLeft ?? 0;
+  }, []);
+
+  const onTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!stripRef.current) return;
+    const dx = dragStartX.current - e.touches[0].pageX;
+    stripRef.current.scrollLeft = dragStartScroll.current + dx;
+    dragVelocity.current = dx * 0.05;
+  }, []);
 
   const getIcon = (name: string) => {
     switch (name) {
@@ -258,16 +327,32 @@ const Home: React.FC = () => {
       </section>
 
       {/* ── Secondary products scrolling strip ── */}
-      <div className="bg-[#080808] overflow-hidden py-10 border-b border-white/[0.04]">
+      <div className="bg-[#080808] py-10 border-b border-white/[0.04]">
         <p className="text-center text-white/18 text-[8px] uppercase tracking-[0.55em] font-bold mb-8">
           Bộ Sưu Tập Đầy Đủ
         </p>
-        <div className="flex animate-marquee" style={{ width: 'max-content', animationDuration: '55s' }}>
+        <div
+          ref={stripRef}
+          className="flex overflow-x-hidden select-none no-scrollbar"
+          style={{
+            cursor: 'grab',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
+          onMouseDown={onMouseDown}
+          onMouseLeave={onMouseLeave}
+          onMouseUp={onMouseUp}
+          onMouseMove={onMouseMove}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+        >
           {[...products.slice(3), ...products.slice(3)].map((product, i) => (
             <Link
               key={i}
               to={`/products/${product.id}`}
-              className="group flex flex-col items-center mx-12 flex-shrink-0"
+              className="group flex flex-col items-center flex-shrink-0"
+              style={{ marginLeft: '2.5rem', marginRight: '2.5rem' }}
+              draggable={false}
             >
               <div className="relative flex items-end justify-center" style={{ height: '26vh' }}>
                 <img
@@ -277,7 +362,6 @@ const Home: React.FC = () => {
                   style={{ maxWidth: '100px', filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.9))' }}
                   draggable={false}
                 />
-                {/* Hover glow */}
                 <div
                   className="absolute inset-x-0 bottom-0 h-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(180,110,0,0.25) 0%, transparent 70%)' }}
