@@ -71,7 +71,7 @@ const ProductDetail: React.FC = () => {
                    <span className="text-amber-500 font-serif italic text-3xl">Dung tích: {product.volume}</span>
                    <div className="h-px flex-1 bg-white/5"></div>
                 </div>
-                <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-9xl text-white mb-10 leading-none">{product.name}</h1>
+                <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-9xl text-white mb-10 leading-tight md:leading-none pt-2">{product.name}</h1>
                 
                 <div className="flex flex-wrap gap-4 mb-12">
                    <div className="flex items-center gap-2 text-emerald-400 font-bold uppercase text-[9px] tracking-widest bg-white/5 px-6 py-3 rounded-full border border-white/5">
@@ -125,7 +125,7 @@ const ProductDetail: React.FC = () => {
             <div className="flex flex-col md:flex-row items-center justify-between mb-16 md:mb-32 gap-6 md:gap-8 lg:gap-12">
                <div className="max-w-2xl text-center md:text-left">
                   <span className="text-amber-600 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">Perfect Pairing</span>
-                  <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-8xl leading-none">Ẩm thực <br/> <span className="italic font-serif text-amber-600">Tương hợp.</span></h2>
+                  <h2 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-8xl leading-tight md:leading-none pt-1">Ẩm thực <br/> <span className="italic font-serif text-amber-600">Tương hợp.</span></h2>
                </div>
                <p className="text-stone-400 font-light text-xl italic max-w-sm text-center md:text-left">
                   Những món ăn đậm đà bản sắc Tây Bắc sẽ nâng tầm hương vị của rượu men lá.

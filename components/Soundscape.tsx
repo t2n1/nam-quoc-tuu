@@ -67,9 +67,9 @@ const Soundscape: React.FC = () => {
 
   return (
     <div className="fixed bottom-8 left-8 z-[110] flex items-center gap-2 font-sans">
-      {/* Track label */}
+      {/* Track label — desktop only */}
       {isPlaying && (
-        <div className="pointer-events-none animate-fade-in-up">
+        <div className="hidden md:block pointer-events-none animate-fade-in-up">
           <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-amber-500 whitespace-nowrap bg-emerald-950/90 backdrop-blur px-4 py-2 rounded-full border border-white/5 shadow-xl flex items-center gap-2">
             <Music2 size={9} className="shrink-0" />
             {TRACKS[trackIndex].label}

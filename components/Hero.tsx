@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
         
         {/* Main Title - Typographic Masterpiece */}
         <div className="relative mb-10 group cursor-default">
-           <div className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-9xl xl:text-[10rem] text-cream-50 font-medium leading-[0.8] tracking-tighter drop-shadow-2xl opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+           <div className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-9xl xl:text-[10rem] text-cream-50 font-medium leading-[0.95] md:leading-[0.8] pt-2 tracking-tighter drop-shadow-2xl opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <div className="block relative z-10 hover:text-white transition-colors duration-700">
                 <EditableText path="hero.mainTitle" content={hero.mainTitle} />
             </div>

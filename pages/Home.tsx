@@ -147,10 +147,10 @@ const Home: React.FC = () => {
 
       {/* ── Brand intro — split dark / cream ── */}
       <section className="relative overflow-hidden" style={{ minHeight: '100vh' }}>
-        {/* Split background: dark left, cream right */}
-        <div className="absolute inset-0 flex flex-col lg:flex-row">
-          <div className="w-full lg:w-1/2 h-1/2 lg:h-full bg-emerald-950" />
-          <div className="w-full lg:w-1/2 h-1/2 lg:h-full bg-cream-100" />
+        {/* Split background */}
+        <div className="absolute inset-0 flex">
+          <div className="w-full lg:w-1/2 bg-emerald-950" />
+          <div className="hidden lg:block w-1/2 bg-cream-100" />
         </div>
         {/* Subtle noise on dark half */}
         <div
@@ -163,10 +163,10 @@ const Home: React.FC = () => {
         />
 
         {/* Content */}
-        <div className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-8 lg:px-12 flex flex-col lg:flex-row items-center min-h-screen py-20">
+        <div className="relative z-10 max-w-[1400px] mx-auto lg:px-12 flex flex-col lg:flex-row items-center min-h-screen py-20">
 
           {/* Left column: product image on dark bg */}
-          <div className="w-full lg:w-1/2 flex items-center justify-center py-16 lg:py-0">
+          <div className="w-full lg:w-1/2 flex items-center justify-center py-16 lg:py-0 px-5 md:px-8 lg:px-0">
             <div className="relative flex items-center justify-center" style={{ height: '72vh' }}>
               {/* Glow */}
               <div
@@ -192,13 +192,13 @@ const Home: React.FC = () => {
           </div>
 
           {/* Right column: text on cream bg */}
-          <div className="w-full lg:w-1/2 py-12 lg:py-0 lg:pl-14 xl:pl-20">
+          <div className="w-full lg:w-1/2 py-12 lg:py-0 lg:pl-14 xl:pl-20 bg-cream-100 lg:bg-transparent px-5 md:px-8 lg:px-0">
             <Reveal variant="fade-left" delay={100}>
               <div>
                 <span className="text-amber-700 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">
                   {home.intro.tagline}
                 </span>
-                <h2 className="font-display text-6xl md:text-8xl text-emerald-950 leading-[0.85] mb-8">
+                <h2 className="font-display text-5xl md:text-8xl text-emerald-950 leading-[0.9] md:leading-[0.85] pt-2 mb-8">
                   {home.intro.title}<br />
                   <span className="font-serif italic text-emerald-800/60 ml-10">
                     {home.intro.subtitle}
@@ -256,7 +256,7 @@ const Home: React.FC = () => {
               <span className="text-amber-500/70 font-bold tracking-[0.4em] text-[10px] uppercase block mb-4">
                 Bộ Sưu Tập
               </span>
-              <h2 className="font-display text-5xl md:text-7xl text-white leading-[0.85]">
+              <h2 className="font-display text-5xl md:text-7xl text-white leading-[0.95] md:leading-[0.85] pt-2">
                 Ba Phiên Bản,<br />
                 <span className="font-serif italic text-amber-500">Một Linh Hồn.</span>
               </h2>
@@ -421,7 +421,7 @@ const Home: React.FC = () => {
               <span className="text-amber-500 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">
                 Linh Hồn Của Rượu
               </span>
-              <h2 className="font-display text-6xl md:text-8xl text-white leading-[0.85]">
+              <h2 className="font-display text-5xl md:text-8xl text-white leading-[0.95] md:leading-[0.85] pt-2">
                 32 Vị Thảo Mọc<br />
                 <span className="font-serif italic text-amber-500">Bí Truyền.</span>
               </h2>
@@ -487,7 +487,7 @@ const Home: React.FC = () => {
               <span className="text-amber-700 font-bold tracking-[0.4em] text-[10px] uppercase block mb-6">
                 Tầm Nhìn Toàn Cầu
               </span>
-              <h2 className="font-display text-6xl md:text-8xl text-emerald-950 leading-[0.85] mb-4">
+              <h2 className="font-display text-5xl md:text-8xl text-emerald-950 leading-[0.95] md:leading-[0.85] pt-2 mb-4">
                 Vươn Ra<br />Biển Lớn
               </h2>
               <p className="font-serif italic text-amber-700 text-xl md:text-2xl mb-8">

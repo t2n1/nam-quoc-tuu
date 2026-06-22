@@ -20,7 +20,7 @@ const Contact: React.FC = () => {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] opacity-20"></div>
         <div className="max-w-[1400px] mx-auto text-center relative z-10">
           <span className="font-sans text-[10px] font-bold tracking-[0.4em] uppercase text-amber-500 mb-6 md:mb-8 block">Get in Touch</span>
-          <h1 className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] text-white leading-[0.8] tracking-tighter mb-8 md:mb-10 drop-shadow-2xl pb-4">{contactPage.title}</h1>
+          <h1 className="font-display text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] text-white leading-[0.95] md:leading-[0.8] pt-2 tracking-tighter mb-8 md:mb-10 drop-shadow-2xl pb-4">{contactPage.title}</h1>
           <div className="w-16 md:w-24 h-px bg-amber-500 mx-auto mb-8 md:mb-10 opacity-30"></div>
           <p className="font-serif italic text-xl md:text-2xl text-emerald-100/60 font-light max-w-3xl mx-auto leading-relaxed px-4">{contactPage.subtitle}</p>
         </div>
