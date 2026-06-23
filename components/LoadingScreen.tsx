@@ -285,12 +285,12 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
         <h1
           className="text-white font-bold mb-2"
           style={{
-            fontFamily: "'Manrope',sans-serif",
-            fontSize: 'clamp(1.1rem, 4vw, 1.6rem)',
-            letterSpacing: '0.45em',
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(1.6rem, 5vw, 2.4rem)',
+            letterSpacing: '0.04em',
           }}
         >
-          NAM QUỐC TỬU
+          Nam Quốc Tửu
         </h1>
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="w-8 h-px bg-amber-600 opacity-50" />
