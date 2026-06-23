@@ -281,20 +281,24 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
       </div>
 
       {/* Brand name + progress */}
-      <div className="text-center select-none mt-10" style={{ zIndex: 2 }}>
+      <div className="text-center select-none mt-8" style={{ zIndex: 2 }}>
         <h1
-          className="text-white font-bold text-xs tracking-[0.55em] mb-1"
-          style={{ fontFamily: "'Manrope',sans-serif" }}
+          className="text-white font-bold mb-2"
+          style={{
+            fontFamily: "'Manrope',sans-serif",
+            fontSize: 'clamp(1.1rem, 4vw, 1.6rem)',
+            letterSpacing: '0.45em',
+          }}
         >
           NAM QUỐC TỬU
         </h1>
         <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-5 h-px bg-amber-600 opacity-50" />
-          <span className="text-amber-500 text-[11px] opacity-70"
-            style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: 'italic', letterSpacing: '0.12em' }}>
+          <div className="w-8 h-px bg-amber-600 opacity-50" />
+          <span className="text-amber-500 opacity-70"
+            style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: 'italic', letterSpacing: '0.15em', fontSize: 'clamp(0.7rem, 2vw, 0.85rem)' }}>
             Heritage Spirit
           </span>
-          <div className="w-5 h-px bg-amber-600 opacity-50" />
+          <div className="w-8 h-px bg-amber-600 opacity-50" />
         </div>
 
         {/* Progress counter */}
