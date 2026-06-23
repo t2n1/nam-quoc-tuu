@@ -180,7 +180,7 @@ const Products: React.FC = () => {
                 className={`w-full lg:w-1/2 flex flex-col justify-center pb-20 lg:py-0 ${isEven ? 'lg:pl-12 xl:pl-20' : 'lg:pr-12 xl:pr-20'}`}
               >
                 {/* Badge */}
-                <span className="inline-flex items-center self-start text-amber-500/70 text-[9px] font-bold tracking-[0.4em] uppercase mb-8 border border-amber-500/20 px-4 py-2 rounded-full">
+                <span className="inline-flex items-center self-start whitespace-nowrap text-amber-500/70 text-[9px] font-bold tracking-[0.15em] md:tracking-[0.4em] uppercase mb-8 border border-amber-500/20 px-4 py-2 rounded-full">
                   {theme.badgeText}
                 </span>
 

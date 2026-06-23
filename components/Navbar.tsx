@@ -19,9 +19,14 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
   // Xác định trạng thái hiển thị
   const isHome = location.pathname === '/';
-  
+
   // isExpanded: Trạng thái ở đầu trang chủ (Padding lớn, nền trong suốt mặc định)
   const isExpanded = isHome && !scrolled;
 
@@ -32,15 +37,18 @@ const Navbar: React.FC = () => {
   const subTextColor = (isOpen || !isExpanded) ? 'text-emerald-900/60' : 'text-white/60';
   const hoverColor = (isOpen || !isExpanded) ? 'hover:text-amber-600' : 'hover:text-amber-300';
   const lineColor = (isOpen || !isExpanded) ? 'bg-amber-600' : 'bg-amber-300';
-  
-  // Logic nền Navbar:
-  // Nếu Menu MỞ -> Trong suốt (để lộ nền Overlay bên dưới).
-  // Nếu Menu ĐÓNG -> Dựa vào vị trí (đầu trang chủ thì trong suốt, còn lại có nền kem).
-  const navBackground = (isOpen || isExpanded) 
-    ? 'bg-transparent border-transparent' 
-    : 'bg-cream-50/95 backdrop-blur-md border-cream-300/50 shadow-sm';
 
-  const navPadding = isExpanded ? 'py-8' : 'py-4';
+  // Logic nền Navbar:
+  // Nếu Menu MỞ -> Nền kem đặc ngay lập tức (không transition) để che hero khi overlay đang slide vào.
+  // Nếu Menu ĐÓNG -> Dựa vào vị trí (đầu trang chủ thì trong suốt, còn lại có nền kem).
+  const navBackground = isOpen
+    ? 'bg-cream-100 border-cream-300/50'
+    : isExpanded
+      ? 'bg-transparent border-transparent'
+      : 'bg-cream-50/95 backdrop-blur-md border-cream-300/50 shadow-sm';
+
+  const navPaddingBottom = isExpanded ? 'pb-8' : 'pb-4';
+  const navPaddingTop = `max(env(safe-area-inset-top, 0px), ${isExpanded ? '2rem' : '1rem'})`;
 
   const navLinks = [
     { name: navbar.menuHome, path: '/' },
@@ -48,11 +56,15 @@ const Navbar: React.FC = () => {
     { name: navbar.menuProducts, path: '/products' },
     { name: navbar.menuProcess, path: '/process' },
     ...(general.isTraceabilityEnabled ? [{ name: navbar.menuTraceability, path: '/check' }] : []),
+    { name: navbar.contactButton, path: '/contact' },
   ];
 
   return (
     <>
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${navPadding} ${navBackground}`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-[100] ${isOpen ? '' : 'transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]'} ${navPaddingBottom} ${navBackground}`}
+      style={{ paddingTop: navPaddingTop }}
+    >
       <div className="max-w-[1500px] mx-auto px-5 md:px-8 lg:px-12">
         <div className="flex justify-between items-center">
           
@@ -141,41 +153,47 @@ const Navbar: React.FC = () => {
     </nav>
 
     {/* Mobile Menu Overlay — outside <nav> to avoid containing-block clipping */}
-    <div className={`fixed inset-0 z-40 bg-cream-100 transform transition-transform duration-[0.8s] ease-[cubic-bezier(0.77,0,0.175,1)] md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+    <div className={`fixed inset-0 z-[90] bg-cream-100 transform transition-transform duration-[0.8s] ease-[cubic-bezier(0.77,0,0.175,1)] md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         {/* Background Texture for Menu */}
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 pointer-events-none"></div>
         
-        <div className="flex flex-col h-full pt-32 px-10 pb-10 relative">
-           
-           <div className="flex flex-col space-y-8 flex-1">
+        <div
+          className="flex flex-col justify-between h-full px-8 relative"
+          style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 5rem)', paddingBottom: '2.5rem' }}
+        >
+          {/* Nav items with dividers */}
+          <div className="flex flex-col">
             {navLinks.map((link, idx) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`font-serif text-4xl text-emerald-950 hover:text-amber-700 transition-all duration-500 transform translate-y-4 opacity-0 ${isOpen ? 'animate-fade-in-up' : ''}`}
-                style={{ animationDelay: `${idx * 100}ms` }}
+                className={`group flex items-center justify-between py-4 border-b border-emerald-950/10 transform translate-y-4 opacity-0 ${isOpen ? 'animate-fade-in-up' : ''}`}
+                style={{ animationDelay: `${idx * 70}ms` }}
               >
-                {link.name}
+                <span className="font-serif text-[2rem] leading-tight text-emerald-950 group-hover:text-amber-700 transition-colors duration-300">
+                  {link.name}
+                </span>
+                <span className="text-[10px] font-bold tracking-[0.2em] text-emerald-950/25 group-hover:text-amber-600/50 transition-colors duration-300">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
               </Link>
             ))}
-           </div>
-           
-           <div className="space-y-4">
-             <Link
-                to="/contact"
-                onClick={() => setIsOpen(false)}
-                className="block w-full text-center text-sm font-bold uppercase tracking-[0.2em] text-cream-100 bg-emerald-950 py-5 rounded-full shadow-lg"
-              >
-                {navbar.mobileMenuCta}
-              </Link>
-              <div className="text-center opacity-60 pt-4">
-                <div className="relative inline-block">
-                  <img src={navbar.logoImage || '/logo-nqt.svg'} alt="Logo" className="h-16 w-auto object-contain grayscale opacity-50" />
-                  <span className="absolute top-0 right-0.5 text-[11px] font-bold leading-none text-emerald-950/50">®</span>
-                </div>
-              </div>
-           </div>
+          </div>
+
+          {/* Bottom section */}
+          <div className="space-y-4 pt-4">
+            <p className="text-[9px] font-bold tracking-[0.3em] uppercase text-emerald-900/40">
+              {navbar.logoSubText}
+            </p>
+            <Link
+              to="/contact"
+              onClick={() => setIsOpen(false)}
+              className="block w-full text-center text-xs font-bold uppercase tracking-[0.25em] text-white bg-emerald-950 py-4 rounded-full hover:bg-amber-700 transition-colors duration-300 shadow-lg"
+            >
+              {navbar.mobileMenuCta}
+            </Link>
+          </div>
         </div>
       </div>
     </>

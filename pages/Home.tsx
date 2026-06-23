@@ -148,9 +148,9 @@ const Home: React.FC = () => {
       {/* ── Brand intro — split dark / cream ── */}
       <section className="relative overflow-hidden" style={{ minHeight: '100vh' }}>
         {/* Split background */}
-        <div className="absolute inset-0 flex">
-          <div className="w-full lg:w-1/2 bg-emerald-950" />
-          <div className="hidden lg:block w-1/2 bg-cream-100" />
+        <div className="absolute inset-0 flex flex-col lg:flex-row">
+          <div className="w-full h-1/2 lg:h-full lg:w-1/2 bg-emerald-950" />
+          <div className="w-full h-1/2 lg:h-full lg:w-1/2 bg-cream-100" />
         </div>
         {/* Subtle noise on dark half */}
         <div

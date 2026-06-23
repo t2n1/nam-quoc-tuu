@@ -14,9 +14,9 @@ const FloatingCTA: React.FC = () => {
   return (
     <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100] flex flex-col gap-4 items-center">
       {/* Scroll to Top */}
-      <button 
+      <button
         onClick={scrollToTop}
-        className="w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-xl border border-white/10 text-white rounded-full flex items-center justify-center hover:bg-amber-600 transition-all shadow-2xl group"
+        className="w-10 h-10 md:w-12 md:h-12 bg-emerald-950 border border-emerald-800 text-white rounded-full flex items-center justify-center hover:bg-amber-600 transition-all shadow-2xl group"
       >
         <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
       </button>
