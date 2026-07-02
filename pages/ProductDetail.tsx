@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { ArrowLeft, ShoppingCart, Award, ShieldCheck, Droplets, Leaf, Wind, Utensils, Zap, Star, GlassWater, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Award, ShieldCheck, Droplets, Leaf, Wind, Utensils, Zap, Star, ChevronRight } from 'lucide-react';
 import Breadcrumbs from '../components/Breadcrumbs';
 import SEOMetadata from '../components/SEOMetadata';
-import FlavorRadar from '../components/FlavorRadar';
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -25,15 +24,6 @@ const ProductDetail: React.FC = () => {
      { name: "Thịt Trâu Gác Bếp", description: "Vị khói bếp và mắc khén quyện cùng men lá nồng nàn.", image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=1000" },
      { name: "Cá Nướng Pa Pỉnh Tộp", description: "Vị ngọt cá suối nướng làm dịu độ nồng của rượu.", image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=1000" }
   ];
-
-  // Default values for radar if not in metadata
-  const radarData = {
-    sweetness: product.scales?.sweetness || 3,
-    aroma: product.scales?.aroma || 4,
-    body: product.scales?.body || 4,
-    finish: product.scales?.finish || 5,
-    intensity: product.scales?.intensity || 4,
-  };
 
   return (
     <div className="bg-emerald-950 min-h-screen text-amber-50 relative overflow-hidden">
@@ -58,11 +48,6 @@ const ProductDetail: React.FC = () => {
                 <img src={product.image} alt={product.name} className="h-full w-full object-contain drop-shadow-[0_60px_120px_rgba(0,0,0,0.6)]" />
               </div>
               
-              {/* Radar Positioned next to product */}
-              <div className="absolute -bottom-10 -left-10 md:bottom-10 md:-left-20 w-48 md:w-64 bg-emerald-950/40 backdrop-blur-xl border border-white/5 p-6 rounded-3xl hidden md:block animate-fade-in-up">
-                 <p className="text-[8px] font-bold uppercase tracking-[0.3em] text-amber-500 mb-4 text-center">Hồ sơ hương vị</p>
-                 <FlavorRadar scales={radarData} />
-              </div>
             </div>
 
             <div className="space-y-12">
@@ -88,20 +73,13 @@ const ProductDetail: React.FC = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+              <div className="mb-16">
                   <div className="p-8 bg-white/5 rounded-3xl border border-white/5 group hover:bg-white transition-all duration-700">
                      <Utensils className="text-amber-500 mb-6 group-hover:text-emerald-950 transition-colors" size={24} />
                      <h4 className="font-serif text-xl text-white group-hover:text-emerald-950 transition-colors mb-2">Ẩm thực đi kèm</h4>
-                     {/* CHANGED: Added tracking-wide */}
                      <p className="font-sans text-emerald-100/50 group-hover:text-stone-500 text-sm font-light tracking-wide transition-colors">
                         {foodPairings.map(f => f.name).join(', ')}
                      </p>
-                  </div>
-                  <div className="p-8 bg-white/5 rounded-3xl border border-white/5 group hover:bg-white transition-all duration-700">
-                     <GlassWater className="text-amber-500 mb-6 group-hover:text-emerald-950 transition-colors" size={24} />
-                     <h4 className="font-serif text-xl text-white group-hover:text-emerald-950 transition-colors mb-2">Nghi thức ly</h4>
-                     {/* CHANGED: Added tracking-wide */}
-                     <p className="font-sans text-emerald-100/50 group-hover:text-stone-500 text-sm font-light tracking-wide transition-colors">Ly gốm truyền thống hoặc Tulip glass cho hương thơm.</p>
                   </div>
               </div>
 
@@ -134,15 +112,16 @@ const ProductDetail: React.FC = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                {foodPairings.map((food, i) => (
-                  <div key={i} className="group relative rounded-[2rem] overflow-hidden shadow-xl aspect-[4/5]">
-                     <img src={food.image} alt={food.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" />
-                     <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/20 to-transparent opacity-80"></div>
-                     <div className="absolute bottom-0 left-0 w-full p-8">
-                        <div className="w-10 h-10 bg-amber-500/20 backdrop-blur-md rounded-full flex items-center justify-center text-amber-500 mb-4 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+                  <div key={i} className="group relative rounded-[2rem] overflow-hidden shadow-xl bg-emerald-950 border border-white/5 p-8 hover:-translate-y-2 transition-transform duration-500">
+                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/az-subtle.png')] opacity-[0.05] pointer-events-none"></div>
+                     <div className="absolute top-4 right-6 font-display text-6xl text-white/[0.05] font-bold leading-none select-none">
+                        {String(i + 1).padStart(2, '0')}
+                     </div>
+                     <div className="relative z-10">
+                        <div className="w-10 h-10 bg-amber-500/20 rounded-full flex items-center justify-center text-amber-500 mb-6 group-hover:bg-amber-500 group-hover:text-white transition-colors">
                             <Utensils size={18} />
                         </div>
                         <h4 className="font-serif text-2xl text-white mb-2">{food.name}</h4>
-                        {/* CHANGED: Added tracking-wide */}
                         <p className="font-sans text-emerald-100/70 text-sm font-light tracking-wide leading-relaxed">{food.description}</p>
                      </div>
                   </div>

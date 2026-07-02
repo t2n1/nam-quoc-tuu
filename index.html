@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Rượu Nam Quốc Tửu | Tinh Hoa Đại Ngàn</title>
     <link rel="icon" type="image/svg+xml" href="/logo-nqt.svg" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Manrope:wght@200;300;400;500;600;700&family=Allison&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
@@ -50,6 +50,10 @@
               'marquee': 'marquee 40s linear infinite',
               'spin-slow': 'spin 12s linear infinite',
               'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'slide-in-right': 'slideInRight 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+              'pulse-slow': 'pulseSoft 3s ease-in-out infinite',
+              'swing': 'swing 0.6s ease-in-out',
             },
             keyframes: {
               float: {
@@ -84,6 +88,20 @@
                 '0%, 100%': { opacity: '1' },
                 '50%': { opacity: '0.5' },
               },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideInRight: {
+                '0%': { transform: 'translateX(100%)' },
+                '100%': { transform: 'translateX(0)' },
+              },
+              swing: {
+                '0%, 100%': { transform: 'rotate(0deg)' },
+                '25%': { transform: 'rotate(15deg)' },
+                '50%': { transform: 'rotate(-12deg)' },
+                '75%': { transform: 'rotate(6deg)' },
+              },
             }
           }
         }
@@ -102,8 +120,25 @@
       }
       
       ::-webkit-scrollbar {
-        width: 0px; 
-        background: transparent; 
+        width: 0px;
+        background: transparent;
+      }
+
+      /* Thin styled scrollbar for scrollable panels (admin nav, drawers, chat) */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(120, 113, 108, 0.35);
+        border-radius: 9999px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(120, 113, 108, 0.55);
+      }
+      .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(120, 113, 108, 0.35) transparent;
       }
 
       /* Luxury Film Grain */

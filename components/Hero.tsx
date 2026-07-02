@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
   const { hero } = siteContent;
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-emerald-950">
+    <div className="relative h-[100svh] w-full overflow-hidden bg-emerald-950">
       
       {/* Background Image with Parallax Feel & Filters */}
       <div className="absolute inset-0 overflow-hidden">

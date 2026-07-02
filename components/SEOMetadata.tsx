@@ -124,7 +124,9 @@ const SEOMetadata: React.FC<SEOProps> = ({ title, description, type = 'website',
     const script = document.createElement('script');
     script.id = 'json-ld-schema';
     script.type = 'application/ld+json';
-    script.innerHTML = JSON.stringify(schema);
+    // Use textContent (not innerHTML) and escape "<" so values derived from URL
+    // params / editable content cannot break out of the <script> tag.
+    script.textContent = JSON.stringify(schema).replace(/</g, '\\u003c');
     document.head.appendChild(script);
 
   }, [title, description, location.pathname, siteContent, product, phoneCheck, image]);

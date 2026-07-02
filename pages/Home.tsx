@@ -52,6 +52,7 @@ const Home: React.FC = () => {
   const dragStartX = useRef(0);
   const dragStartScroll = useRef(0);
   const dragVelocity = useRef(0); // extra px/frame added by drag
+  const isTouching = useRef(false); // pause auto-scroll while a touch gesture owns the scroll
 
   useEffect(() => {
     const BASE_SPEED = 0.6; // px per frame auto-scroll
@@ -60,7 +61,7 @@ const Home: React.FC = () => {
 
     const tick = () => {
       if (el) {
-        const speed = BASE_SPEED + dragVelocity.current;
+        const speed = isTouching.current ? 0 : BASE_SPEED + dragVelocity.current;
         el.scrollLeft += speed;
         // seamless loop: reset when first copy is done
         if (el.scrollLeft >= el.scrollWidth / 2) {
@@ -103,16 +104,15 @@ const Home: React.FC = () => {
     dragVelocity.current = dx * 0.05;
   }, []);
 
-  const onTouchStart = useCallback((e: React.TouchEvent) => {
-    dragStartX.current = e.touches[0].pageX;
-    dragStartScroll.current = stripRef.current?.scrollLeft ?? 0;
+  // Touch scrolling is native (overflow-x-auto) so momentum/inertia come from the
+  // browser; we only pause the auto-marquee while the finger is down.
+  const onTouchStart = useCallback(() => {
+    isTouching.current = true;
+    dragVelocity.current = 0;
   }, []);
 
-  const onTouchMove = useCallback((e: React.TouchEvent) => {
-    if (!stripRef.current) return;
-    const dx = dragStartX.current - e.touches[0].pageX;
-    stripRef.current.scrollLeft = dragStartScroll.current + dx;
-    dragVelocity.current = dx * 0.05;
+  const onTouchEnd = useCallback(() => {
+    isTouching.current = false;
   }, []);
 
   const getIcon = (name: string) => {
@@ -333,7 +333,7 @@ const Home: React.FC = () => {
         </p>
         <div
           ref={stripRef}
-          className="flex overflow-x-hidden select-none no-scrollbar"
+          className="flex overflow-x-auto overscroll-x-contain select-none no-scrollbar"
           style={{
             cursor: 'grab',
             scrollbarWidth: 'none',
@@ -344,7 +344,7 @@ const Home: React.FC = () => {
           onMouseUp={onMouseUp}
           onMouseMove={onMouseMove}
           onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
           {[...products.slice(3), ...products.slice(3)].map((product, i) => (
             <Link

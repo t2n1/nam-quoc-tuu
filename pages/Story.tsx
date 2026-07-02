@@ -58,7 +58,7 @@ const Story: React.FC = () => {
     <div className="bg-cream-100 min-h-screen overflow-x-hidden">
 
       {/* ── HERO — full-screen parallax ────────────────────── */}
-      <section className="h-screen relative overflow-hidden flex items-end pb-28">
+      <section className="h-[100svh] relative overflow-hidden flex items-end pb-28">
         <div ref={heroImgRef} className="absolute inset-0 scale-110 will-change-transform">
           <img
             src={story.header.image}

@@ -49,11 +49,15 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [faqs, setFaqs] = useState<FAQItem[]>(MOCK_FAQS);
   const [contacts, setContacts] = useState<ContactRequest[]>(MOCK_CONTACTS);
   const [siteContent, setSiteContent] = useState<SiteContent>(INITIAL_CONTENT);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => localStorage.getItem('isAdmin') === 'true');
+  // The admin area is dev-only (see ADMIN_ENABLED in App.tsx). Auth state is never
+  // restored in production, so setting the localStorage flag by hand has no effect.
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    () => import.meta.env.DEV && localStorage.getItem('isAdmin') === 'true'
+  );
   const [isLiveEditing, setIsLiveEditing] = useState(false);
 
   const login = (password: string) => {
-    if (password === 'admin123') {
+    if (import.meta.env.DEV && password === 'admin123') {
       setIsAuthenticated(true);
       localStorage.setItem('isAdmin', 'true');
       return true;

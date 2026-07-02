@@ -158,7 +158,7 @@ const Navbar: React.FC = () => {
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 pointer-events-none"></div>
         
         <div
-          className="flex flex-col justify-between h-full px-8 relative"
+          className="flex flex-col justify-between min-h-full overflow-y-auto px-8 relative"
           style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 5rem)', paddingBottom: '2.5rem' }}
         >
           {/* Nav items with dividers */}

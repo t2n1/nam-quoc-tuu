@@ -9,6 +9,8 @@ const AdminLayout: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
+  // Off-canvas drawer state for mobile (<md). Independent of the desktop collapse.
+  const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false);
 
   // Count new contacts
   const newContactsCount = contacts.filter(c => c.status === 'new').length;
@@ -36,9 +38,17 @@ const AdminLayout: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-[#f0f4f8] font-sans overflow-hidden">
+      {/* Mobile backdrop */}
+      {isMobileNavOpen && (
+        <div
+          onClick={() => setIsMobileNavOpen(false)}
+          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          aria-hidden="true"
+        />
+      )}
       {/* Sidebar */}
-      <aside 
-        className={`${isSidebarOpen ? 'w-72' : 'w-20'} bg-[#022c22] text-white flex flex-col shadow-2xl z-30 relative transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]`}
+      <aside
+        className={`fixed md:relative inset-y-0 left-0 w-72 ${isSidebarOpen ? 'md:w-72' : 'md:w-20'} ${isMobileNavOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 bg-[#022c22] text-white flex flex-col shadow-2xl z-40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]`}
       >
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')] opacity-20 pointer-events-none"></div>
         
@@ -70,6 +80,7 @@ const AdminLayout: React.FC = () => {
                 
                 <Link
                     to={item.path}
+                    onClick={() => setIsMobileNavOpen(false)}
                     className={`group flex items-center relative px-3 py-3 rounded-xl transition-all duration-300 overflow-hidden ${
                     isActive 
                         ? 'bg-white/10 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]' 
@@ -128,9 +139,16 @@ const AdminLayout: React.FC = () => {
       <div className="flex-1 flex flex-col h-full overflow-hidden relative">
         
         {/* Header */}
-        <header className="h-20 px-8 flex justify-between items-center z-20 bg-white/80 backdrop-blur-md border-b border-stone-200/60 sticky top-0 transition-all">
-           <div className="flex items-center gap-4">
-              <h2 className="font-display text-3xl text-emerald-950 font-bold tracking-tight">{currentPathName}</h2>
+        <header className="h-20 px-4 md:px-8 flex justify-between items-center z-20 bg-white/80 backdrop-blur-md border-b border-stone-200/60 sticky top-0 transition-all">
+           <div className="flex items-center gap-3 md:gap-4 min-w-0">
+              <button
+                onClick={() => setIsMobileNavOpen(true)}
+                className="md:hidden p-2 -ml-2 text-emerald-950 hover:text-amber-600 transition-colors shrink-0"
+                aria-label="Mở menu"
+              >
+                <Menu size={24} />
+              </button>
+              <h2 className="font-display text-2xl md:text-3xl text-emerald-950 font-bold tracking-tight truncate">{currentPathName}</h2>
            </div>
 
            <div className="flex items-center gap-6">

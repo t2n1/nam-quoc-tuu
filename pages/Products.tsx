@@ -55,7 +55,7 @@ const Products: React.FC = () => {
     <div className="bg-cream-100 min-h-screen overflow-x-hidden">
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
-      <section className="h-screen relative overflow-hidden flex items-end pb-28">
+      <section className="h-[100svh] relative overflow-hidden flex items-end pb-28">
         <div ref={heroImgRef} className="absolute inset-0 scale-110 will-change-transform">
           <img
             src={heroData.backgroundImage}
@@ -177,7 +177,7 @@ const Products: React.FC = () => {
               {/* ── TEXT trên nền tối ── */}
               <Reveal
                 variant={isEven ? 'fade-left' : 'fade-right'}
-                className={`w-full lg:w-1/2 flex flex-col justify-center pb-20 lg:py-0 ${isEven ? 'lg:pl-12 xl:pl-20' : 'lg:pr-12 xl:pr-20'}`}
+                className={`w-full lg:w-1/2 flex flex-col justify-center px-6 pb-20 pt-8 lg:p-0 ${theme.bg} lg:bg-transparent ${isEven ? 'lg:pl-12 xl:pl-20' : 'lg:pr-12 xl:pr-20'}`}
               >
                 {/* Badge */}
                 <span className="inline-flex items-center self-start whitespace-nowrap text-amber-500/70 text-[9px] font-bold tracking-[0.15em] md:tracking-[0.4em] uppercase mb-8 border border-amber-500/20 px-4 py-2 rounded-full">

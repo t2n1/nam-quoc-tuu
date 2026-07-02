@@ -288,7 +288,7 @@ export const PRODUCTS: Product[] = [
     name: "Rượu Nếp Cái Hoa Vàng",
     volume: "500ml · 29,5% Vol",
     type: "Lẻ",
-    description: "Nấu từ giống nếp cái hoa vàng thuần chủng, lên men bằng men lá rừng truyền thống. Vị ngọt thanh, hậu vị dài, hương thơm lúa nếp đặc trưng. Thích hợp dùng thưởng thức hoặc làm quà biếu cao cấp.",
+    description: "Đặc sản Quảng Ninh — sản xuất theo phương pháp truyền thống, lên men từ giống nếp cái trứ danh bên dòng sông Kinh Thầy. Sau một năm ngâm ủ, rượu lên màu bắt mắt, dậy hương thơm lúa nếp, vị êm dịu và cay cay nơi đầu lưỡi. Đặc biệt, rượu không gây đau đầu hay khát nước.",
     image: "/products/ruou-nep-cai-hoa-vang.png",
     scales: { sweetness: 4, aroma: 5, body: 3, finish: 4, intensity: 3 },
     pairings: [
@@ -301,7 +301,7 @@ export const PRODUCTS: Product[] = [
     name: "Rượu Nếp Cẩm",
     volume: "500ml · 25% Vol",
     type: "Lẻ",
-    description: "Lên men từ gạo nếp cẩm tím — giàu anthocyanin, chất chống oxy hóa tự nhiên. Màu tím hồng đặc trưng, vị ngọt nhẹ, thơm nồng. Tốt cho tuần hoàn máu, phù hợp cho phụ nữ sau sinh.",
+    description: "Đặc sản Điện Biên — chắt lọc từ gạo nếp cẩm quý hiếm của vùng núi cao, nơi mỗi năm chỉ có một vụ thu hoạch. Kết hợp cùng nguồn nước tinh khiết từ những dòng suối trong vắt của Tây Bắc, loại rượu này mang đến hương vị mộc mạc, chất phác mà nồng nàn đặc trưng.",
     image: "/products/ruou-nep-cam.png",
     scales: { sweetness: 4, aroma: 4, body: 3, finish: 3, intensity: 2 },
     pairings: [
@@ -314,7 +314,7 @@ export const PRODUCTS: Product[] = [
     name: "Rượu Táo Mèo",
     volume: "500ml · 22% Vol",
     type: "Lẻ",
-    description: "Ngâm từ quả táo mèo (sơn tra) rừng Bắc Kạn — vị chua ngọt tự nhiên, thơm dịu. Táo mèo giàu vitamin C, hỗ trợ tiêu hóa, giảm mỡ máu. Rượu ngâm truyền thống, uống ấm bụng, tốt cho sức khoẻ.",
+    description: "Đặc sản Tây Bắc — táo mèo rừng thấm đẫm sương gió núi cao, mang vị ngọt và hương thơm đặc trưng, được ngâm ủ trọn một năm với rượu trắng nấu bằng men ta. Rượu Táo Mèo có màu đậm đẹp mắt, hương thơm thoang thoảng, vị êm dịu và không gây đau đầu.",
     image: "/products/ruou-tao-meo.png",
     scales: { sweetness: 4, aroma: 4, body: 2, finish: 3, intensity: 2 },
     pairings: [
@@ -327,7 +327,7 @@ export const PRODUCTS: Product[] = [
     name: "Rượu Chuối Hột",
     volume: "500ml · 22% Vol",
     type: "Lẻ",
-    description: "Ngâm từ chuối hột rừng — vị ngọt thơm tự nhiên của chuối, hậu vị dịu. Chuối hột có tác dụng lợi tiểu, hỗ trợ thận, thường dùng trong y học dân gian vùng cao. Rượu ngâm nguyên chất, không phụ gia.",
+    description: "Đặc sản Tây Bắc — chuối hột rừng được ngâm ủ trọn một năm trong rượu nếp nấu bằng men truyền thống. Rượu mang màu nâu sóng sánh, dậy mùi thơm chuối hột đặc trưng, vị êm dịu dễ uống, không gây đau đầu hay khát nước.",
     image: "/products/ruou-chuoi-hot.png",
     scales: { sweetness: 4, aroma: 3, body: 2, finish: 3, intensity: 2 },
     pairings: [
@@ -340,7 +340,7 @@ export const PRODUCTS: Product[] = [
     name: "Rượu Dừa",
     volume: "500ml · 29% Vol",
     type: "Lẻ",
-    description: "Rượu ngâm trong quả dừa tươi Bến Tre — hương dừa béo ngậy, vị ngọt thanh tự nhiên, nồng độ nhẹ dễ uống. Đặc sản độc đáo kết hợp tinh hoa miền Bắc và hương vị nhiệt đới. Phù hợp làm quà biếu lạ miệng.",
+    description: "Đặc sản Bến Tre — hương vị rượu nổi tiếng của miền Tây sông nước, với vị ngọt thanh của dừa quyện cùng chút cay nhẹ nơi hậu vị, để lại ấn tượng khó quên ngay từ lần thưởng thức đầu tiên.",
     image: "/products/ruou-dua.png",
     scales: { sweetness: 5, aroma: 3, body: 2, finish: 3, intensity: 2 },
     pairings: [

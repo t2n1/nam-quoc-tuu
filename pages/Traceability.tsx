@@ -165,7 +165,7 @@ const Traceability: React.FC = () => {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         placeholder="Ví dụ: 09012345678"
-                        className="flex-1 px-6 py-4 rounded-full outline-none text-xl font-sans font-light text-emerald-950 placeholder-stone-300 bg-transparent text-center md:text-left"
+                        className="flex-1 pl-6 pr-16 py-4 rounded-full outline-none text-xl font-sans font-light text-emerald-950 placeholder-stone-300 bg-transparent text-center md:text-left"
                       />
                       <button type="submit" className="bg-emerald-950 hover:bg-amber-600 text-white w-14 h-14 rounded-full flex items-center justify-center transition-colors shadow-lg absolute right-2"><Search size={24} /></button>
                     </form>

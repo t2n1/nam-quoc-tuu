@@ -47,7 +47,7 @@ const Process: React.FC = () => {
     <div className="min-h-screen overflow-x-hidden">
 
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section className="h-screen relative overflow-hidden flex items-end pb-28">
+      <section className="h-[100svh] relative overflow-hidden flex items-end pb-28">
         <div ref={heroImgRef} className="absolute inset-0 scale-110 will-change-transform">
           <img
             src={story.header.image}

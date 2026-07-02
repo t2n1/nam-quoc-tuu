@@ -34,6 +34,11 @@ import { AdminToolbar } from './components/LiveEditor';
 
 import { DataProvider, useData } from './context/DataContext';
 
+// Admin dashboard is kept in the codebase for future use but is only reachable in
+// dev builds. In production the routes below are not registered at all, so the
+// client-side-only auth (which can be trivially bypassed) is never exposed.
+const ADMIN_ENABLED = import.meta.env.DEV;
+
 // Scroll to top
 const ScrollHandler = () => {
   const { pathname } = useLocation();
@@ -111,11 +116,11 @@ const ProtectedRoute = () => {
 
 const PublicLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen font-sans cursor-none relative">
+    <div className="flex flex-col min-h-screen font-sans lg:cursor-none relative">
       <CustomCursor />
       <AgeGate />
       <Navbar />
-      <AdminToolbar />
+      {ADMIN_ENABLED && <AdminToolbar />}
       <main className="flex-grow">
         <Outlet />
       </main>
@@ -159,22 +164,26 @@ const App: React.FC = () => {
               <Route path="*" element={<NotFound />} />
             </Route>
 
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<Navigate to="/admin/dashboard" />} />
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="products" element={<AdminProducts />} />
-                <Route path="distributors" element={<AdminDistributors />} />
-                <Route path="blog" element={<AdminBlog />} />
-                <Route path="testimonials" element={<AdminTestimonials />} />
-                <Route path="faq" element={<AdminFAQ />} />
-                <Route path="content" element={<AdminContent />} />
-                <Route path="settings" element={<AdminSettings />} />
-                <Route path="process" element={<AdminProcess />} />
-                <Route path="contacts" element={<AdminContacts />} />
-              </Route>
-            </Route>
+            {ADMIN_ENABLED && (
+              <>
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<Navigate to="/admin/dashboard" />} />
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="products" element={<AdminProducts />} />
+                    <Route path="distributors" element={<AdminDistributors />} />
+                    <Route path="blog" element={<AdminBlog />} />
+                    <Route path="testimonials" element={<AdminTestimonials />} />
+                    <Route path="faq" element={<AdminFAQ />} />
+                    <Route path="content" element={<AdminContent />} />
+                    <Route path="settings" element={<AdminSettings />} />
+                    <Route path="process" element={<AdminProcess />} />
+                    <Route path="contacts" element={<AdminContacts />} />
+                  </Route>
+                </Route>
+              </>
+            )}
           </Routes>
         </Router>
       </DataProvider>

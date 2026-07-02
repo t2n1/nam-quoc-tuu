@@ -56,7 +56,7 @@ const AgeGate: React.FC = () => {
   );
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center overflow-hidden">
+    <div className="fixed inset-0 z-[150] flex items-center justify-center overflow-hidden">
 
       {/* ── Left curtain ── */}
       <div
