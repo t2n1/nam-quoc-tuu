@@ -272,10 +272,10 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'p4',
-    name: "Rượu Men Lá Chai 1 Lít",
-    volume: "1 Lít · 25% Vol",
+    name: "Rượu Men Lá Chai Mờ",
+    volume: "500ml · 25% Vol",
     type: "Lẻ",
-    description: "Chai 1 lít tiện dụng cho gia đình hoặc làm quà biếu dịp lễ Tết. Rượu men lá nguyên chất, hương thơm đặc trưng vùng cao Bắc Kạn, ủ đủ 6 tháng hạ thổ.",
+    description: "Chai thủy tinh mờ 500ml tiện dụng cho gia đình hoặc làm quà biếu dịp lễ Tết. Rượu men lá nguyên chất, hương thơm đặc trưng vùng cao Bắc Kạn, ủ đủ 6 tháng hạ thổ.",
     image: "/products/ruou-men-la-mat.png",
     scales: { sweetness: 2, aroma: 4, body: 4, finish: 5, intensity: 4 },
     pairings: [
