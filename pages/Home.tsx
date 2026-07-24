@@ -1,5 +1,5 @@
 
-import React, { useRef, useCallback, useEffect } from 'react';
+import React from 'react';
 import Hero from '../components/Hero';
 import {
   ArrowRight, Leaf, Droplets, Award, Hexagon,
@@ -45,75 +45,6 @@ const Home: React.FC = () => {
   const { siteContent, blogPosts, testimonials, products } = useData();
   const { home, general } = siteContent;
   const [lightbox, setLightbox] = React.useState<string | null>(null);
-
-  const stripRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>(0);
-  const isDragging = useRef(false);
-  const dragStartX = useRef(0);
-  const dragStartScroll = useRef(0);
-  const dragVelocity = useRef(0); // extra px/frame added by drag
-  const isTouching = useRef(false); // pause auto-scroll while a touch gesture owns the scroll
-
-  useEffect(() => {
-    const BASE_SPEED = 0.6; // px per frame auto-scroll
-    const el = stripRef.current;
-    if (!el) return;
-
-    const tick = () => {
-      if (el) {
-        const speed = isTouching.current ? 0 : BASE_SPEED + dragVelocity.current;
-        el.scrollLeft += speed;
-        // seamless loop: reset when first copy is done
-        if (el.scrollLeft >= el.scrollWidth / 2) {
-          el.scrollLeft -= el.scrollWidth / 2;
-        }
-        // decay drag velocity
-        dragVelocity.current *= 0.92;
-        if (Math.abs(dragVelocity.current) < 0.01) dragVelocity.current = 0;
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, []);
-
-  const onMouseDown = useCallback((e: React.MouseEvent) => {
-    isDragging.current = true;
-    dragStartX.current = e.pageX;
-    dragStartScroll.current = stripRef.current?.scrollLeft ?? 0;
-    if (stripRef.current) stripRef.current.style.cursor = 'grabbing';
-  }, []);
-
-  const onMouseUp = useCallback(() => {
-    isDragging.current = false;
-    if (stripRef.current) stripRef.current.style.cursor = 'grab';
-  }, []);
-
-  const onMouseLeave = useCallback(() => {
-    isDragging.current = false;
-    if (stripRef.current) stripRef.current.style.cursor = 'grab';
-  }, []);
-
-  const onMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!isDragging.current || !stripRef.current) return;
-    e.preventDefault();
-    const dx = dragStartX.current - e.pageX;
-    stripRef.current.scrollLeft = dragStartScroll.current + dx;
-    // feed velocity so RAF keeps momentum
-    dragVelocity.current = dx * 0.05;
-  }, []);
-
-  // Touch scrolling is native (overflow-x-auto) so momentum/inertia come from the
-  // browser; we only pause the auto-marquee while the finger is down.
-  const onTouchStart = useCallback(() => {
-    isTouching.current = true;
-    dragVelocity.current = 0;
-  }, []);
-
-  const onTouchEnd = useCallback(() => {
-    isTouching.current = false;
-  }, []);
 
   const getIcon = (name: string) => {
     switch (name) {
@@ -327,24 +258,13 @@ const Home: React.FC = () => {
       </section>
 
       {/* ── Secondary products scrolling strip ── */}
-      <div className="bg-[#080808] py-10 border-b border-white/[0.04]">
+      <div className="bg-[#080808] py-10 border-b border-white/[0.04] overflow-hidden">
         <p className="text-center text-white/18 text-[8px] uppercase tracking-[0.55em] font-bold mb-8">
           Bộ Sưu Tập Đầy Đủ
         </p>
         <div
-          ref={stripRef}
-          className="flex overflow-x-auto overscroll-x-contain select-none no-scrollbar"
-          style={{
-            cursor: 'grab',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-          }}
-          onMouseDown={onMouseDown}
-          onMouseLeave={onMouseLeave}
-          onMouseUp={onMouseUp}
-          onMouseMove={onMouseMove}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
+          className="flex animate-marquee hover:[animation-play-state:paused]"
+          style={{ width: 'max-content', animationDuration: '45s' }}
         >
           {[...products.slice(3), ...products.slice(3)].map((product, i) => (
             <Link
