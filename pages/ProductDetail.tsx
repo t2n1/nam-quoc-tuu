@@ -87,9 +87,6 @@ const ProductDetail: React.FC = () => {
                 <Link to="/contact" className="px-16 py-6 bg-amber-600 text-white hover:bg-amber-500 transition-all text-xs font-bold uppercase tracking-widest rounded-full flex items-center justify-center gap-4 shadow-2xl">
                    <ShoppingCart size={18} /> Đặt hàng ngay
                 </Link>
-                <button className="px-10 py-6 border border-white/10 text-white rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-emerald-950 transition-all">
-                   Tải Catalog PDF
-                </button>
               </div>
             </div>
           </div>
