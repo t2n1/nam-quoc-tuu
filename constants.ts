@@ -377,7 +377,8 @@ export const PROCESS_STEPS: ProcessStep[] = [
       "Hấp gạo thành xôi, để nguội.",
       "Trộn men, ủ từ 30-60 ngày để chuyển hóa tự nhiên."
     ],
-    icon: "Hourglass"
+    icon: "Hourglass",
+    image: "/process/u-ruou.jpg"
   },
   {
     step: 4,
