@@ -358,7 +358,8 @@ export const PROCESS_STEPS: ProcessStep[] = [
       "Thu hái từ 19-32 loại lá thuốc tự nhiên.",
       "Chọn lá có mùi thơm đặc biệt và dược tính tốt."
     ],
-    icon: "Leaf"
+    icon: "Leaf",
+    image: "/process/tim-la-thuoc-rung.jpg"
   },
   {
     step: 2,
