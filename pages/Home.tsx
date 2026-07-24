@@ -491,7 +491,8 @@ const Home: React.FC = () => {
         </div>
       )}
 
-      {/* ── Testimonials ── */}
+      {/* ── Testimonials (tạm thời ẩn) ── */}
+      {false && (
       <section className="py-24 bg-cream-50 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200/20 rounded-full blur-[80px] pointer-events-none" />
         <div className="max-w-[1400px] mx-auto px-5 md:px-8 lg:px-12 relative z-10">
@@ -535,6 +536,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* ── Traceability CTA ── */}
       <section className="py-32 bg-cream-100 relative overflow-hidden">
